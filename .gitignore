@@ -1,0 +1,11 @@
+database/
+wordpress/
+assets/
+
+.env*
+!.env.example
+
+docker-compose.*yml
+docker-compose.*yaml
+
+.DS_Store
