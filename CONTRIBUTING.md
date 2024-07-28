@@ -4,10 +4,11 @@ This repository sets up a basic Wordpress app with a MySQL database using Docker
 
 Shortcuts:
 
-- [Getting Started Locally](#getting-started-locally)
-- [Security](#security)
+- [Getting Started](#getting-started) - setting up the app locally
+- [Technical Context](#technical-context) - technical decisions and information
+- [Security](#security) - securing the app
 
-## Getting Started Locally
+## Getting Started
 
 This section will guide you through setting up the app locally (on your machine) using Docker Compose.
 
@@ -83,13 +84,32 @@ php_value max_execution_time 300
 php_value max_input_time 300
 ```
 
-## Deployment
+## Technical Context
 
-This section will guide you through deploying the app to a server using Docker Compose.
+Technical decisions and information made in the development of this Wordpress application for future reference.
 
-```md
-To Be Announced
-```
+### Plugins
+
+| Plugin Name                                   | Active | Description                                     |
+| --------------------------------------------- | ------ | ----------------------------------------------- |
+| Advanced Custom Fields PRO                    | Yes    | Custom fields for posts and pages               |
+| Advanced Custom Fields Multilingual (**BUG**) | No     | Multilingual custom fields for posts and pages  |
+| All-in-One WP Migration                       | No     | Migrate the website to another server           |
+| Campaign Monitor for WordPress                | Yes    | Campaign monitor for the website                |
+| Contact Form 7                                | Yes    | Contact form for the website                    |
+| Drag and Drop Multiple File Upload            | Yes    | Drag and drop file upload for the website       |
+| Duplicate Page                                | Yes    | Duplicate posts and pages                       |
+| Font Awesome                                  | Yes    | Font Awesome icons for the website              |
+| Insert Headers and Footers                    | Yes    | Insert headers and footers for the website      |
+| Under Construction                            | No     | Under construction page for the website         |
+| WPForms Lite                                  | Yes    | Contact form for the website                    |
+| WPML Media (**BUG**)                          | No     | Multilingual media for the website              |
+| WPML Multilingual CMS (**BUG**)               | No     | Multilingual CMS for the website                |
+| WPML String Translation (**BUG**)             | No     | Multilingual string translation for the website |
+| Yoast SEO                                     | Yes    | SEO for the website                             |
+| Yoast SEO Multilingual                        | Yes    | Multilingual SEO for the website                |
+
+Some of the plugins are not active because they are not needed for the website. The plugins with the `(BUG)` tag are not working as expected can cause issues with the website.
 
 ## Security
 
