@@ -7,6 +7,7 @@ Shortcuts:
 - [Getting Started](#getting-started) - setting up the app locally
 - [Technical Context](#technical-context) - technical decisions and information
 - [Security](#security) - securing the app
+- [FAQ](#faq) - frequently asked questions
 
 ## Getting Started
 
@@ -90,26 +91,29 @@ Technical decisions and information made in the development of this Wordpress ap
 
 ### Plugins
 
-| Plugin Name                                   | Active | Description                                     |
-| --------------------------------------------- | ------ | ----------------------------------------------- |
-| Advanced Custom Fields PRO                    | Yes    | Custom fields for posts and pages               |
-| Advanced Custom Fields Multilingual (**BUG**) | No     | Multilingual custom fields for posts and pages  |
-| All-in-One WP Migration                       | No     | Migrate the website to another server           |
-| Campaign Monitor for WordPress                | Yes    | Campaign monitor for the website                |
-| Contact Form 7                                | Yes    | Contact form for the website                    |
-| Drag and Drop Multiple File Upload            | Yes    | Drag and drop file upload for the website       |
-| Duplicate Page                                | Yes    | Duplicate posts and pages                       |
-| Font Awesome                                  | Yes    | Font Awesome icons for the website              |
-| Insert Headers and Footers                    | Yes    | Insert headers and footers for the website      |
-| Under Construction                            | No     | Under construction page for the website         |
-| WPForms Lite                                  | Yes    | Contact form for the website                    |
-| WPML Media (**BUG**)                          | No     | Multilingual media for the website              |
-| WPML Multilingual CMS (**BUG**)               | No     | Multilingual CMS for the website                |
-| WPML String Translation (**BUG**)             | No     | Multilingual string translation for the website |
-| Yoast SEO                                     | Yes    | SEO for the website                             |
-| Yoast SEO Multilingual                        | Yes    | Multilingual SEO for the website                |
+> [!NOTE]
+> The plugins with the `(BUG)` tag are not working as expected can cause issues with the website. I suspect that the plugins causing issues are all related to the `WPML Multilingual CMS` plugin which is a paid plugin that requires a license key to work properly and since local development does not have a license key, the plugin does not work as expected.
 
-Some of the plugins are not active because they are not needed for the website. The plugins with the `(BUG)` tag are not working as expected can cause issues with the website.
+The Wordpress app comes with the following plugins, of which some are active and some are not (because they are not needed at the moment):
+
+| Plugin Name                         | Active | Description                                                  |
+| ----------------------------------- | ------ | ------------------------------------------------------------ |
+| Advanced Custom Fields PRO          | Yes    | Custom fields for posts and pages                            |
+| Advanced Custom Fields Multilingual | No     | Multilingual custom fields for posts and pages (needs WPML)  |
+| All-in-One WP Migration             | No     | Migrate the website to another server                        |
+| Campaign Monitor for WordPress      | Yes    | Campaign monitor for the website                             |
+| Contact Form 7                      | Yes    | Contact form for the website                                 |
+| Drag and Drop Multiple File Upload  | Yes    | Drag and drop file upload for the website                    |
+| Duplicate Page                      | Yes    | Duplicate posts and pages                                    |
+| Font Awesome                        | Yes    | Font Awesome icons for the website                           |
+| Insert Headers and Footers          | Yes    | Insert headers and footers for the website                   |
+| Under Construction                  | No     | Under construction page for the website                      |
+| WPForms Lite                        | Yes    | Contact form for the website                                 |
+| WPML Media                          | No     | Multilingual media for the website (needs WPML)              |
+| WPML Multilingual CMS (**BUG**)     | No     | Multilingual CMS for the website                             |
+| WPML String Translation             | No     | Multilingual string translation for the website (needs WPML) |
+| Yoast SEO                           | Yes    | SEO for the website                                          |
+| Yoast SEO Multilingual              | NO     | Multilingual SEO for the website (needs WPML)                |
 
 ## Security
 
@@ -141,3 +145,68 @@ A strong password should be easy to remember but hard to guess. Below are some r
 - use phrases that are easy to remember but hard to guess (i.e. `ilovetoeathotdogs` instead of `h0td0gs@ndk3tchup`)
 - use a mix of uppercase and lowercase letters, numbers, and special characters, if you can
 - avoid using common words, phrases, or patterns in your passwords that can be inferred from your personal information (e.g. your name, birthdate, birth year etc.)
+
+## FAQ
+
+### How do I export and import data from the Wordpress app?
+
+> [!TIP]
+> If you have issues importing data, try increasing the maximum upload size in the `.htaccess` file (see [this guide](#how-do-i-upload-more-than-2mb-of-data-to-the-wordpress-app)). If that doesn't work, try exporting and importing the data in smaller chunks.
+
+You can export and import data from the Wordpress app using the [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/) plugin.
+
+To export the data, follow these steps:
+
+1. Install and activate the All-in-One WP Migration plugin
+2. Go to `All-in-One WP Migration` > `Export` in the Wordpress admin dashboard
+3. Click on `Export To` and select the desired location (e.g. `File`)
+4. Click on advanced options to exclude/include certain data (e.g. media, themes, plugins) - *I try to export as much as possible*
+
+To import the data, follow these steps:
+
+1. Install and activate the All-in-One WP Migration plugin
+2. Go to `All-in-One WP Migration` > `Import` in the Wordpress admin dashboard
+3. Click on `Import From` and select the desired location (e.g. for `File`, upload the file that was exported with the `.wpress` extension)
+4. Click on `Proceed` to start the import process
+5. Once the import is complete, click on `Permalinks` to update the permalinks
+6. Click on `Save Changes` to save the permalinks
+
+### How do I upload more than 2MB of data to the Wordpress app?
+
+Paste the following values into the `.htaccess` file to increase the maximum upload size:
+
+```bash
+php_value upload_max_filesize 1G
+php_value post_max_size 1G
+php_value memory_limit 256M
+php_value max_execution_time 300
+php_value max_input_time 300
+```
+
+TIP: You can change the values to your preference.
+
+### Hod do I debug the Wordpress app?
+
+To debug the Wordpress app, you can enable the `WP_DEBUG` mode in the `wp-config.php` file:
+
+```php
+define( 'WP_DEBUG', true );
+```
+
+### Why am I seeing a `404` error when I try to access a page that exists?
+
+This might be due to the `.htaccess` file.
+
+In the case of this specific app, it might be because the following lines of code are missing from the `# BEGIN WordPress` and `# END WordPress` block in the `.htaccess` file:
+
+```xml
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+```
