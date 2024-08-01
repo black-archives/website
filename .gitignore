@@ -1,6 +1,5 @@
-database/
-wordpress/
-assets/
+/assets/
+/database/
 
 .env*
 !.env.example

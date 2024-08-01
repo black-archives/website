@@ -89,6 +89,10 @@ php_value max_input_time 300
 
 Technical decisions and information made in the development of this Wordpress application for future reference.
 
+### Themes
+
+The Wordpress app uses a custom theme called Highwire by Sam Skogh, the original developer of the website. The theme is located in the [`/wordpress/wp-content/themes/highwire`](./wordpress/wp-content/themes/highwire/) directory.
+
 ### Plugins
 
 > [!NOTE]
