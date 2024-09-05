@@ -189,7 +189,7 @@ php_value max_input_time 300
 
 TIP: You can change the values to your preference.
 
-### Hod do I debug the Wordpress app?
+### How do I debug the Wordpress app?
 
 To debug the Wordpress app, you can enable the `WP_DEBUG` mode in the `wp-config.php` file:
 
@@ -214,3 +214,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 </IfModule>
 ```
+
+### How does the Events page work? (Unsolved)
+
+The Events page is accessible via the `/events` URL and there is a pin icon in the wordpress admin page for 'Events' (and 'Exhibitions' even though it is not visible) and I can't find a php file that is responsible for the events page. So how does it work?
