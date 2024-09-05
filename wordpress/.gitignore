@@ -49,4 +49,5 @@ wp-config*.php
 #/wp-content/themes
 
 # Exceptions
+!wp-config-sample.php
 !/wp-content/themes/highwire
