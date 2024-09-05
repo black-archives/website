@@ -54,7 +54,7 @@ create_docker_compose_file() {
     services:
       mysql:
         container_name: $DOCKER_MYSQL_CONTAINER_NAME
-        image: mysql:latest
+        image: mysql:9.0.1
         restart: always
         environment:
           MYSQL_DATABASE: $MYSQL_DATABASE_NAME
@@ -70,7 +70,7 @@ create_docker_compose_file() {
         depends_on:
           - mysql
         container_name: $DOCKER_PHPMYADMIN_CONTAINER_NAME
-        image: phpmyadmin:latest
+        image: phpmyadmin:5.2.1
         restart: always
         environment:
           PMA_HOST: $DOCKER_MYSQL_CONTAINER_NAME
@@ -83,7 +83,7 @@ create_docker_compose_file() {
         depends_on:
           - mysql
         container_name: $DOCKER_WORDPRESS_CONTAINER_NAME
-        image: wordpress:latest
+        image: wordpress:6.6.1
         restart: always
         environment:
           WORDPRESS_DB_HOST: $DOCKER_MYSQL_CONTAINER_NAME
