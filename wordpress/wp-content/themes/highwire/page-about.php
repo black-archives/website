@@ -4,15 +4,13 @@
 <?php $site_title = get_bloginfo('name'); ?>
 <main role="main">
   <div class="sub-page-menu">
-
     <ul class="menu-list flex" style="justify-content: space-evenly; ">
       <li><a href="#about"><?php _e('About Black Archives Sweden', 'bas'); ?></a></li>
       <li><a href="#team"><?php _e('The Team', 'bas'); ?></a></li>
-      <!--<li>Others</li>-->
-      <!--<li>Partners</li>-->
+      <li><a href="#partners"><?php _e('Partners', 'bas'); ?></a></li>
     </ul>
-
   </div>
+
   <section class="about-page" id="about">
     <div class="wrap-m">
       <h1><?php the_title();
@@ -23,7 +21,7 @@
 
   <section class="team" id="team">
     <div class="wrap-m">
-      <h2 class="heading"><?php _e('The team', 'bas'); ?></h2>
+      <h2 class="heading"><?php _e('The Team', 'bas'); ?></h2>
       <?php if (get_field('team-text')) : ?>
         <p>
           <?php the_field('team-text'); ?>
@@ -55,25 +53,21 @@
     </div>
   </section>
 
-  <?php
-  if (have_rows('partners')) : ?>
-    <section class="partners">
+  <section class="partners" id="partners">
+    <?php
+    if (have_rows('partners')) : ?>
       <div class="wrap-m">
         <h2 class="heading"><?php _e('Supported by', 'bas'); ?></h2>
+
         <div class="partners-row flex">
-
           <?php while (have_rows('partners')) : the_row();
-
             $partnerLogo = get_sub_field('image');   ?>
-
-
-            <img class="partner-logo" src="<?php echo $partnerLogo['url']; ?>" alt="<?php echo $partnerLogo['alt']; ?>" style="margin-right:20px;">
+            <img class="partner-logo" src="<?php echo $partnerLogo['url']; ?>" alt="<?php echo $partnerLogo['alt']; ?>" style="margin-right: 50px; margin-bottom: 20px;">
           <?php endwhile; ?>
         </div>
       </div>
-
-    </section>
-  <?php endif; ?>
+    <?php endif; ?>
+  </section>
 </main>
 
 <?php get_footer(); ?>
