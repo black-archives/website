@@ -1,4 +1,4 @@
-<?php /* Template Name: Donate Page */ ?>
+<?php /* Template Name: Support Page */ ?>
 
 <?php get_header(); ?>
 <main role="main" class="archive-page">
