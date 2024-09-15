@@ -26,8 +26,4 @@ jobs:
 
       - name: Copy files
         run: |
-          SOURCE_PATH="./wordpress/wp-content/themes/highwire/*"
-          TARGET_PATH="/www/wp-content/themes/highwire/"
-          SERVER_KEY_PATH="~/.ssh/id_ed25519"
-
-          bash scripts/deploy.sh "${SOURCE_PATH}" "${TARGET_PATH}" "${SERVER_KEY_PATH}"
+          bash scripts/deploy.sh "${{ secrets.ONE_COM_HOST }}" "${{ secrets.ONE_COM_USERNAME }}" ~/.ssh/id_ed25519
