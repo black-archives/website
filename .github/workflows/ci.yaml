@@ -20,5 +20,10 @@ jobs:
           SOURCE_THEME_PATH="./wordpress/wp-content/themes/highwire/*"
           TARGET_THEME_PATH="/www/wp-content/themes/highwire/"
 
+          # setup ssh key
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ONE_COM_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
           # copy over files to server 
-          sshpass -p ${{ secrets.ONE_COM_PASSWORD }} scp -r "${SOURCE_THEME_PATH}" ${{ secrets.ONE_COM_USERNAME }}@${{ secrets.ONE_COM_HOST }}:"${TARGET_THEME_PATH}"
+          scp -i ~/.ssh/id_ed25519 -r "${SOURCE_THEME_PATH}" ${{ secrets.ONE_COM_USERNAME }}@${{ secrets.ONE_COM_HOST }}:"${TARGET_THEME_PATH}"
