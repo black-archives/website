@@ -31,11 +31,11 @@ fi
 echo "Deploying theme to ${_SERVER_HOSTNAME}..."
 
 if [ -z "$_SERVER_KEY_PATH" ]; then
-  scp -v -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
+  scp -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
 else
   if [[ "$_CI_MODE" = "true" || "$_CI_MODE" = "TRUE" || "$_CI_MODE" = "1" ]]; then
-    scp -v -o StrictHostKeyChecking=no -i ${_SERVER_KEY_PATH} -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
+    scp -o StrictHostKeyChecking=no -i ${_SERVER_KEY_PATH} -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
   else
-    scp -v -i ${_SERVER_KEY_PATH} -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
+    scp -i ${_SERVER_KEY_PATH} -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
   fi
 fi
