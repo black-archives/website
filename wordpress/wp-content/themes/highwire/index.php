@@ -77,7 +77,7 @@
 
 
       <div class="col-f-1-3 ">
-        <div class="box-content hover-active'">
+        <div class="box-content hover-active">
           <a href="https://www.blackarchivessweden.com/index-of-archival-projects-sites/">
             <img src="https://www.blackarchivessweden.com/wp-content/uploads/2023/06/BAS_index_ig_1.jpg" alt="">
           </a>
@@ -101,7 +101,6 @@
           $categories = get_the_category();
           ?>
           <div class="col-f-1-3 post-boxes active <?php
-
                                                   foreach ($categories as $category) {
                                                     echo $category->slug . " ";
                                                   } ?> ">

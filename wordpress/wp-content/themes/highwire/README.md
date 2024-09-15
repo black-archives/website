@@ -8,7 +8,7 @@ Highwire is a WordPress theme.
 By default, all themes come with the following pre-defined files:
 
 - `README.md` - This file.
-- [front-page.php](./front-page.php) - The front page template.
+- [front-page.php](./front-page.php) - The front page template *or in our case, the home page*
 - [header.php](./header.php) - The header template *or in our case, the sidebar*
 - [footer.php](./footer.php) - The footer template.
 - [index.php](./index.php) - The main file *or in our case, the archive (posts) page*
