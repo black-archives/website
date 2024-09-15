@@ -1,0 +1,28 @@
+name: Continous Integration
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'wordpress/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy files
+        run: |
+          SOURCE_THEME_PATH="./wordpress/wp-content/themes/highwire/*"
+          TARGET_THEME_PATH="/www/wp-content/themes/highwire/"
+
+          # install sshpass
+          sudo apt-get install sshpass
+
+          # copy over files to server 
+          echo ${{ secrets.ONE_COM_PASSWORD }} | sshpass -p scp -r "${SOURCE_THEME_PATH}" ${{ secrets.ONE_COM_USERNAME }}@${{ secrets.ONE_COM_HOST }}:"${TARGET_THEME_PATH}"

@@ -1,6 +1,6 @@
 # Contributing
 
-This repository sets up a basic Wordpress app with a MySQL database using Docker Compose. It comes with a bash script, `entrypoint.sh`, that can be used to start and stop the wordpress app, connect to the database, and create a fresh `docker-compose.yaml` file.
+This repository sets up a basic Wordpress app with a MySQL database using Docker Compose. It comes with a bash script, `scripts/entrypoint.sh`, that can be used to start and stop the wordpress app, connect to the database, and create a fresh `docker-compose.yaml` file.
 
 Shortcuts:
 
@@ -23,13 +23,13 @@ To start the app locally, run the following command:
 
 ```bash
 # start the app with default configurations
-bash entrypoint.sh start --dev
+bash scripts/entrypoint.sh start --dev
 
 # start the app with custom configurations
-bash entrypoint.sh start
+bash scripts/entrypoint.sh start
 
 # connect to the MySQL database (databaseName: mysql, username: wp-user)
-bash entrypoint.sh connect mysql wp-user
+bash scripts/entrypoint.sh connect mysql wp-user
 ```
 
 The `start` command will perform the following steps:
@@ -45,10 +45,10 @@ To stop the app, run the following command:
 
 ```bash
 # stop the app
-bash entrypoint.sh stop
+bash scripts/entrypoint.sh stop
 
 # stop the app and remove the volumes
-bash entrypoint.sh stop --clean
+bash scripts/entrypoint.sh stop --clean
 ```
 
 ### Default Configurations
