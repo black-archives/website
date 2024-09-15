@@ -67,7 +67,13 @@
         </div>
       </nav>
     </div>
-  </header>
-</body>
 
-</html>
+    <div class="mob-menu vert-center">
+      <div>
+        <img src="/wp-content/uploads/2021/03/BAS-Logga.svg" alt="Black Archive Sweden Logo" width="100">
+      </div>
+      <div class="menu-hamburger">
+        <img class="" src="/wp-content/uploads/2021/03/Meny.svg" alt="Menu icon">
+      </div>
+    </div>
+  </header>
