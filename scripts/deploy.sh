@@ -9,9 +9,10 @@ CURRENT_DIR="${CURRENT_DIR}/.." # Move up one directory
 
 ## CONSTANTS ############################################
 
-_SERVER_HOSTNAME=$1
-_SERVER_USERNAME=$2
-_SERVER_KEY_PATH=$3
+_SERVER_HOSTNAME=$1                         # hostname for server
+_SERVER_USERNAME=$2                         # username for server
+_SERVER_KEY_PATH=$3                         # path to the server key
+_CI_MODE=$4                                 # if "true", then don't check for strict host key checking
 
 SOURCE_THEME_PATH="${CURRENT_DIR}/wordpress/wp-content/themes/highwire/*"
 TARGET_THEME_PATH="/www/wp-content/themes/highwire/"
@@ -32,5 +33,9 @@ echo "Deploying theme to ${_SERVER_HOSTNAME}..."
 if [ -z "$_SERVER_KEY_PATH" ]; then
   scp -v -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
 else
-  scp -v -i ${_SERVER_KEY_PATH} -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
+  if [[ "$_CI_MODE" = "true" || "$_CI_MODE" = "TRUE" || "$_CI_MODE" = "1" ]]; then
+    scp -v -o StrictHostKeyChecking=no -i ${_SERVER_KEY_PATH} -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
+  else
+    scp -v -i ${_SERVER_KEY_PATH} -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
+  fi
 fi

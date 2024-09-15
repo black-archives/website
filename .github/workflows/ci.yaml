@@ -23,7 +23,8 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.ONE_COM_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
+          echo "ONE_COM_KEY_PATH=~/.ssh/id_ed25519" >> $GITHUB_ENV
 
       - name: Copy files
         run: |
-          bash scripts/deploy.sh "${{ secrets.ONE_COM_HOST }}" "${{ secrets.ONE_COM_USERNAME }}" ~/.ssh/id_ed25519
+          bash scripts/deploy.sh "${{ secrets.ONE_COM_HOST }}" "${{ secrets.ONE_COM_USERNAME }}" "${{ env.ONE_COM_KEY_PATH }}" "TRUE"
