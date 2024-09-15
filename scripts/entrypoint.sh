@@ -5,7 +5,7 @@
 # phpMyAdmin. To get started, run the following command: `./entrypoint.sh start`
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-CURRENT_DIR="${CURRENT_DIR}/.." # Move up one directory
+ROOT_DIR="${CURRENT_DIR}/.." # Move up one directory
 
 ## CONSTANTS ############################################
 
@@ -16,10 +16,11 @@ DOCKER_PHPMYADMIN_CONTAINER_NAME="wp-mysql-dashboard"
 DOCKER_WORDPRESS_PORT="8081"
 DOCKER_PHPMYADMIN_PORT="8082"
 
-ENV_FILE_PATH="${CURRENT_DIR}/.env"
+ENV_FILE_PATH="${ROOT_DIR}/.env"
 
-MYSQL_PATH="${CURRENT_DIR}/database"
-WORDPRESS_PATH="${CURRENT_DIR}/wordpress"
+THEME_PATH="${ROOT_DIR}/src/"
+MYSQL_PATH="${ROOT_DIR}/.dev/database"
+WORDPRESS_PATH="${ROOT_DIR}/.dev/wordpress/"
 
 
 ## FUNCTIONS ############################################
@@ -50,7 +51,12 @@ util_import_env() {
   
   if [ -f $ENV_FILE_PATH ]; then
     util_log "Importing environment variables from $ENV_FILE_PATH..." extra
-    export $(cat $ENV_FILE_PATH | xargs)
+
+    # export all lines in the .env file that are not comments
+    for line in $(cat $ENV_FILE_PATH | grep -v '^#')
+    do
+      export $line
+    done
   fi
 }
 
@@ -103,6 +109,7 @@ create_docker_compose_file() {
         networks:
           - default
         volumes:
+          - $THEME_PATH:/usr/src/wordpress/wp-content/themes/highwire
           - $WORDPRESS_PATH:/var/www/html
 
     networks:
@@ -143,6 +150,13 @@ setup_directories() {
     mkdir -p $WORDPRESS_PATH
   else
     util_log "Wordpress directory already exists..." extra
+  fi
+
+  if [ ! -d $THEME_PATH ]; then
+    util_log "Theme directory does not exist..." extra
+    exit 1
+  else
+    cp -r $THEME_PATH $WORDPRESS_PATH/wp-content/themes/highwire
   fi
 }
 
