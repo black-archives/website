@@ -6,10 +6,6 @@ on:
       - main
     paths:
       - 'wordpress/**'
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
 
 jobs:
   deploy:
