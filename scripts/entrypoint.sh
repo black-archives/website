@@ -1,5 +1,12 @@
 #!/bin/env bash
 
+# The purpose of this script is to spin up a local development environment for
+# Wordpress website using Docker containers for the database, Wordpress, and
+# phpMyAdmin. To get started, run the following command: `./entrypoint.sh start`
+
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+CURRENT_DIR="${CURRENT_DIR}/.." # Move up one directory
+
 ## CONSTANTS ############################################
 
 DOCKER_COMPOSE_NETWORK="wp_default"
@@ -9,10 +16,11 @@ DOCKER_PHPMYADMIN_CONTAINER_NAME="wp-mysql-dashboard"
 DOCKER_WORDPRESS_PORT="8081"
 DOCKER_PHPMYADMIN_PORT="8082"
 
-ENV_FILE_PATH=".env"
+ENV_FILE_PATH="${CURRENT_DIR}/.env"
 
-MYSQL_PATH="./database"
-WORDPRESS_PATH="./wordpress"
+MYSQL_PATH="${CURRENT_DIR}/database"
+WORDPRESS_PATH="${CURRENT_DIR}/wordpress"
+
 
 ## FUNCTIONS ############################################
 usage() {
