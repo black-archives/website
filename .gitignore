@@ -1,5 +1,7 @@
 /assets/
 /database/
+/backups/
+/.dev/
 
 .env*
 !.env.example
