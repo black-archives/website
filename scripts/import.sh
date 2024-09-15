@@ -8,7 +8,7 @@
 # wp-content directory. 
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-ROOT_DIR="${CURRENT_DIR}/.." # Move up one directory
+ROOT_DIR=$(realpath "${CURRENT_DIR}/..") # Move up one directory
 
 ## CONSTANTS ############################################
 
