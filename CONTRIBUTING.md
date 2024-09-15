@@ -19,6 +19,10 @@ Pre-requisites:
 
 ### Starting the app
 
+> [!NOTE]
+>
+> Before starting the app, you will need to copy the `wp-content` directory from the remote server to the `.development/wordpress` directory. This directory contains the themes, plugins, and uploads for the Wordpress app that are needed to 'recreate' the website locally. In order to copy the `wp-content` directory from the remote server, see the [migrating remote data to local app](#migrating-remote-data-to-local-app) section.
+
 To start the app locally, run the following command:
 
 ```bash
@@ -67,6 +71,10 @@ The MySQL database and Wordpress app are set up with the following configuration
 | MySQL regular password | `wp-pass` | The regular password for the MySQL database and Wordpress app |
 
 ### Migrating remote data to local app
+
+> [!NOTE]
+>
+> For routine development, it is recommended to copy the `wp-content` directory from the remote server to the `.development/wordpress` directory since it contains the themes, plugins, and uploads for the Wordpress app that are needed to 'recreate' the website locally. To speed this specific process up, you can use the [import.sh](./scripts/import.sh) script to copy the `wp-content` directory from the remote server to the `.development/wordpress` directory.
 
 This essentially involves exporting the remote wordpress application using the [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/) plugin and importing it into the local app.
 

@@ -5,7 +5,7 @@
 # easier deployments.
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-CURRENT_DIR="${CURRENT_DIR}/.." # Move up one directory
+ROOT_DIR="${CURRENT_DIR}/.." # Move up one directory
 
 ## CONSTANTS ############################################
 
@@ -14,7 +14,7 @@ _SERVER_USERNAME=$2                         # username for server
 _SERVER_KEY_PATH=$3                         # path to the server key
 _CI_MODE=$4                                 # if "true", then don't check for strict host key checking
 
-SOURCE_THEME_PATH="${CURRENT_DIR}/wordpress/wp-content/themes/highwire/*"
+SOURCE_THEME_PATH="${ROOT_DIR}/src/*"
 TARGET_THEME_PATH="/www/wp-content/themes/highwire/"
 
 ## MAIN ##################################################

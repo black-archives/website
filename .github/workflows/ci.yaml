@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'wordpress/**'
+      - 'src/**'
+  workflow_dispatch:
 
 jobs:
   deploy:
