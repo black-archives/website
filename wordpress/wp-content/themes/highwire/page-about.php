@@ -49,7 +49,6 @@
       <h4><?php _e('Contributors to Black Archives Sweden', 'bas'); ?></h4>
       <p><?php the_field('text-contributors'); ?></p>
       <p><?php the_field('contributors'); ?></p>
-
     </div>
   </section>
 
