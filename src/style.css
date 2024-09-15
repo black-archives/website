@@ -1,10 +1,16 @@
 /*
-	Theme Name: High wire.
-	Description: High wire WordPress Theme
-	Version: 1.0
-	Author: High Wire / Sam Skogh
-	Author URI: https://www.highwire.se
-	*/
+Theme Name: High Wire
+Author: High Wire / Sam Skogh
+Description: A modified version of the High Wire theme for Black Archives Sweden.
+Requires at least: 6.4
+Tested up to: 6.5
+Requires PHP: 7.0
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: high-wire
+Tags: minimal, colorful
+*/
 
 /*------------ Reset ------------*/
 

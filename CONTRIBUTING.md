@@ -1,11 +1,11 @@
 # Contributing
 
-This repository sets up a basic Wordpress app with a MySQL database using Docker Compose. It comes with a bash script, `scripts/entrypoint.sh`, that can be used to start and stop the wordpress app, connect to the database, and create a fresh `docker-compose.yaml` file.
+This repository implements a Wordpress Application. Locally, it comes with a bash script, `scripts/entrypoint.sh`, that sets up containers for Wordpress, MySQL and PHPadmin using a generated `docker-compose.yaml` file.
 
 Shortcuts:
 
 - [Getting Started](#getting-started) - setting up the app locally
-- [Technical Context](#technical-context) - technical decisions and information
+- [Architecture](#architecture) - technical decisions and information
 - [Security](#security) - securing the app
 - [FAQ](#faq) - frequently asked questions
 
@@ -93,13 +93,13 @@ php_value max_execution_time 300
 php_value max_input_time 300
 ```
 
-## Technical Context
+## Architecture
 
 Technical decisions and information made in the development of this Wordpress application for future reference.
 
 ### Themes
 
-The Wordpress app uses a custom theme called Highwire by Sam Skogh, the original developer of the website. The theme is located in the [`/wordpress/wp-content/themes/highwire`](./wordpress/wp-content/themes/highwire/) directory.
+The Wordpress app uses a custom theme called Highwire by Sam Skogh, the original developer of the website. The theme is located in the [`/src`](./src/) directory.
 
 ### Plugins
 
@@ -110,22 +110,22 @@ The Wordpress app comes with the following plugins, of which some are active and
 
 | Plugin Name                         | Active | Description                                                  |
 | ----------------------------------- | ------ | ------------------------------------------------------------ |
-| Advanced Custom Fields PRO          | Yes    | Custom fields for posts and pages                            |
-| Advanced Custom Fields Multilingual | No     | Multilingual custom fields for posts and pages (needs WPML)  |
-| All-in-One WP Migration             | No     | Migrate the website to another server                        |
-| Campaign Monitor for WordPress      | Yes    | Campaign monitor for the website                             |
-| Contact Form 7                      | Yes    | Contact form for the website                                 |
-| Drag and Drop Multiple File Upload  | Yes    | Drag and drop file upload for the website                    |
-| Duplicate Page                      | Yes    | Duplicate posts and pages                                    |
-| Font Awesome                        | Yes    | Font Awesome icons for the website                           |
-| Insert Headers and Footers          | Yes    | Insert headers and footers for the website                   |
-| Under Construction                  | No     | Under construction page for the website                      |
-| WPForms Lite                        | Yes    | Contact form for the website                                 |
-| WPML Media                          | No     | Multilingual media for the website (needs WPML)              |
-| WPML Multilingual CMS (**BUG**)     | No     | Multilingual CMS for the website                             |
-| WPML String Translation             | No     | Multilingual string translation for the website (needs WPML) |
-| Yoast SEO                           | Yes    | SEO for the website                                          |
-| Yoast SEO Multilingual              | NO     | Multilingual SEO for the website (needs WPML)                |
+| Advanced Custom Fields PRO          | ✅      | Custom fields for posts and pages                            |
+| Advanced Custom Fields Multilingual | ❌      | Multilingual custom fields for posts and pages (needs WPML)  |
+| All-in-One WP Migration             | ❌      | Migrate the website to another server                        |
+| Campaign Monitor for WordPress      | ✅      | Campaign monitor for the website                             |
+| Contact Form 7                      | ✅      | Contact form for the website                                 |
+| Drag and Drop Multiple File Upload  | ✅      | Drag and drop file upload for the website                    |
+| Duplicate Page                      | ✅      | Duplicate posts and pages                                    |
+| Font Awesome                        | ✅      | Font Awesome icons for the website                           |
+| Insert Headers and Footers          | ✅      | Insert headers and footers for the website                   |
+| Under Construction                  | ❌      | Under construction page for the website                      |
+| WPForms Lite                        | ✅      | Contact form for the website                                 |
+| WPML Media                          | ❌      | Multilingual media for the website (needs WPML)              |
+| WPML Multilingual CMS (**BUG**)     | ❌      | Multilingual CMS for the website                             |
+| WPML String Translation             | ❌      | Multilingual string translation for the website (needs WPML) |
+| Yoast SEO                           | ✅      | SEO for the website                                          |
+| Yoast SEO Multilingual              | ❌      | Multilingual SEO for the website (needs WPML)                |
 
 ## Security
 
@@ -163,7 +163,7 @@ A strong password should be easy to remember but hard to guess. Below are some r
 ### How do I export and import data from the Wordpress app?
 
 > [!TIP]
-> If you have issues importing data, try increasing the maximum upload size in the `.htaccess` file (see [this guide](#how-do-i-upload-more-than-2mb-of-data-to-the-wordpress-app)). If that doesn't work, try exporting and importing the data in smaller chunks.
+> If you have issues importing data, checkout [this guide](#how-do-i-upload-more-than-2mb-of-data-to-the-wordpress-app) on how to increase the upload size. If that doesn't work, try exporting and importing the data in smaller chunks.
 
 You can export and import data from the Wordpress app using the [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/) plugin.
 
@@ -185,7 +185,7 @@ To import the data, follow these steps:
 
 ### How do I upload more than 2MB of data to the Wordpress app?
 
-Paste the following values into the `.htaccess` file to increase the maximum upload size:
+Paste the following values into the `.dev/wordpress/wp-content/.htaccess` file to increase the maximum upload size:
 
 ```bash
 php_value upload_max_filesize 1G

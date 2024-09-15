@@ -1,6 +1,6 @@
 # Black Archives
 
-This is the source code for Black Archives Sweden. The website is built on top of WordPress and uses a custom theme.
+[Black Archives Sweden](https://www.blackarchivessweden.com/) is a contemporary archive on Afro-Swedish experiences. This repository contains the source code for it's website which is built using WordPress.
 
 ## Contributing
 
