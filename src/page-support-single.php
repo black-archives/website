@@ -1,4 +1,8 @@
-<?php /* Template Name: Support Single Page */ ?>
+<!--
+This template is meant for support pages (i.e. dontations, volunteering...)
+-->
+
+<?php /* Template Name: Support */ ?>
 
 <?php get_header(); ?>
 <main role="main" class="support-single-page">
@@ -11,12 +15,12 @@
       </p>
 
       <?php if (have_rows('links')) : ?>
-        <div class="flex flex-space" style="margin-top: 50px;">
+        <div class="flex" style="margin-top: 50px;">
           <?php while (have_rows('links')) : the_row();
             $button_text = get_sub_field('content');
             $button_link = get_sub_field('link');
           ?>
-            <a href="<?= $button_link; ?>" class="btn btn-primary"><?= $button_text; ?> <img src="/wp-content/uploads/2021/03/Pil.svg" /></a>
+            <a href="<?= $button_link; ?>" class="btn btn-primary" style="margin-right: 20px;"><?= $button_text; ?> <img src="/wp-content/uploads/2021/03/Pil.svg" /></a>
           <?php endwhile; ?>
         </div>
       <?php endif; ?>
