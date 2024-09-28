@@ -110,6 +110,7 @@ create_docker_compose_file() {
           - default
         volumes:
           - $THEME_PATH:/usr/src/wordpress/wp-content/themes/highwire
+          - $THEME_PATH:/var/www/html/wp-content/themes/highwire
           - $WORDPRESS_PATH:/var/www/html
 
     networks:
