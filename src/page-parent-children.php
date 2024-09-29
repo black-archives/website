@@ -20,7 +20,7 @@
   </section>
 
   <section class="post-feed post-feed--single">
-    <div class="flex">
+    <div class="flex owl-carousel">
       <?php
       // get all child pages
       $args = array(
@@ -60,24 +60,38 @@
             </a>
           </div>
       <?php endwhile;
-      else: endif ?>
+      endif; ?>
 
       <?php
-      // Temporary card for volunteering in the support page
-      if (strpos($_SERVER['REQUEST_URI'], '/support') !== false): ?>
-        <div class="col-f-1-3" style="background-image: url('/wp-content/uploads/2024/02/Image-2.jpg');">
-          <div class="post-hover-box">
-            <div class="top">
-              <h2>Volunteer</h2>
-            </div>
+      // Reset Post Data
+      wp_reset_postdata();
 
-            <div class="bottom">
-              <p>Coming soon.</p>
-              <button class="btn btn-primary" style="padding-bottom: 15px;">Volunteer <img src="/wp-content/uploads/2021/03/Pil.svg" /></button>
+      while (have_rows('cards')) : the_row();
+        $card_image = get_sub_field('image')['url'];
+        $card_title = get_sub_field('title');
+        $card_summary = get_sub_field('summary');
+        $card_call_to_action = get_sub_field('call_to_action');
+        $card_link = get_sub_field('link');
+      ?>
+        <?php if (!empty($card_link)): ?>
+          <a href="<?= $card_link ?>">
+          <?php endif; ?>
+          <div class="col-f-1-3" style="background-image: url('<?= $card_image ?>');">
+            <div class="post-hover-box">
+              <div class="top">
+                <h2><?= $card_title ?></h2>
+              </div>
+
+              <div class="bottom">
+                <p><?= $card_summary ?></p>
+                <button class="btn btn-primary" style="padding-bottom: 15px;"><?= $card_call_to_action ?> <img src="/wp-content/uploads/2021/03/Pil.svg" /></button>
+              </div>
             </div>
           </div>
-        </div>
-      <?php endif; ?>
+          <?php if (!empty($card_link)): ?>
+          </a>
+        <?php endif; ?>
+      <?php endwhile; ?>
     </div>
   </section>
 </main>

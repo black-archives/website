@@ -1,8 +1,9 @@
-<!--
-This template is meant for support pages (i.e. dontations, volunteering...)
--->
+<?php
+/* Template Name: Support Page */
 
-<?php /* Template Name: Support */ ?>
+// This template is meant for support pages (i.e. dontations, volunteering...)
+
+?>
 
 <?php get_header(); ?>
 <main role="main" class="support-single-page">
