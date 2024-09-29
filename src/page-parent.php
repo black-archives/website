@@ -21,6 +21,14 @@
         'post_type' => 'page', //you can use also 'any'
       );
 
+      // set call to actions (if in /support path, then set it to 'support', if in /submit path, then set it to 'submit' otherwise set it to 'view')
+      $call_to_action = 'View';
+      if (strpos($_SERVER['REQUEST_URI'], '/support') !== false) {
+        $call_to_action = 'Support';
+      } elseif (strpos($_SERVER['REQUEST_URI'], '/submit') !== false) {
+        $call_to_action = 'Submit';
+      }
+
       $the_query = new WP_Query($args);
 
       if ($the_query->have_posts()):
@@ -38,7 +46,7 @@
 
                 <div class="bottom">
                   <p><?php echo esc_html($subtitle); ?></p>
-                  <button class="btn btn-primary"><?= _e('Support', ' bas'); ?> <img src="/wp-content/uploads/2021/03/Pil.svg" /></button>
+                  <button class="btn btn-primary" style="padding-bottom: 15px;"><?php echo esc_html($call_to_action); ?> <img src="/wp-content/uploads/2021/03/Pil.svg" /></button>
                 </div>
               </div>
             </a>
