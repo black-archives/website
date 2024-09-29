@@ -61,6 +61,23 @@
           </div>
       <?php endwhile;
       else: endif ?>
+
+      <?php
+      // Temporary card for volunteering in the support page
+      if (strpos($_SERVER['REQUEST_URI'], '/support') !== false): ?>
+        <div class="col-f-1-3" style="background-image: url('/wp-content/uploads/2024/02/Image-2.jpg');">
+          <div class="post-hover-box">
+            <div class="top">
+              <h2>Volunteer</h2>
+            </div>
+
+            <div class="bottom">
+              <p>Coming soon.</p>
+              <button class="btn btn-primary" style="padding-bottom: 15px;">Volunteer <img src="/wp-content/uploads/2021/03/Pil.svg" /></button>
+            </div>
+          </div>
+        </div>
+      <?php endif; ?>
     </div>
   </section>
 </main>
