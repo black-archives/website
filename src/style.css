@@ -105,6 +105,16 @@ p {
 	flex-wrap: wrap;
 }
 
+.flex-stack {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
 .flex-space {
 	-webkit-justify-content: space-between;
 	-ms-justify-content: space-between;
