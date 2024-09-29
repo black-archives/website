@@ -15,12 +15,16 @@ This template is meant for support pages (i.e. dontations, volunteering...)
       </p>
 
       <?php if (have_rows('links')) : ?>
-        <div class="flex" style="margin-top: 50px;">
+        <div class="flex-stack" style="margin-top: 50px;">
           <?php while (have_rows('links')) : the_row();
             $button_text = get_sub_field('content');
             $button_link = get_sub_field('link');
           ?>
-            <a href="<?= $button_link; ?>" class="btn btn-primary" style="margin-right: 20px;"><?= $button_text; ?> <img src="/wp-content/uploads/2021/03/Pil.svg" /></a>
+
+            <a href="<?= $button_link; ?>" class="btn btn-primary" style="margin: 20px 20px 0 0; width:fit-content;">
+              <?= $button_text; ?>&nbsp;
+              <img src="/wp-content/uploads/2021/03/Pil.svg" />
+            </a>
           <?php endwhile; ?>
         </div>
       <?php endif; ?>
