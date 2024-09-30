@@ -1,6 +1,12 @@
-<!-- 404 page -->
+<?php
 
-<?php get_header(); ?>
+/**
+ * Name: 404 Page
+ * Descripton: This is the page that viewers see when they try to access a page that does not exist or is not accessible to them.
+ */
+
+get_header();
+?>
 
 <main role="main">
   <div class="wrap pad">

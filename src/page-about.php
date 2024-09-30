@@ -1,7 +1,13 @@
-<?php /* Template Name: About Page */ ?>
+<?php
 
-<?php get_header(); ?>
-<?php $site_title = get_bloginfo('name'); ?>
+/**
+ * Template Name: About Page
+ */
+
+get_header();
+$site_title = get_bloginfo('name');
+
+?>
 <main role="main">
   <div class="sub-page-menu">
     <ul class="menu-list flex" style="justify-content: space-evenly; ">

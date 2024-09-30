@@ -1,11 +1,14 @@
 <?php
-/* Template Name: Support Page */
 
-// This template is meant for support pages (i.e. dontations, volunteering...)
+/**
+ * Template Name: Support Page
+ * 
+ * This template is meant for support pages (i.e. dontations, volunteering...)
+ */
 
+get_header();
 ?>
 
-<?php get_header(); ?>
 <main role="main" class="support-single-page">
   <section class="front-heading">
     <div class="col-3-4 wrap-m">

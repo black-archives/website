@@ -1,6 +1,13 @@
-<!-- Archive page -->
+<?php
 
-<?php get_header(); ?>
+/**
+ * Name: Archive Page
+ * 
+ * This page lists all the Wordpress posts in a grid.
+ */
+
+get_header();
+?>
 <main role="main" class="archive-page">
   <section class="front-heading">
     <div class="col-3-4">

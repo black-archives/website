@@ -1,6 +1,14 @@
-<!-- front page -->
+<?php
 
-<?php get_header(); ?>
+/**
+ * Name: Front Page
+ * 
+ * This is the landing page.
+ */
+
+get_header();
+?>
+
 <main class="frontpage">
   <section class="front-heading">
     <div class="col-3-4">
