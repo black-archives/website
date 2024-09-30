@@ -39,7 +39,7 @@
                     <p class="show-desktop"><?php if (get_field('short_about')):  echo fredy_custom_excerpt(get_field('short_about'));
                                             else: custom_length_excerpt(20);
                                             endif;   ?></p>
-                    <p class="show-ipad"><?php if (get_field('short_about')):  echo fredy_10_custom_excerpt(get_field('short_about'));
+                    <p class="show-ipad"><?php if (get_field('short_about')):  echo fredy_custom_excerpt(get_field('short_about'), 10);
                                           else: custom_length_excerpt(8);
                                           endif;   ?></p>
 
@@ -65,7 +65,7 @@
                     <p class="show-desktop"><?php if (get_field('short_about')):  echo fredy_custom_excerpt(get_field('short_about'));
                                             else: custom_length_excerpt(20);
                                             endif;   ?></p>
-                    <p class="show-ipad"><?php if (get_field('short_about')):  echo fredy_10_custom_excerpt(get_field('short_about'));
+                    <p class="show-ipad"><?php if (get_field('short_about')):  echo fredy_custom_excerpt(get_field('short_about'), 10);
                                           else: custom_length_excerpt(8);
                                           endif;   ?></p>
                     <ul class="cat-list">

@@ -12,7 +12,7 @@
 require get_template_directory() . '/inc/contact-form.php';
 require get_template_directory() . '/inc/custom-fields.php';
 require get_template_directory() . '/inc/taxonomy.php';
-// Load any external files you have here
+require get_template_directory() . '/inc/content-excerpt.php';
 
 /*------------------------------------*\
 	Theme Support
@@ -294,28 +294,6 @@ function html5_blank_view_article($more)
   return '... ';
 }
 add_filter('excerpt_more', 'html5_blank_view_article'); // Add 'View Article' button instead of [...] for Excerpts
-
-// add something like this to functions.php
-function fredy_custom_excerpt($text)
-{
-  $text = strip_shortcodes($text);
-  $text = apply_filters('the_content', $text);
-  $text = str_replace(']]>', ']]>', $text);
-  $excerpt_length = apply_filters('excerpt_length', 20);
-  $excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
-  return wp_trim_words($text, $excerpt_length, $excerpt_more);
-}
-
-function fredy_10_custom_excerpt($text)
-{
-  $text = strip_shortcodes($text);
-  $text = apply_filters('the_content', $text);
-  $text = str_replace(']]>', ']]>', $text);
-  $excerpt_length = apply_filters('excerpt_length', 10);
-  $excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
-  return wp_trim_words($text, $excerpt_length, $excerpt_more);
-}
-
 
 // Remove 'text/css' from our enqueued stylesheet
 function html5_style_remove($tag)
