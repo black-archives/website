@@ -768,12 +768,12 @@ function my_acf_init_block_types()
     // register a testimonial block.
     acf_register_block_type(array(
       'name'              => 'cards',
-      'title'             => __('Puffar'),
+      'title'             => __('Cards'),
       'description'       => __('A custom testimonial block.'),
       'render_template'   => 'block-cards.php',
       'category'          => 'formatting',
       'icon'              => 'admin-comments',
-      'keywords'          => array('puff', 'card'),
+      'keywords'          => array('card'),
     ));
 
     acf_register_block_type(array(
@@ -783,7 +783,7 @@ function my_acf_init_block_types()
       'render_template'   => 'block-newsletter.php',
       'category'          => 'formatting',
       'icon'              => 'admin-comments',
-      'keywords'          => array('puff', 'card'),
+      'keywords'          => array('card'),
     ));
   }
 }
