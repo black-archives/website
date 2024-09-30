@@ -9,6 +9,9 @@
 	External Modules/Files
 \*------------------------------------*/
 
+require get_template_directory() . '/inc/contact-form.php';
+require get_template_directory() . '/inc/custom-fields.php';
+require get_template_directory() . '/inc/taxonomy.php';
 // Load any external files you have here
 
 /*------------------------------------*\
@@ -86,6 +89,7 @@ function html5blank_header_scripts()
     wp_enqueue_script('html5blankscripts'); // Enqueue it!
   }
 }
+add_action('init', 'html5blank_header_scripts'); // Add Custom Scripts to wp_head
 
 // Load HTML5 Blank styles
 function html5blank_styles()
@@ -108,6 +112,7 @@ function html5blank_styles()
   wp_register_style('menu', get_template_directory_uri() . '/assets/css/menu.css', array(), '1.1', 'all');
   wp_enqueue_style('menu'); // Enqueue it!
 }
+add_action('wp_enqueue_scripts', 'html5blank_styles'); // Add Theme Stylesheet
 
 
 // Register HTML5 Blank Navigation
@@ -119,6 +124,7 @@ function register_html5_menu()
     'extra-menu' => __('Extra Menu', 'html5blank') // Extra Navigation if needed (duplicate as many as you need!)
   ));
 }
+add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
 
 // Remove the <div> surrounding the dynamic navigation to cleanup markup
 function my_wp_nav_menu_args($args = '')
@@ -126,6 +132,7 @@ function my_wp_nav_menu_args($args = '')
   $args['container'] = false;
   return $args;
 }
+add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <div> from WP Navigation
 
 // Remove Injected classes, ID's and Page ID's from Navigation <li> items
 function my_css_attributes_filter($var)
@@ -138,6 +145,7 @@ function remove_category_rel_from_category_list($thelist)
 {
   return str_replace('rel="category tag"', 'rel="tag"', $thelist);
 }
+add_filter('the_category', 'remove_category_rel_from_category_list'); // Remove invalid rel attribute
 
 // Add page slug to body class, love this - Credit: Starkers Wordpress Theme
 function add_slug_to_body_class($classes)
@@ -156,6 +164,7 @@ function add_slug_to_body_class($classes)
 
   return $classes;
 }
+add_filter('body_class', 'add_slug_to_body_class'); // Add slug to body class (Starkers build)
 
 // If Dynamic Sidebar Exists
 if (function_exists('register_sidebar')) {
@@ -219,6 +228,7 @@ function my_remove_recent_comments_style()
     'recent_comments_style'
   ));
 }
+add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
 
 // Pagination for paged posts, Page 1, Page 2, Page 3, with Next and Previous Links, No plugin
 function html5wp_pagination()
@@ -232,6 +242,7 @@ function html5wp_pagination()
     'total' => $wp_query->max_num_pages
   ));
 }
+add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
 
 /**
  * Filter the except length to 20 words.
@@ -282,7 +293,7 @@ function html5_blank_view_article($more)
   global $post;
   return '... ';
 }
-
+add_filter('excerpt_more', 'html5_blank_view_article'); // Add 'View Article' button instead of [...] for Excerpts
 
 // add something like this to functions.php
 function fredy_custom_excerpt($text)
@@ -311,6 +322,7 @@ function html5_style_remove($tag)
 {
   return preg_replace('~\s+type=["\'][^"\']++["\']~', '', $tag);
 }
+add_filter('style_loader_tag', 'html5_style_remove'); // Remove 'text/css' from enqueued stylesheet
 
 // Remove thumbnail width and height dimensions that prevent fluid images in the_thumbnail
 function remove_thumbnail_dimensions($html)
@@ -318,6 +330,8 @@ function remove_thumbnail_dimensions($html)
   $html = preg_replace('/(width|height)=\"\d*\"\s/', "", $html);
   return $html;
 }
+add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to thumbnails
+add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to post images
 
 // Custom Gravatar in Settings > Discussion
 function html5blankgravatar($avatar_defaults)
@@ -326,6 +340,7 @@ function html5blankgravatar($avatar_defaults)
   $avatar_defaults[$myavatar] = "Custom Gravatar";
   return $avatar_defaults;
 }
+add_filter('avatar_defaults', 'html5blankgravatar'); // Custom Gravatar in Settings > Discussion
 
 // Threaded Comments
 function enable_threaded_comments()
@@ -336,6 +351,8 @@ function enable_threaded_comments()
     }
   }
 }
+
+add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
 
 // Custom Comments Callback
 function html5blankcomments($comment, $args, $depth)
@@ -385,14 +402,6 @@ function html5blankcomments($comment, $args, $depth)
 	Actions + Filters + ShortCodes
 \*------------------------------------*/
 
-// Add Actions
-add_action('init', 'html5blank_header_scripts'); // Add Custom Scripts to wp_head
-add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
-add_action('wp_enqueue_scripts', 'html5blank_styles'); // Add Theme Stylesheet
-add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
-add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
-add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
-
 // Remove Actions
 remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
 remove_action('wp_head', 'feed_links', 2); // Display the links to the general feeds: Post and Comment Feed
@@ -407,28 +416,13 @@ remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 remove_action('wp_head', 'rel_canonical');
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
-// Add Filters
-add_filter('avatar_defaults', 'html5blankgravatar'); // Custom Gravatar in Settings > Discussion
-add_filter('body_class', 'add_slug_to_body_class'); // Add slug to body class (Starkers build)
-add_filter('widget_text', 'do_shortcode'); // Allow shortcodes in Dynamic Sidebar
-add_filter('widget_text', 'shortcode_unautop'); // Remove <p> tags in Dynamic Sidebars (better!)
-add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <div> from WP Navigation
-add_filter('the_category', 'remove_category_rel_from_category_list'); // Remove invalid rel attribute
-add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
-add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
-add_filter('excerpt_more', 'html5_blank_view_article'); // Add 'View Article' button instead of [...] for Excerpts
-add_filter('style_loader_tag', 'html5_style_remove'); // Remove 'text/css' from enqueued stylesheet
-add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to thumbnails
-add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to post images
-// add_filter('nav_menu_css_class', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected classes (Commented out by default)
-// add_filter('nav_menu_item_id', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected ID (Commented out by default)
-// add_filter('page_css_class', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> Page ID's (Commented out by default)
-
 
 // Remove Filters
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
 
 // Shortcodes
+add_filter('widget_text', 'shortcode_unautop'); // Remove <p> tags in Dynamic Sidebars (better!)
+add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
 add_shortcode('html5_shortcode_demo', 'html5_shortcode_demo'); // You can place [html5_shortcode_demo] in Pages, Posts now.
 add_shortcode('html5_shortcode_demo_2', 'html5_shortcode_demo_2'); // Place [html5_shortcode_demo_2] in Pages, Posts now.
 
@@ -440,7 +434,7 @@ add_shortcode('html5_shortcode_demo_2', 'html5_shortcode_demo_2'); // Place [htm
 \*------------------------------------*/
 
 
-function create_posttype_produkter()
+function create_post_types()
 {
 
   register_post_type(
@@ -462,8 +456,9 @@ function create_posttype_produkter()
     )
   );
 }
+add_action('init', 'create_post_types');
 
-function create_my_taxonomies_produkter()
+function create_taxonomies()
 {
   register_taxonomy(
     'exhibition-category',
@@ -483,8 +478,9 @@ function create_my_taxonomies_produkter()
     )
   );
 }
+add_action('init', 'create_taxonomies', 0);
 
-function create_posttype_events()
+function create_events()
 {
 
   register_post_type(
@@ -506,6 +502,7 @@ function create_posttype_events()
     )
   );
 }
+add_action('init', 'create_events');
 
 function create_my_taxonomies_events()
 {
@@ -527,16 +524,7 @@ function create_my_taxonomies_events()
     )
   );
 }
-
-// function wpa_show_permalinks( $post_link, $post ){
-//     if ( is_object( $post ) && $post->post_type == 'produkter' ){
-//         $terms = wp_get_object_terms( $post->ID, 'produktkategori' );
-//         if( $terms ){
-//             return str_replace( '%produktkategori%' , $terms[0]->slug , $post_link );
-//         }
-//     }
-//     return $post_link;
-// }
+add_action('init', 'create_my_taxonomies_events', 0);
 
 /**
  * Remove archive labels.
@@ -560,13 +548,14 @@ function my_theme_archive_title($title)
 
   return $title;
 }
-
-add_action('init', 'create_posttype_produkter');
-add_action('init', 'create_my_taxonomies_produkter', 0);
-add_action('init', 'create_posttype_events');
-add_action('init', 'create_my_taxonomies_events', 0);
 add_filter('get_the_archive_title', 'my_theme_archive_title');
-// add_filter( 'post_type_link', 'wpa_show_permalinks', 1, 2 );
+
+function cc_mime_types($mimes)
+{
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
 
 /*------------------------------------*\
 	ShortCode Functions
@@ -584,213 +573,6 @@ function html5_shortcode_demo_2($atts, $content = null) // Demo Heading H2 short
   return '<h2>' . $content . '</h2>';
 }
 
-/*------------------------------------*\
-    Egna funktioner
-\*------------------------------------*/
-
-
-// Allow SVG
-
-function cc_mime_types($mimes)
-{
-  $mimes['svg'] = 'image/svg+xml';
-  return $mimes;
-}
-
-// ACF Options page
-//felicia
-
-if (function_exists('acf_add_options_page')) {
-
-  acf_add_options_page(array(
-    'page_title'    => 'Options',
-    'menu_title'    => 'Options',
-    'menu_slug'     => 'options',
-    'capability'    => 'edit_posts',
-    'redirect'      => false
-  ));
-
-  acf_add_options_sub_page(array(
-    'page_title'    => 'Social Media',
-    'menu_title'    => 'Social Media',
-    'parent_slug'   => 'options',
-  ));
-
-  // acf_add_options_sub_page(array(
-  //  'page_title'    => 'Footer',
-  //  'menu_title'    => 'Footer',
-  //  'parent_slug'   => 'options',
-  // ));
-
-}
-
-function add_custom_taxonomies()
-{
-  // Add new "Locations" taxonomy to Posts
-  register_taxonomy('archive-type', 'post', array(
-    // Hierarchical taxonomy (like categories)
-    'hierarchical' => true,
-    // This array of options controls the labels displayed in the WordPress Admin UI
-    'labels' => array(
-      'name' => _x('Archive type', 'taxonomy general name'),
-      'singular_name' => _x('Archive type', 'taxonomy singular name'),
-      'search_items' =>  __('Search'),
-      'all_items' => __('All '),
-      'parent_item' => __('Parent '),
-      'parent_item_colon' => __('Parent:'),
-      'edit_item' => __('Edit'),
-      'update_item' => __('Update'),
-      'add_new_item' => __('Add New'),
-      'new_item_name' => __('New Name'),
-      'menu_name' => __('Archive type'),
-    ),
-    // Control the slugs used for this taxonomy
-    'rewrite' => array(
-      'slug' => 'archive-type', // This controls the base slug that will display before each term
-      'with_front' => false, // Don't display the category base before "/locations/"
-      'hierarchical' => true // This will allow URL's like "/locations/boston/cambridge/"
-    ),
-  ));
-}
-
-function cspd_call_after_for_submit($contact_data)
-{
-
-  $contact_form = WPCF7_ContactForm::get_current();
-  $contact_form_id = $contact_form->id;
-
-  if ($contact_form_id == 592 || $contact_form_id == 678) {
-    $relation = $_POST["relation"];
-    $represent = $_POST["represent"];
-    $people = $_POST["people"];
-    $meaning = $_POST["meaning"];
-    $description = $_POST["description"];
-    $year = $_POST["yearCreate"];
-    $month = $_POST["monthCreate"];
-    $day = $_POST["dayCreate"];
-    $photographers = $_POST["photographers"];
-    $fornamn = $_POST["fornamn"];
-    $efternamn = $_POST["efternamn"];
-    $epost = $_POST["epost"];
-    $contactways = $_POST["otherways"];
-    $about = $_POST["aboutself"];
-    $post_title = 'The interview series';
-    $categoryID = 51;
-    $content = '
-        <!-- wp:heading {"level":2} -->
-        <h2>Hur ser din relation till ditt familjearkiv: fotografier, filmklipp, ljudinspelningar, minnen, muntliga berättelser?</h2>
-        <!-- /wp:heading -->
-        <!-- wp:paragraph -->
-        <p>' . $relation . '</p>
-        <!-- /wp:paragraph -->
-        <!-- wp:heading {"level":2} -->
-        <h2>Du delar med dig av visuellt material som berör din familj. Vad representerar detta material för dig?</h2>
-        <!-- /wp:heading -->
-        <!-- wp:paragraph -->
-        <p>' . $represent . '</p>
-        <!-- /wp:paragraph -->
-        <!-- wp:heading {"level":2} -->
-        <h2>Beskriv kort personerna i bildmaterialet och situationen som avbildas, om möjligt</h2>
-        <!-- /wp:heading -->
-        <!-- wp:paragraph -->
-        <p>' . $people . '</p>
-        <!-- /wp:paragraph -->
-        <!-- wp:heading {"level":2} -->
-        <h2>Vad innebär ett Svart arkiv/Black archive för dig?</h2>
-        <!-- /wp:heading -->
-        <!-- wp:paragraph -->
-        <p>' . $meaning . '</p>
-        <!-- /wp:paragraph -->';
-  } elseif ($contact_form_id == 637 || $contact_form_id == 679) {
-    $description = $_POST["description"];
-    $year = $_POST["yearCreate"];
-    $month = $_POST["monthCreate"];
-    $day = $_POST["dayCreate"];
-    $photographers = $_POST["photographers"];
-    $fornamn = $_POST["fornamn"];
-    $efternamn = $_POST["efternamn"];
-    $epost = $_POST["epost"];
-    $contactways = $_POST["otherways"];
-    $about = $_POST["aboutself"];
-    $content = '<!-- wp:heading {"level":2} -->
-        <h2>Om fotografierna</h2>
-        <!-- /wp:heading -->
-        <!-- wp:paragraph -->
-        <p>' . $description . '</p>
-        <!-- /wp:paragraph -->
-        ';
-    $post_title = 'Family Photo album';
-    $categoryID = 49;
-  }
-
-  $name = $fornamn . " " . $efternamn;
-  $date = $year . " " . $month . " " . $day;
-  // create new CPT
-
-  $submission = WPCF7_Submission::get_instance();
-  if (!$submission) {
-    return;
-  }
-  $posted_data = $submission->get_posted_data();
-
-  $new_post = array();
-  $new_post['post_title'] = $post_title . " - submitted by: " . $fornamn . " " . $efternamn;
-  $new_post['post_type'] = 'post';
-  $new_post['post_content'] = $content;
-  $new_post['post_status'] = 'draft';
-
-  //When everything is prepared, insert the post into your WordPress Database
-  $post_id = wp_insert_post($new_post);
-
-
-  update_field('field_6041d8dc93430', $name, $post_id); // author
-  update_field('field_633dc189232bf', $epost, $post_id); // e-post
-  update_field('field_633dc1a8232c1', $contactways, $post_id); // annan kontaktväg
-  update_field('field_633dc1bd232c2', $about, $post_id); // about
-  update_field('field_633dce2712b47', $photographers, $post_id); // fotografer
-  update_field('field_633dd06a6da81', $date, $post_id); // date
-  return;
-}
-
-function suppress_wpcf7_filter($value, $sub = "")
-{
-  $out    =   !empty($sub) ? $sub : $value;
-  $out    =   strip_tags($out);
-  $out    =   wptexturize($out);
-  return $out;
-}
-
-function my_acf_init_block_types()
-{
-  // Check function exists.
-  if (function_exists('acf_register_block_type')) {
-
-    // register a testimonial block.
-    acf_register_block_type(array(
-      'name'              => 'cards',
-      'title'             => __('Cards'),
-      'description'       => __('A custom testimonial block.'),
-      'render_template'   => 'block-cards.php',
-      'category'          => 'formatting',
-      'icon'              => 'admin-comments',
-      'keywords'          => array('card'),
-    ));
-
-    acf_register_block_type(array(
-      'name'              => 'newsletter',
-      'title'             => __('Newsletter'),
-      'description'       => __('A custom testimonial block.'),
-      'render_template'   => 'block-newsletter.php',
-      'category'          => 'formatting',
-      'icon'              => 'admin-comments',
-      'keywords'          => array('card'),
-    ));
-  }
-}
-
-add_filter('upload_mimes', 'cc_mime_types');
-add_filter("wpcf7_mail_tag_replaced", "suppress_wpcf7_filter");
-add_action('init', 'add_custom_taxonomies', 0);
-add_action('wpcf7_before_send_mail', 'cspd_call_after_for_submit');
-add_action('acf/init', 'my_acf_init_block_types');
+add_filter('widget_text', 'do_shortcode'); // Allow shortcodes in Dynamic Sidebar
+add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
   ?>
