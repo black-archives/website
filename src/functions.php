@@ -12,7 +12,7 @@
 require get_template_directory() . '/inc/contact-form.php';
 require get_template_directory() . '/inc/custom-fields.php';
 require get_template_directory() . '/inc/taxonomy.php';
-require get_template_directory() . '/inc/content-excerpt.php';
+require get_template_directory() . '/inc/helper.php';
 
 /*------------------------------------*\
 	Theme Support
