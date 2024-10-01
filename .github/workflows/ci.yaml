@@ -8,6 +8,9 @@ on:
       - 'src/**'
 
 jobs:
+  # This job will fetch the latest version of the code and copy it to the server
+  # hosting the WordPress site. The job will run automatically when a push is made
+  # to the main branch and the changes are in the /src directory.
   deploy:
     runs-on: ubuntu-latest
     steps:

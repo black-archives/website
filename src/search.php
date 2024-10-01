@@ -1,6 +1,12 @@
-<!-- This is the search result page -->
+<?php
 
-<?php get_header(); ?>
+/**
+ * Name: Search Result Page
+ * Description: A page that lists the search results for a query provided by the customer. 
+ */
+
+get_header();
+?>
 <main role="main" class="search-results" style="background: #F0F0F0;">
   <section class="search-top">
     <div class="wrap-l">

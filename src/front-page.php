@@ -1,6 +1,12 @@
-<!-- front page -->
+<?php
 
-<?php get_header(); ?>
+/**
+ * This is the front page. It displays the latest posts and an open call.
+ */
+
+get_header();
+?>
+
 <main class="frontpage">
   <section class="front-heading">
     <div class="col-3-4">
@@ -54,10 +60,10 @@
                     </div>
 
                     <div class="bottom">
-                      <p class="show-desktop"><?php if (get_field('short_about')):  echo fredy_custom_excerpt(get_field('short_about'));
+                      <p class="show-desktop"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'));
                                               else: custom_length_excerpt(20);
                                               endif;   ?></p>
-                      <p class="show-ipad"><?php if (get_field('short_about')):  echo fredy_10_custom_excerpt(get_field('short_about'));
+                      <p class="show-ipad"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'), 10);
                                             else: custom_length_excerpt(8);
                                             endif;   ?></p>
                       <ul class="cat-list">
@@ -82,10 +88,10 @@
                     </div>
 
                     <div class="bottom">
-                      <p class="show-desktop"><?php if (get_field('short_about')):  echo fredy_custom_excerpt(get_field('short_about'));
+                      <p class="show-desktop"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'));
                                               else: custom_length_excerpt(20);
                                               endif;   ?></p>
-                      <p class="show-ipad"><?php if (get_field('short_about')):  echo fredy_10_custom_excerpt(get_field('short_about'));
+                      <p class="show-ipad"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'), 10);
                                             else: custom_length_excerpt(8);
                                             endif;   ?></p>
                       <ul class="cat-list">

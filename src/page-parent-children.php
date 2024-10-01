@@ -1,16 +1,19 @@
 <?php
-/* Template Name: Parent Children Page */
 
-//This template is for parent pages. It will display all child pages of the parent page in a grid layout.
+/**
+ * Template Name: Parent Children Page
+ * 
+ * This template is for parent pages. It will display all child pages of the parent page in a grid layout.
+ * 
+ * Pre-requisites:
+ * - Create a new page in WordPress and assign this template to it.
+ * - Create child pages for the parent page.
+ * - Add a featured image to each child page. If no featured image is added, a fallback image will be used.
+ * - Add a summary to each child page in the 'Page Summary' field of the Custom Fields section. If no summary is added, the excerpt will be used.
+ */
 
-//Pre-requisites:
-//- Create a new page in WordPress and assign this template to it.
-//- Create child pages for the parent page.
-//- Add a featured image to each child page. If no featured image is added, a fallback image will be used.
-//- Add a summary to each child page in the 'Page Summary' field of the Custom Fields section. If no summary is added, the excerpt will be used.
+get_header();
 ?>
-
-<?php get_header(); ?>
 <main role="main" class="parent-children-page">
   <section class="front-heading">
     <div class="col-3-4">
@@ -66,6 +69,7 @@
       // Reset Post Data
       wp_reset_postdata();
 
+      // Display cards from ACF repeater fieldm, if available
       while (have_rows('cards')) : the_row();
         $card_image = get_sub_field('image')['url'];
         $card_title = get_sub_field('title');

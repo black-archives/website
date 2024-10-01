@@ -1,6 +1,13 @@
-<!-- Archive page -->
+<?php
 
-<?php get_header(); ?>
+/**
+ * Name: Archive Page
+ * 
+ * This is the archive page. It displays all posts.
+ */
+
+get_header();
+?>
 <main role="main" class="archive-page">
   <section class="front-heading">
     <div class="col-3-4">
@@ -115,10 +122,10 @@
                     </div>
 
                     <div class="bottom">
-                      <p class="show-desktop"><?php if (get_field('short_about')):  echo fredy_custom_excerpt(get_field('short_about'));
+                      <p class="show-desktop"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'));
                                               else: custom_length_excerpt(20);
                                               endif;   ?></p>
-                      <p class="show-ipad"><?php if (get_field('short_about')):  echo fredy_10_custom_excerpt(get_field('short_about'));
+                      <p class="show-ipad"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'), 10);
                                             else: custom_length_excerpt(8);
                                             endif;   ?></p>
                       <ul class="cat-list">
@@ -138,10 +145,10 @@
                       <h2><?php the_title(); ?></h2>
                     </div>
                     <div class="bottom">
-                      <p class="show-desktop"><?php if (get_field('short_about')):  echo fredy_custom_excerpt(get_field('short_about'));
+                      <p class="show-desktop"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'));
                                               else: custom_length_excerpt(20);
                                               endif;   ?></p>
-                      <p class="show-ipad"><?php if (get_field('short_about')):  echo fredy_10_custom_excerpt(get_field('short_about'));
+                      <p class="show-ipad"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'), 10);
                                             else: custom_length_excerpt(8);
                                             endif;   ?></p>
                       <ul class="cat-list">

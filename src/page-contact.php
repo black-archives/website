@@ -1,6 +1,14 @@
-<?php /* Template Name: Contact Page */ ?>
+<?php
 
-<?php get_header(); ?>
+/**
+ * Template Name: Contact Page
+ * 
+ * This is the contact page.
+ */
+
+get_header();
+?>
+
 <main class="contact-page">
   <div class="wrap-m">
     <h1><?php the_title(); ?></h1>

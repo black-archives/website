@@ -1,4 +1,11 @@
-<?php get_header(); ?>
+<?php
+
+/**
+ * The template for displaying all single posts
+ */
+
+get_header();
+?>
 
 <main role="main" class="single-page">
   <div class="breadcrumbs">

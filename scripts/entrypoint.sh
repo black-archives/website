@@ -5,7 +5,7 @@
 # phpMyAdmin. To get started, run the following command: `./entrypoint.sh start`
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-ROOT_DIR="${CURRENT_DIR}/.." # Move up one directory
+ROOT_DIR=$(realpath "${CURRENT_DIR}/..") # Move up one directory
 
 ## CONSTANTS ############################################
 
@@ -21,7 +21,6 @@ ENV_FILE_PATH="${ROOT_DIR}/.env"
 THEME_PATH="${ROOT_DIR}/src/"
 MYSQL_PATH="${ROOT_DIR}/.dev/database"
 WORDPRESS_PATH="${ROOT_DIR}/.dev/wordpress/"
-
 
 ## FUNCTIONS ############################################
 usage() {

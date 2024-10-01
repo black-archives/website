@@ -23,7 +23,7 @@ Pre-requisites:
 >
 > Before starting the app, you will need to copy the `wp-content` directory from the remote server to the `.development/wordpress` directory. This directory contains the themes, plugins, and uploads for the Wordpress app that are needed to 'recreate' the website locally. In order to copy the `wp-content` directory from the remote server, see the [migrating remote data to local app](#migrating-remote-data-to-local-app) section.
 
-To start the app locally, run the following command:
+To start the app locally, run the following command and open the browser to `http://localhost:8081/`:
 
 ```bash
 # start the app with default configurations
@@ -80,18 +80,7 @@ This essentially involves exporting the remote wordpress application using the [
 
 1. Export the remote Wordpress app using the All-in-One WP Migration plugin
 2. Download the exported file
-3. Import the file into the local Wordpress app using the All-in-One WP Migration plugin
-
-The exported file may be larger than the maximum upload size (usually 2MB) for Wordpress. If this is the case, you can increase the maximum upload size by pasting the following values into the `.htaccess` file:
-
-```bash
-# this will increase the maximum upload size to 128MB (you can change the values to your preference)
-php_value upload_max_filesize 128M
-php_value post_max_size 128M
-php_value memory_limit 256M
-php_value max_execution_time 300
-php_value max_input_time 300
-```
+3. Import the file into the local Wordpress app using the All-in-One WP Migration plugin (see [how to increase the upload size](#how-do-i-upload-more-than-2mb-of-data-to-the-wordpress-app) if the import fails due to the file size)
 
 ## Architecture
 
@@ -185,12 +174,15 @@ To import the data, follow these steps:
 
 ### How do I upload more than 2MB of data to the Wordpress app?
 
-Paste the following values into the `.dev/wordpress/wp-content/.htaccess` file to increase the maximum upload size:
+> [!TIP]
+> You can increase the maximum upload size by updating the values in the example snippet below.
+
+Paste the following values into the `.dev/wordpress/.htaccess` file to increase the maximum upload size:
 
 ```bash
-php_value upload_max_filesize 1G
-php_value post_max_size 1G
-php_value memory_limit 256M
+php_value upload_max_filesize 2G
+php_value post_max_size 2G
+php_value memory_limit 300M
 php_value max_execution_time 300
 php_value max_input_time 300
 ```
