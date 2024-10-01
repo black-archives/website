@@ -544,6 +544,32 @@ a.cookie-read {
 	}
 }
 
+/*------- Modal ---------*/
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+	background-color: #fefefe;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+.modal-close img {
+	height: 30px;
+}
+
 /*------- forms ---------*/
 
 .wpcf7-form .flex,
@@ -1093,15 +1119,6 @@ h3 {
 
 .single-page .ingress p {
 	margin-bottom: 0;
-}
-
-.info {
-	font-family: "Space Mono", monospace;
-	margin-bottom: 40px;
-}
-
-.info span {
-	margin-right: 25px;
 }
 
 blockquote {
@@ -1849,10 +1866,6 @@ button[type="submit"] {
 
 	.about-page {
 		padding: 60px 0 30px;
-	}
-
-	.info span {
-		display: block;
 	}
 
 	.date span {
