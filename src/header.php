@@ -12,17 +12,33 @@
 
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
-  <title><?php wp_title(''); ?></title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title><?php wp_title(''); ?></title>
+  <?php wp_head(); ?>
+
+  <!-- analytics -->
   <link href="//www.google-analytics.com" rel="dns-prefetch">
+
+  <!-- favicon -->
   <link href="<?php echo get_template_directory_uri(); ?>/img/icons/favicon.png" rel="shortcut icon">
   <link href="<?php echo get_template_directory_uri(); ?>/img/icons/touch.png" rel="apple-touch-icon-precomposed">
+
+  <!-- fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Epilogue&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <?php wp_head(); ?>
+
+  <!-- javascript libraries -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      prefix: 'tw-',
+    }
+  </script>
+
+  <!-- misc -->
   <script>
     conditionizr.config({
       assets: '<?php echo get_template_directory_uri(); ?>',
@@ -34,12 +50,15 @@
 <body <?php body_class('flex flex-space'); ?>>
   <header class="header clear" role="banner">
     <div class="main-header">
+      <!-- sidebar -->
       <div class="left-menu">
         <div class="menu-hamburger">
-          <img class="" src="/wp-content/uploads/2021/03/Meny.svg" alt="Menu icon">
+          <img src="/wp-content/uploads/2021/03/Meny.svg" alt="Menu icon">
         </div>
         <img class="header-logo" src="/wp-content/uploads/2021/03/logo-side.svg" alt="Black Archive Sweden Logo">
       </div>
+
+      <!-- sidebar active content -->
       <nav class="nav" role="navigation">
         <div class="meny-cross"><img src="/wp-content/uploads/2021/03/Meny-kryss.svg" alt="Close menu cross"></div>
 
@@ -66,6 +85,7 @@
       </nav>
     </div>
 
+    <!-- mobile navigation bar -->
     <div class="mob-menu vert-center">
       <div>
         <img src="/wp-content/uploads/2021/03/BAS-Logga.svg" alt="Black Archive Sweden Logo" width="100">
