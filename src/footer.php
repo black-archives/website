@@ -1,3 +1,11 @@
+<?php
+
+/**
+ * This is the footer of the website. It contains the newsletter form and the
+ * copy right information.
+ */
+?>
+
 <div class="bottom-footer">
   <div class="copyright">
     <p>&copy; <?php echo date('Y'); ?> All rights reserved </p>

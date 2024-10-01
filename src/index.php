@@ -3,7 +3,7 @@
 /**
  * Name: Archive Page
  * 
- * This page lists all the Wordpress posts in a grid.
+ * This is the archive page. It displays all posts.
  */
 
 get_header();

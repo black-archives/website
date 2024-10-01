@@ -69,6 +69,7 @@ get_header();
       // Reset Post Data
       wp_reset_postdata();
 
+      // Display cards from ACF repeater fieldm, if available
       while (have_rows('cards')) : the_row();
         $card_image = get_sub_field('image')['url'];
         $card_title = get_sub_field('title');

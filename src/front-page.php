@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Name: Front Page
- * 
- * This is the landing page.
+ * This is the front page. It displays the latest posts and an open call.
  */
 
 get_header();

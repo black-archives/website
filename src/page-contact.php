@@ -2,6 +2,8 @@
 
 /**
  * Template Name: Contact Page
+ * 
+ * This is the contact page.
  */
 
 get_header();

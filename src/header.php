@@ -1,4 +1,11 @@
-<!-- This is the sidebar -->
+<?php
+
+/**
+ * The header/navigation for our theme which is a sidebar on large screens and a hamburger
+ * menu on small screens. It includes also includes the site logo and social media links
+ * and other header logic for an HTML document.
+ */
+?>
 
 <!doctype html>
 <html <?php language_attributes(); ?> class="no-js">

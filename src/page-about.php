@@ -2,6 +2,9 @@
 
 /**
  * Template Name: About Page
+ * 
+ * This is the about page. It displays information about Black Archives Sweden,
+ * the team, and partners.
  */
 
 get_header();

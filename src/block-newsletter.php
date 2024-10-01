@@ -1,4 +1,10 @@
-<!-- delete after inspecting refrence in functions.php -->
+<?php
+
+/**
+ * This is the newsletter block. It contains a form for subscribing to the
+ * newsletter.
+ */
+?>
 <div class="outer-container">
   <div class="form-container">
     <h1><?= get_field('rubrik'); ?></h1>

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Content Only
+ * Template Name: Content Only Page
  * 
  * This is a template for pages that only contain content. It will display 
  * the content of the page excluding the title.
