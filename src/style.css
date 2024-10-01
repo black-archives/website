@@ -76,8 +76,8 @@ h6 {
 }
 
 p {
-	font-size: 1.1em;
-	line-height: 1.5;
+	font-size: 1.1em !important;
+	line-height: 1.5 !important;
 }
 
 /*----------- Structure -----------*/
@@ -1577,8 +1577,6 @@ button[type="submit"] {
 }
 
 .bottom-footer {
-	display: flex;
-	justify-content: space-between;
 	width: 94%;
 	margin-left: 6%;
 	align-items: center;
