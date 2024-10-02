@@ -51,7 +51,7 @@ get_header();
           <div class="col-f-1-3">
             <div class="box-content <?php if (has_post_thumbnail()): echo 'hover-active';
                                     endif; ?> ">
-              <a href="<?php the_permalink(); ?>">
+              <a href="<?php the_permalink(); ?>" style="height: 100%;">
                 <?php if (has_post_thumbnail()): ?>
                   <?php the_post_thumbnail(); ?>
                   <div class="post-hover-box">

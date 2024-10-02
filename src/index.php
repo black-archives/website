@@ -113,7 +113,7 @@ get_header();
                                                   } ?> ">
             <div class="box-content <?php if (has_post_thumbnail()): echo 'hover-active';
                                     endif; ?> ">
-              <a href="<?php the_permalink(); ?>">
+              <a href="<?php the_permalink(); ?>" style="height: 100%;">
                 <?php if (has_post_thumbnail()):
                   the_post_thumbnail(); ?>
                   <div class="post-hover-box">
