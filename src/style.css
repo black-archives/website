@@ -235,6 +235,11 @@ p {
 	margin-left: 2.66667%;
 }
 
+.lang-list,
+.lang-list ul li a span {
+	font-size: 1.5rem !important;
+}
+
 /*------------ GB blocks -----------*/
 
 .wp-block-group__inner-container {
