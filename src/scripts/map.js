@@ -1,6 +1,58 @@
+const map = document.getElementById("map-main");
+const svgMapBox = document.getElementById("map-box");
 const zoomInBtn = document.getElementById("btn-zoom-in");
 const zoomOutBtn = document.getElementById("btn-zoom-out");
-const svgMapBox = document.getElementById("map-box");
+
+let selectedCardElement = null;
+
+/**
+ * Create a card element and append it to the top-left corner of the map
+ *
+ * @param {string} id - the id of the card
+ * @param {string} title - the title of the card
+ * @param {string} body - the body of the card
+ *
+ * @returns {void}
+ */
+function setCard(id, title, body) {
+	// remove the card if it already exists
+	if ((selectedCardElement && selectedCardElement.id) === id) {
+		selectedCardElement.remove();
+		selectedCardElement = null;
+		return;
+	} else {
+		const card = document.createElement("div");
+		const twClass = "tw-bg-white tw-shadow-md tw-rounded tw-p-4 tw-mt-4";
+		card.classList.add("map-card", ...twClass.split(" "));
+		card.id = id;
+
+		const closeButton = document.createElement("button");
+		closeButton.textContent = "X";
+		closeButton.classList.add(
+			"tw-absolute",
+			"tw-top-0",
+			"tw-right-0",
+			"tw-m-2"
+		);
+
+		closeButton.addEventListener("click", function () {
+			card.remove();
+		});
+
+		const cardTitle = document.createElement("h3");
+		cardTitle.textContent = title;
+
+		const cardBody = document.createElement("p");
+		cardBody.textContent = body;
+
+		card.appendChild(closeButton);
+		card.appendChild(cardTitle);
+		card.appendChild(cardBody);
+
+		map.appendChild(card);
+		selectedCardElement = card;
+	}
+}
 
 /**
  * Returns the x and y coordinates of the center of the svg element
@@ -22,7 +74,7 @@ function getCoords() {
  *
  * @returns {void}
  */
-function setup() {
+function setupPanzoom() {
 	const instance = panzoom(svgMapBox, {
 		maxZoom: 3,
 		minZoom: 0.7,
@@ -51,4 +103,4 @@ function setup() {
 	});
 }
 
-document.addEventListener("DOMContentLoaded", setup);
+document.addEventListener("DOMContentLoaded", setupPanzoom);

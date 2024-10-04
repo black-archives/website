@@ -13,6 +13,12 @@ Tags: minimal, colorful
 */
 
 /*------------ interactive map ------------*/
+.map-card {
+	position: absolute;
+	top: 0;
+	margin-left: 20px;
+}
+
 #map-container {
 	width: 100%;
 	height: 90%;

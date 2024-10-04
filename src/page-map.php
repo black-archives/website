@@ -49,6 +49,19 @@ $map_cards = [
     'content' => 'Content 2',
   ],
 ];
+
+// get a map object by id
+function get_map_object_by_id($id)
+{
+  global $map_cards;
+  foreach ($map_cards as $object) {
+    if ($object->id == $id) {
+      return $object;
+    }
+  }
+  return null;
+}
+
 ?>
 
 <main id="map-page" role="main">
@@ -62,14 +75,28 @@ $map_cards = [
 
           <!--  pointers -->
           <g id="map-objects">
-            <?php foreach ($map_objects as $object) : ?>
+            <?php
+            foreach ($map_objects as $object) :
+
+              $title = '';
+              $body = '';
+
+              // set the selected object
+              $obj = get_map_object_by_id($object->id);
+
+              if ($obj) {
+                $title = $obj->title;
+                $content = $obj->content;
+              }
+            ?>
               <circle
                 id="<?= $object->id; ?>"
                 class="map-object"
                 cx="<?= $object->x; ?>"
                 cy="<?= $object->y; ?>"
                 fill="<?= $object->color; ?>"
-                r="5" />
+                r="5"
+                onclick="setCard(<?= $object->id; ?>, '<?= $title; ?>', '<?= $content; ?>')" />
             <?php endforeach; ?>
           </g>
         </g>
