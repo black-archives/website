@@ -16,37 +16,49 @@ let selectedCardElement = null;
  */
 function setCard(id, title, body) {
 	// remove the card if it already exists
-	if ((selectedCardElement && selectedCardElement.id) === id) {
+	if (selectedCardElement && Number(selectedCardElement.id) === id) {
+		console.log(`Removing ${id} card...`);
 		selectedCardElement.remove();
 		selectedCardElement = null;
 		return;
 	} else {
+		console.log(`Creating ${id} card...`);
 		const card = document.createElement("div");
-		const twClass = "tw-bg-white tw-shadow-md tw-rounded tw-p-4 tw-mt-4";
-		card.classList.add("map-card", ...twClass.split(" "));
+		card.classList.add(
+			"map-card",
+			"tw-flex-col",
+			"tw-absolute",
+			"tw-top-5",
+			"tw-left-5",
+			"tw-min-w-72",
+			"tw-min-h-60",
+			"tw-p-4",
+			"tw-bg-slate-100",
+			"tw-rounded-lg",
+			"tw-border-2",
+			"tw-border-slate-800"
+		);
 		card.id = id;
 
 		const closeButton = document.createElement("button");
 		closeButton.textContent = "X";
-		closeButton.classList.add(
-			"tw-absolute",
-			"tw-top-0",
-			"tw-right-0",
-			"tw-m-2"
-		);
-
+		closeButton.classList.add("tw-mx-2");
 		closeButton.addEventListener("click", function () {
 			card.remove();
 		});
 
 		const cardTitle = document.createElement("h3");
-		cardTitle.textContent = title;
+		cardTitle.textContent = `${id}. ${title}`;
+
+		const cardHead = document.createElement("div");
+		cardHead.classList.add("tw-flex", "tw-justify-between", "tw-items-start");
+		cardHead.appendChild(cardTitle);
+		cardHead.appendChild(closeButton);
 
 		const cardBody = document.createElement("p");
 		cardBody.textContent = body;
 
-		card.appendChild(closeButton);
-		card.appendChild(cardTitle);
+		card.appendChild(cardHead);
 		card.appendChild(cardBody);
 
 		map.appendChild(card);
