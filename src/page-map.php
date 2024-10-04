@@ -13,7 +13,7 @@ wp_enqueue_script('map-js', get_template_directory_uri() . '/scripts/map.js', ar
 
 // if screen is less than 768px
 if (wp_is_mobile()) {
-  $title_font_size = "font-size: 2.5em !important;";
+  $title_font_size = "font-size: 4em !important;";
 } else {
   $title_font_size = "font-size: 6.5em !important;";
 }
@@ -65,9 +65,9 @@ function get_map_object_by_id($id)
 ?>
 
 <main id="map-page" role="main">
-  <div id="map-main" class="tw-h-svh tw-flex-col">
+  <div id="map-main" class="tw-min-h-svh md:tw-h-svh tw-flex-col">
     <!-- map -->
-    <div id="map-container" class="tw-grow">
+    <div id="map-container" class="md:tw-grow md:tw-mt-0">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
         <g id="map-box">
           <!-- background -->
@@ -104,9 +104,9 @@ function get_map_object_by_id($id)
     </div>
 
     <!-- options -->
-    <div id="map-options" class="tw-grow-0 tw-my-2 tw-flex md:tw-justify-between md:tw-mx-10">
+    <div id="map-options" class="md:tw-grow-0 tw-my-2 tw-mx-1 md:tw-mx-10 tw-space-y-2 md:tw-space-y-0 tw-flex tw-flex-col md:tw-flex-row md:tw-justify-between">
       <!-- interaction options -->
-      <div class="tw-flex tw-space-x-2">
+      <div class="tw-flex tw-justify-center md:tw-justify-start tw-space-x-2">
         <button id="btn-zoom-in" class="tw-px-2 tw-py-1 tw-border tw-border-black tw-bg-white hover:tw-bg-slate-800 hover:tw-text-white">
           zoom in
         </button>
@@ -115,8 +115,8 @@ function get_map_object_by_id($id)
         </button>
       </div>
 
-      <!-- language options -->
-      <div class="tw-flex tw-space-x-2">
+      <!-- extra options -->
+      <div class="tw-flex tw-justify-center md:tw-justify-end tw-space-x-2">
         <button class="tw-px-2 tw-py-1 tw-border tw-border-black tw-bg-white hover:tw-bg-slate-800 hover:tw-text-white">
           En
         </button>
@@ -136,13 +136,13 @@ function get_map_object_by_id($id)
         <img class="tw-ml-auto tw-mr-3 tw-my-3 tw-cursor-pointer" src="/wp-content/uploads/2021/03/Meny-kryss.svg" alt="Button to close modal">
       </span>
       <section id="project-info" class="tw-flex-col tw-justify-center">
-        <div class="tw-w-2/6 tw-mx-auto tw-text-center">
+        <div class="md:tw-w-2/6 md:tw-mx-auto tw-text-center">
           <h1 style="<?= $title_font_size; ?>">
             <?= get_the_title(); ?>
           </h1>
         </div>
 
-        <div class="tw-mt-5 tw-w-1/2 tw-mx-auto">
+        <div class="tw-mt-5 md:tw-w-1/2 md:tw-mx-auto">
           <?= get_the_content(); ?>
         </div>
       </section>

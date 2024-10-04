@@ -22,7 +22,6 @@ Tags: minimal, colorful
 #map-container {
 	width: 100%;
 	height: 90%;
-	position: relative;
 }
 
 #map-container svg {
@@ -34,6 +33,16 @@ Tags: minimal, colorful
 
 #map-container #map-box .map-object {
 	cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+	#map-container {
+		height: 75vh;
+	}
+
+	.map-card {
+		top: 100px;
+	}
 }
 
 /*------------ Reset ------------*/
@@ -572,7 +581,7 @@ a.cookie-read {
 .modal {
 	display: none;
 	position: fixed;
-	z-index: 1;
+	z-index: 999;
 	left: 0;
 	top: 0;
 	width: 100%;
