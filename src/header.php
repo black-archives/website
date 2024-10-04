@@ -30,13 +30,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Epilogue&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
 
-  <!-- javascript libraries -->
+  <!-- javascript library - Tailwind (styling framework) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       prefix: 'tw-',
     }
   </script>
+
+  <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
 
   <!-- misc -->
   <script>
