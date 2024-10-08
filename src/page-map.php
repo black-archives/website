@@ -58,9 +58,9 @@ function get_map_story_by_id($id)
 <main id="map-page" role="main">
   <div id="map-main" class="tw-min-h-svh md:tw-h-svh tw-flex-col">
     <!-- map -->
-    <div id="map-container" class="md:tw-grow md:tw-mt-0">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-        <g id="map-box">
+    <div
+      id="map-container"
+      class="tw-h-svh md:tw-h-screen-90vh md:tw-grow tw-border-black tw-border-2 md:tw-border-0">
           <!-- background -->
           <image href="<?= $map_image_url; ?>" />
 
