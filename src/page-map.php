@@ -25,19 +25,278 @@ $map_image_url = get_field('map_image');
 $map_stories = get_field('map_stories');
 
 // Create an array of 2 PHP objects with dummy data
-$map_objects = [
+$pointer_color = "red";
+$map_pointers = [
   (object) [
     'id' => 1,
-    'x' => "10",
-    'y' => "20",
-    'color' => '#ff0000',
+    'x' => '7746.912109375',
+    'y' => '2287.798583984375',
+    'color' => $pointer_color,
   ],
   (object) [
     'id' => 2,
-    'x' => "40%",
-    'y' => "20%",
-    'color' => '#00ff00',
+    'x' => '7902.91552734375',
+    'y' => '2220.940185546875',
+    'color' => $pointer_color,
   ],
+  (object) [
+    'id' => 3,
+    'x' => '8155.4921875',
+    'y' => '2354.656982421875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 4,
+    'x' => '7709.7685546875',
+    'y' => '2503.2314453125',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 5,
+    'x' => '7932.63037109375',
+    'y' => '2532.9462890625',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 6,
+    'x' => '7405.19091796875',
+    'y' => '3023.241943359375',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 7,
+    'x' => '7486.9072265625',
+    'y' => '3015.813232421875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 8,
+    'x' => '7761.76953125',
+    'y' => '4620.4169921875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 9,
+    'x' => '7858.34326171875',
+    'y' => '4627.845703125',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 10,
+    'x' => '7264.04541015625',
+    'y' => '3216.388671875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 11,
+    'x' => '7449.763671875',
+    'y' => '4419.841796875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 12,
+    'x' => '7085.755859375',
+    'y' => '3045.528076171875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 13,
+    'x' => '7197.18701171875',
+    'y' => '3038.099365234375',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 14,
+    'x' => '310.76214599609375',
+    'y' => '5341.0029296875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 15,
+    'x' => '7769.1982421875',
+    'y' => '3231.24609375',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 16,
+    'x' => '7925.20166015625',
+    'y' => '4523.84375',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 17,
+    'x' => '7256.61669921875',
+    'y' => '4018.690673828125',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 18,
+    'x' => '7249.18798828125',
+    'y' => '4115.26416015625',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 19,
+    'x' => '4760.56640625',
+    'y' => '5066.14013671875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 20,
+    'x' => '7940.05908203125',
+    'y' => '3075.242919921875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 21,
+    'x' => '7249.18798828125',
+    'y' => '4211.83740234375',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 22,
+    'x' => '7732.0546875',
+    'y' => '4085.549072265625',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 23,
+    'x' => '7286.33154296875',
+    'y' => '3104.9580078125',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 24,
+    'x' => '7791.48486328125',
+    'y' => '3535.82373046875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 25,
+    'x' => '0',
+    'y' => '0',
+    'color' => '#39ff14',
+  ],
+  (object) [
+    'id' => 26,
+    'x' => '7590.9091796875',
+    'y' => '3877.544921875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 27,
+    'x' => '7204.61572265625',
+    'y' => '2941.526123046875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 28,
+    'x' => '8816.6484375',
+    'y' => '2733.521728515625',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 29,
+    'x' => '8898.3642578125',
+    'y' => '2674.092041015625',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 30,
+    'x' => '7576.0517578125',
+    'y' => '4360.41162109375',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 31,
+    'x' => '9024.65234375',
+    'y' => '2703.806884765625',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 32,
+    'x' => '7776.626953125',
+    'y' => '3929.5458984375',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 33,
+    'x' => '6536.03076171875',
+    'y' => '4033.548095703125',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 34,
+    'x' => '6075.4501953125',
+    'y' => '3877.544921875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 35,
+    'x' => '8110.91943359375',
+    'y' => '2191.22509765625',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 36,
+    'x' => '7278.90283203125',
+    'y' => '2837.52392578125',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 37,
+    'x' => '7821.19970703125',
+    'y' => '4107.83544921875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 38,
+    'x' => '7888.05810546875',
+    'y' => '4419.841796875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 39,
+    'x' => '7427.47705078125',
+    'y' => '3268.389892578125',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 40,
+    'x' => '7873.20068359375',
+    'y' => '4196.97998046875',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 41,
+    'x' => '8408.068359375',
+    'y' => '2889.52490234375',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 42,
+    'x' => '7516.6220703125',
+    'y' => '3231.24609375',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 43,
+    'x' => '7784.05615234375',
+    'y' => '3832.97265625',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 44,
+    'x' => '4337.12939453125',
+    'y' => '4612.98828125',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 45,
+    'x' => '7531.4794921875',
+    'y' => '3104.9580078125',
+    'color' => $pointer_color,
+  ]
 ];
 
 // get a map object by id
@@ -51,6 +310,16 @@ function get_map_story_by_id($id)
     }
   }
   return null;
+}
+
+// get map object radius
+function get_map_object_radius()
+{
+  if (wp_is_mobile()) {
+    return 50;
+  } else {
+    return 50;
+  }
 }
 
 ?>
@@ -72,9 +341,9 @@ function get_map_story_by_id($id)
 
           <!--  pointers -->
           <?php
-          foreach ($map_objects as $object) :
+          foreach ($map_pointers as $pointer) :
             // set the selected object
-            $map_story = get_map_story_by_id($object->id);
+            $map_story = get_map_story_by_id($pointer->id);
 
             // set content
             $title = '';
@@ -86,13 +355,13 @@ function get_map_story_by_id($id)
             }
           ?>
             <circle
-              id="<?= $object->id; ?>"
+              id="<?= $pointer->id; ?>"
               class="map-pointer tw-cursor-pointer"
               cx="<?= $object->x; ?>"
-              cy="<?= $object->y; ?>"
-              fill="<?= $object->color; ?>"
-              r="5"
-              onclick="setCard(<?= $object->id; ?>, '<?= $title; ?>', '<?= $body; ?>')" />
+              cx="<?= $pointer->x; ?>"
+              cy="<?= $pointer->y; ?>"
+              r="<?= get_map_object_radius(); ?>"
+              onclick="setCard(<?= $pointer->id; ?>, '<?= $title; ?>', '<?= $body; ?>')" />
           <?php endforeach; ?>
         </g>
       </svg>
