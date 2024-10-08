@@ -18,45 +18,36 @@ if (wp_is_mobile()) {
   $title_font_size = "font-size: 6.5em !important;";
 }
 
-// get svg image
-$svg_image_url = get_field('svg_image');
+// get map image
+$map_image_url = get_field('map_image');
+
+// get repeater field
+$map_stories = get_field('map_stories');
 
 // Create an array of 2 PHP objects with dummy data
 $map_objects = [
   (object) [
     'id' => 1,
-    'x' => 100,
-    'y' => 200,
+    'x' => "10",
+    'y' => "20",
     'color' => '#ff0000',
   ],
   (object) [
     'id' => 2,
-    'x' => 400,
-    'y' => 200,
+    'x' => "40%",
+    'y' => "20%",
     'color' => '#00ff00',
   ],
 ];
 
-$map_cards = [
-  (object) [
-    'id' => 1,
-    'title' => 'Title 1',
-    'content' => 'Content 1',
-  ],
-  (object) [
-    'id' => 2,
-    'title' => 'Title 2',
-    'content' => 'Content 2',
-  ],
-];
-
 // get a map object by id
-function get_map_object_by_id($id)
+function get_map_story_by_id($id)
 {
-  global $map_cards;
-  foreach ($map_cards as $object) {
-    if ($object->id == $id) {
-      return $object;
+  global $map_stories;
+  foreach ($map_stories as $map_story) {
+
+    if ($map_story['id'] == $id) {
+      return $map_story;
     }
   }
   return null;
@@ -71,34 +62,32 @@ function get_map_object_by_id($id)
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
         <g id="map-box">
           <!-- background -->
-          <image href="<?= $svg_image_url; ?>" width="100%" height="100%" />
+          <image href="<?= $map_image_url; ?>" />
 
           <!--  pointers -->
-          <g id="map-objects">
-            <?php
-            foreach ($map_objects as $object) :
+          <?php
+          foreach ($map_objects as $object) :
+            // set the selected object
+            $map_story = get_map_story_by_id($object->id);
 
-              $title = '';
-              $body = '';
+            // set content
+            $title = '';
+            $body = '';
 
-              // set the selected object
-              $obj = get_map_object_by_id($object->id);
-
-              if ($obj) {
-                $title = $obj->title;
-                $content = $obj->content;
-              }
-            ?>
-              <circle
-                id="<?= $object->id; ?>"
-                class="map-object"
-                cx="<?= $object->x; ?>"
-                cy="<?= $object->y; ?>"
-                fill="<?= $object->color; ?>"
-                r="5"
-                onclick="setCard(<?= $object->id; ?>, '<?= $title; ?>', '<?= $content; ?>')" />
-            <?php endforeach; ?>
-          </g>
+            if ($map_story) {
+              $title = $map_story['title'];
+              $body = $map_story['body'];
+            }
+          ?>
+            <circle
+              id="<?= $object->id; ?>"
+              class="map-pointer tw-cursor-pointer"
+              cx="<?= $object->x; ?>"
+              cy="<?= $object->y; ?>"
+              fill="<?= $object->color; ?>"
+              r="5"
+              onclick="setCard(<?= $object->id; ?>, '<?= $title; ?>', '<?= $body; ?>')" />
+          <?php endforeach; ?>
         </g>
       </svg>
     </div>
