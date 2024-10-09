@@ -66,22 +66,29 @@ get_header();
 
   <section class="post-feed">
     <div class="flex">
-      <div class="col-f-1-3 active" style="background: #35A270;">
+      <?php
+      $website_origin = get_site_url();
+      $website_origin = $website_origin ? $website_origin : null;
+      $map_url = $website_origin . '/the-swinging-town/';
+      $map_image = $website_origin . '/wp-content/uploads/2024/10/karta-webb.png';
+      $map_title = 'The Swinging Town';
+      $map_cta = 'Launches on 12th October'
+      ?>
+      <div class="col-f-1-3 active" style="background: #35A270; background-image: url('<?= $map_image; ?>');">
         <div class="box-content">
-          <a href="https://www.blackarchivessweden.com/submit/family-archive/">
-            <div class="post-text-box">
-              <div class="top">
-                <h2>Open call</h2>
-              </div>
-              <div class="bottom">
-                <p><?= get_field('archive_text', 'options'); ?></p>
-                <button class="btn btn-primary"><?= _e('Submit', ' bas'); ?> <img src="/wp-content/uploads/2021/03/Pil.svg" /></button>
-              </div>
+          <div class="post-text-box">
+            <div class="top">
+              <h2><?= $map_title; ?></h2>
             </div>
-          </a>
+            <div class="bottom tw-mt-auto">
+              <p></p>
+              <button class="btn btn-primary tw-cursor-default">
+                <?= $map_cta ?> <img src="/wp-content/uploads/2021/03/Pil.svg" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-
 
       <div class="col-f-1-3 ">
         <div class="box-content hover-active">
