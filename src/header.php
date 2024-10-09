@@ -30,13 +30,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Epilogue&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
 
-  <!-- javascript libraries -->
+  <!-- javascript library - Tailwind (styling framework) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       prefix: 'tw-',
+      theme: {
+        extend: {
+          height: {
+            'screen-1/4': '25vh',
+            'screen-2/4': '50vh',
+            'screen-3/4': '75vh',
+            'screen-80vh': '80vh',
+            'screen-90vh': '90vh'
+          },
+          width: {
+            'screen-1/4': '25vw',
+            'screen-2/4': '50vw',
+            'screen-3/4': '75vw',
+            'screen-80vw': '80vw',
+            'screen-90vw': '90vw'
+          },
+        }
+      }
     }
   </script>
+
+  <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
 
   <!-- misc -->
   <script>
