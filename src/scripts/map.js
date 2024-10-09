@@ -1,3 +1,12 @@
+/**
+ * This script is responsible for setting up the interactive map in
+ * page-map.php.
+ *
+ * It uses the panzoom library to enable zooming and panning of the map image
+ * within the map svg. It also creates a card element that displays information
+ * about a point on the map when the point is clicked.
+ */
+
 const map = document.getElementById("map-main"); // entire map container
 const mapSvg = document.getElementById("map-svg");
 const mapSvgGroup = document.getElementById("map-svg-group");
@@ -311,18 +320,14 @@ function setCard(id, title, body) {
  * @returns {Object} - object containing x and y coordinates
  */
 function getCoords() {
+	// exit if mapSvgGroup is not group instance of SVGElement
+	if (!(mapSvgGroup instanceof SVGElement)) {
+		return;
+	}
+
 	const rect = mapSvgGroup.getBBox();
 	const cx = rect.x + rect.width / 2;
 	const cy = rect.y + rect.height / 2;
-
-	console.log("zoom coords", {
-		x: rect.x,
-		y: rect.y,
-		width: rect.width,
-		height: rect.height,
-		cx,
-		cy,
-	});
 
 	return { x: cx, y: cy };
 }
@@ -334,10 +339,12 @@ function getCoords() {
  * @returns {void}
  */
 function setupPanzoom() {
+	const PANZOOM_ZOOM_IN = 2;
+	const PANZOOM_ZOOM_OUT = 0;
+
 	const isMobileDevice = isMobile();
 
 	const instance = panzoom(mapSvgGroup, {
-		transformOrigin: { x: 0.5, y: 0.5 }, // centers the map
 		bounds: true,
 		boundsPadding: isMobile() ? 0.05 : 0.9, // the bigger the value (max 1), the less of the map is visible
 
@@ -355,14 +362,14 @@ function setupPanzoom() {
 
 	// increase scale of map when zoom in button is clicked
 	zoomInBtn.addEventListener("click", function () {
-		const { x, y } = getCoords(mapSvgGroup);
-		instance.zoomTo(x, y, 2);
+		const { x, y } = getCoords();
+		instance.smoothZoom(x, y, PANZOOM_ZOOM_IN);
 	});
 
 	// decrease scale of map when zoom out button is clicked
 	zoomOutBtn.addEventListener("click", function () {
-		const { x, y } = getCoords(mapSvgGroup);
-		instance.zoomTo(x, y, 0.2);
+		const { x, y } = getCoords();
+		instance.smoothZoom(x, y, PANZOOM_ZOOM_OUT);
 	});
 }
 
