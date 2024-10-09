@@ -259,25 +259,31 @@ function setCard(id, title, body) {
 		const card = document.createElement("div");
 		card.classList.add(
 			"map-card",
-			"tw-flex-col",
 			"tw-absolute",
-			"tw-top-32",
-			"tw-left-32",
-			"tw-min-w-72",
+			"tw-top-28",
+			"tw-left-0",
+			"tw-w-11/12",
 			"tw-min-h-60",
+			"tw-mx-2",
 			"tw-p-4",
 			"tw-bg-slate-100",
 			"tw-rounded-lg",
 			"tw-border-2",
-			"tw-border-slate-800"
+			"tw-border-slate-800",
+			"tw-flex-col",
+			"md:tw-top-1/2",
+			"md:tw-left-1/2",
+			"md:tw-min-w-72",
+			"md:tw-min-h-60"
 		);
 		card.id = id;
 
 		const closeButton = document.createElement("button");
 		closeButton.textContent = "X";
-		closeButton.classList.add("tw-mx-2");
+		closeButton.classList.add("tw-mx-2", "tw-px-2", "tw-text-2xl");
 		closeButton.addEventListener("click", function () {
 			card.remove();
+			selectedCardElement = null;
 		});
 
 		const cardTitle = document.createElement("h3");
@@ -329,7 +335,6 @@ function getCoords() {
  */
 function setupPanzoom() {
 	const isMobileDevice = isMobile();
-	console.log("isMobileDevice", isMobileDevice);
 
 	const instance = panzoom(mapSvgGroup, {
 		transformOrigin: { x: 0.5, y: 0.5 }, // centers the map
@@ -338,15 +343,15 @@ function setupPanzoom() {
 
 		maxZoom: 0.5,
 		minZoom: 0.1,
-		initialZoom: isMobile() ? 0.2 : 0.3,
-		initialX: isMobile() ? -300 : -300,
-		initialY: isMobile() ? 0 : 100,
+		initialZoom: isMobileDevice ? 0.2 : 0.3,
+		initialX: isMobileDevice ? -300 : -300,
+		initialY: isMobileDevice ? 0 : 100,
 	});
 
 	// This event will be called along with events above.
-	instance.on("transform", function (e) {
-		console.log("logging latest panzoom instance", instance.getTransform());
-	});
+	//instance.on("transform", function (e) {
+	//	console.log("logging latest panzoom instance", instance.getTransform());
+	//});
 
 	// increase scale of map when zoom in button is clicked
 	zoomInBtn.addEventListener("click", function () {
