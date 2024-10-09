@@ -353,15 +353,26 @@ function get_map_object_radius()
               $title = $map_story['title'];
               $body = $map_story['body'];
             }
+
           ?>
-            <circle
-              id="<?= $pointer->id; ?>"
+            <g
               class="map-pointer tw-cursor-pointer"
-              cx="<?= $object->x; ?>"
-              cx="<?= $pointer->x; ?>"
-              cy="<?= $pointer->y; ?>"
-              r="<?= get_map_object_radius(); ?>"
-              onclick="setCard(<?= $pointer->id; ?>, '<?= $title; ?>', '<?= $body; ?>')" />
+              onclick="setCard(<?= $pointer->id; ?>, '<?= $title; ?>', '<?= $body; ?>')">
+              <circle
+                id="<?= $pointer->id; ?>"
+                cx="<?= $pointer->x; ?>"
+                cy="<?= $pointer->y; ?>"
+                r="<?= get_map_object_radius(); ?>" />
+
+              <!-- add text element with id -->
+              <text
+                x="<?= $pointer->x - 25; ?>"
+                y="<?= $pointer->y + 15; ?>"
+                style="font-size: 3em;"
+                fill="white">
+                <?= $pointer->id; ?>
+              </text>
+            </g>
           <?php endforeach; ?>
         </g>
       </svg>
