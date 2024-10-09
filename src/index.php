@@ -67,166 +67,129 @@ get_header();
   <section class="post-feed">
     <div class="flex">
       <?php
-      $website_origin = get_site_url();
-      $website_origin = $website_origin ? $website_origin : null;
-      $current_language = apply_filters('wpml_current_language', NULL);
+      /*
+      This snippet fetches the 'pinned_items' repeater field from the front page and
+      displays the items in the archive page.
+      */
 
-      $exhibition_image = $website_origin . '/wp-content/uploads/2024/11/exhibition-thumbnail-james-barnor.png';
-      $exhibition_title = 'James Barnor: Transmissions';
-      $exhibition_base_path = '/transmissions-james-barnor';
+      // Reset Post Data
+      wp_reset_postdata();
 
-      if ($current_language == 'sv') {
-        $exhbition_cta = 'Öppna';
-        $exhibition_url = $website_origin . '/sv' . $exhibition_base_path;
-      } else {
-        $exhbition_cta = 'Enter';
-        $exhibition_url = $website_origin . $exhibition_base_path;
-      }
+      $pinned_items_key = "pinned_items";
+
+      while (have_rows($pinned_items_key)) : the_row();
+        $item_title = get_field('title');
+        $item_body = get_field('body');
+
       ?>
-      <div class="col-f-1-3 active">
-        <div class="box-content hover-active">
-          <a href="<?= $exhibition_url; ?>" style="height: 100%;">
-            <img src="<?= $exhibition_image; ?>" alt="">
-            <div class="post-hover-box">
+        <div class="col-f-1-3 active" style="background: #35A270;">
+          <div class="box-content">
+
+            <div class="post-text-box">
               <div class="top">
-                <h2><?= $exhibition_title; ?></h2>
+                <h2><?= $item_title; ?></h2>
               </div>
 
-              <div class="bottom tw-mt-auto tw-w-full">
-                <button class="btn btn-primary tw-w-full tw-flex">
-                  <?= $exhbition_cta ?>
-                  <img src="/wp-content/uploads/2021/03/Pil.svg" />
-                </button>
+              <div class="bottom">
+                <p><?= $item_body ?></p>
               </div>
             </div>
-          </a>
-        </div>
-      </div>
-
-      <?php
-      $map_image = $website_origin . '/wp-content/uploads/2024/10/karta-thumbnail-cropped.png';
-      $map_title = 'The Swinging Town';
-
-      if ($current_language == 'sv') {
-        $map_cta = 'Öppna kartan';
-        $map_url = $website_origin . '/sv/the-swinging-town/';
-      } else {
-        $map_cta = 'Enter the map';
-        $map_url = $website_origin . '/the-swinging-town/';
-      }
-      ?>
-      <div class="col-f-1-3 active">
-        <div class="box-content hover-active">
-          <a href="<?= $map_url; ?>" style="height: 100%;">
-            <img src="<?= $map_image; ?>" alt="">
-            <div class="post-hover-box">
-              <div class="top">
-                <h2><?= $map_title; ?></h2>
-              </div>
-
-              <div class="bottom tw-mt-auto tw-w-full">
-                <button class="btn btn-primary tw-w-full tw-flex">
-                  <?= $map_cta ?>
-                  <img src="/wp-content/uploads/2021/03/Pil.svg" />
-                </button>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="col-f-1-3 ">
-        <div class="box-content hover-active">
-          <a href="https://www.blackarchivessweden.com/index-of-archival-projects-sites/">
-            <img src="https://www.blackarchivessweden.com/wp-content/uploads/2023/06/BAS_index_ig_1.jpg" alt="">
-          </a>
-        </div>
-      </div>
-
-      <?php
-      $args = array(
-        'posts_per_page'    => -1,
-        'post_type'     => 'post'
-      );
-      // query
-      $the_query = new WP_Query($args);
-
-
-      if ($the_query->have_posts()):
-        while ($the_query->have_posts()) : $the_query->the_post(); ?>
-          <?php $args = array(
-            'exclude' => '1'
-          );
-          $categories = get_the_category();
-          ?>
-          <div class="col-f-1-3 post-boxes active <?php
-                                                  foreach ($categories as $category) {
-                                                    echo $category->slug . " ";
-                                                  } ?> ">
-            <div class="box-content <?php if (has_post_thumbnail()): echo 'hover-active';
-                                    endif; ?> ">
-              <a href="<?php the_permalink(); ?>" style="height: 100%;">
-                <?php if (has_post_thumbnail()):
-                  the_post_thumbnail(); ?>
-                  <div class="post-hover-box">
-                    <div class="top">
-                      <h2><?php the_title(); ?></h2>
-                    </div>
-
-                    <div class="bottom">
-                      <p class="show-desktop"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'));
-                                              else: custom_length_excerpt(20);
-                                              endif;   ?></p>
-                      <p class="show-ipad"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'), 10);
-                                            else: custom_length_excerpt(8);
-                                            endif;   ?></p>
-                      <ul class="cat-list">
-                        <?php
-
-                        foreach ($categories as $category) {
-                          if ($category->name !== 'All') {
-                            echo "<li>" . $category->name . "</li>";
-                          }
-                        } ?>
-                      </ul>
-                    </div>
-                  </div>
-                <?php else: ?>
-                  <div class="post-text-box">
-                    <div class="top">
-                      <h2><?php the_title(); ?></h2>
-                    </div>
-                    <div class="bottom">
-                      <p class="show-desktop"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'));
-                                              else: custom_length_excerpt(20);
-                                              endif;   ?></p>
-                      <p class="show-ipad"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'), 10);
-                                            else: custom_length_excerpt(8);
-                                            endif;   ?></p>
-                      <ul class="cat-list">
-                        <?php
-                        $args = array(
-                          'exclude' => '1'
-                        );
-                        $categories = get_categories($args);
-                        foreach ($categories as $category) {
-                          if ($category->name !== 'All') {
-                            echo "<li>" . $category->name . "</li>";
-                          }
-                        } ?>
-                      </ul>
-                    </div>
-
-                  </div>
-                <?php endif; ?>
-              </a>
-            </div>
+            </a>
           </div>
-      <?php endwhile;
-      else :
-      endif;
-      ?>
-    </div>
+        <?php endwhile; ?>
+
+        <div class="col-f-1-3 ">
+          <div class="box-content hover-active">
+            <a href="https://www.blackarchivessweden.com/index-of-archival-projects-sites/">
+              <img src="https://www.blackarchivessweden.com/wp-content/uploads/2023/06/BAS_index_ig_1.jpg" alt="">
+            </a>
+          </div>
+        </div>
+
+        <?php
+        $args = array(
+          'posts_per_page'    => -1,
+          'post_type'     => 'post'
+        );
+        // query
+        $the_query = new WP_Query($args);
+
+
+        if ($the_query->have_posts()):
+          while ($the_query->have_posts()) : $the_query->the_post(); ?>
+            <?php $args = array(
+              'exclude' => '1'
+            );
+            $categories = get_the_category();
+            ?>
+            <div class="col-f-1-3 post-boxes active <?php
+                                                    foreach ($categories as $category) {
+                                                      echo $category->slug . " ";
+                                                    } ?> ">
+              <div class="box-content <?php if (has_post_thumbnail()): echo 'hover-active';
+                                      endif; ?> ">
+                <a href="<?php the_permalink(); ?>" style="height: 100%;">
+                  <?php if (has_post_thumbnail()):
+                    the_post_thumbnail(); ?>
+                    <div class="post-hover-box">
+                      <div class="top">
+                        <h2><?php the_title(); ?></h2>
+                      </div>
+
+                      <div class="bottom">
+                        <p class="show-desktop"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'));
+                                                else: custom_length_excerpt(20);
+                                                endif;   ?></p>
+                        <p class="show-ipad"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'), 10);
+                                              else: custom_length_excerpt(8);
+                                              endif;   ?></p>
+                        <ul class="cat-list">
+                          <?php
+
+                          foreach ($categories as $category) {
+                            if ($category->name !== 'All') {
+                              echo "<li>" . $category->name . "</li>";
+                            }
+                          } ?>
+                        </ul>
+                      </div>
+                    </div>
+                  <?php else: ?>
+                    <div class="post-text-box">
+                      <div class="top">
+                        <h2><?php the_title(); ?></h2>
+                      </div>
+                      <div class="bottom">
+                        <p class="show-desktop"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'));
+                                                else: custom_length_excerpt(20);
+                                                endif;   ?></p>
+                        <p class="show-ipad"><?php if (get_field('short_about')):  echo get_text_excerpt(get_field('short_about'), 10);
+                                              else: custom_length_excerpt(8);
+                                              endif;   ?></p>
+                        <ul class="cat-list">
+                          <?php
+                          $args = array(
+                            'exclude' => '1'
+                          );
+                          $categories = get_categories($args);
+                          foreach ($categories as $category) {
+                            if ($category->name !== 'All') {
+                              echo "<li>" . $category->name . "</li>";
+                            }
+                          } ?>
+                        </ul>
+                      </div>
+
+                    </div>
+                  <?php endif; ?>
+                </a>
+              </div>
+            </div>
+        <?php endwhile;
+        else :
+        endif;
+        ?>
+        </div>
   </section>
 </main>
 
