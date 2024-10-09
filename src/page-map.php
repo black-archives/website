@@ -18,6 +18,10 @@ if (wp_is_mobile()) {
   $title_font_size = "font-size: 6.5em !important;";
 }
 
+// set option btn style
+$option_btn_style = "tw-py-3 tw-px-5 tw-text-5xl tw-rounded-full tw-border tw-border-black tw-bg-white";
+$menu_option_btn_style = "tw-px-3 tw-py-4 tw-rounded-full tw-border tw-border-black tw-bg-slate-900 tw-text-white hover:tw-bg-white hover:tw-text-black md:tw-px-5 md:tw-py-2";
+
 // get map image
 $map_image_url = get_field('map_image');
 
@@ -329,7 +333,7 @@ function get_map_object_radius()
     <!-- map -->
     <div
       id="map-container"
-      class="tw-h-svh md:tw-h-screen-90vh md:tw-grow tw-border-black tw-border-2 md:tw-border-0">
+      class="tw-h-svh md:tw-grow tw-border-black tw-border-2 md:tw-border-0">
       <!-- 10004px × 7087px (scaled to 1146px × 811px) -->
       <svg
         id="map-svg"
@@ -380,26 +384,27 @@ function get_map_object_radius()
 
     <!-- options -->
     <div
-      id="map-options" class="tw-absolute tw-bottom-0 tw-inset-x-0 tw-w-full md:tw-w-auto md:tw-relative md:tw-grow-0 tw-my-2 tw-mx-1 md:tw-mx-10 tw-space-y-2 md:tw-space-y-0 tw-flex tw-flex-col md:tw-flex-row tw-justify-between">
+      id="map-options"
+      class="tw-absolute tw-bottom-0 tw-inset-x-0 tw-mb-5 tw-mx-2 tw-flex tw-flex-col tw-space-y-2 tw-justify-between tw-text-xl md:tw-pl-10 md:tw-mx-10 md:tw-flex-row md:tw-space-y-0 lg:tw-pl-20">
       <!-- interaction options -->
       <div class="tw-flex md:tw-justify-start tw-space-x-2">
-        <button id="btn-zoom-in" class="tw-px-2 tw-py-1 tw-border tw-border-black tw-bg-white hover:tw-bg-slate-800 hover:tw-text-white">
-          zoom in
+        <button id="btn-zoom-in" class="<?= $option_btn_style; ?>">
+          +
         </button>
-        <button id="btn-zoom-out" class="tw-px-2 tw-py-1 tw-border tw-border-black tw-bg-white hover:tw-bg-slate-800 hover:tw-text-white">
-          zoom out
+        <button id="btn-zoom-out" class="<?= $option_btn_style; ?>">
+          -
         </button>
       </div>
 
-      <!-- extra options -->
+      <!-- menu options -->
       <div class="tw-flex md:tw-justify-end tw-space-x-2">
-        <button class="tw-grow-0 tw-px-2 tw-py-1 tw-border tw-border-black tw-bg-white hover:tw-bg-slate-800 hover:tw-text-white">
+        <button class="tw-basis-3/12 <?= $menu_option_btn_style; ?>">
           En
         </button>
-        <button class="tw-grow-0 tw-px-2 tw-py-1 tw-border tw-border-black tw-bg-white hover:tw-bg-slate-800 hover:tw-text-white">
+        <button class="tw-basis-3/12 <?= $menu_option_btn_style; ?>">
           Sv
         </button>
-        <button id="map-open-modal" class="tw-grow md:tw-grow-0 tw-px-2 tw-py-1 tw-border tw-border-black tw-bg-white hover:tw-bg-slate-800 hover:tw-text-white">
+        <button id="map-open-modal" class="tw-basis-6/12 <?= $menu_option_btn_style; ?>">
           Info
         </button>
       </div>
