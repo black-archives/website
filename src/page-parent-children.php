@@ -44,7 +44,7 @@ get_header();
                 </div>
 
                 <div class="bottom">
-                  <p><?php echo esc_html($subtitle); ?></p>
+                  <p><?php echo get_text_excerpt(esc_html($subtitle)); ?></p>
                 </div>
               </div>
             </a>
@@ -74,7 +74,7 @@ get_header();
               </div>
 
               <div class="bottom">
-                <p><?= $card_summary ?></p>
+                <p><?php echo get_text_excerpt($card_summary); ?></p>
               </div>
             </div>
           </div>
