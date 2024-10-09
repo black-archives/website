@@ -334,13 +334,13 @@ function setupPanzoom() {
 	const instance = panzoom(mapSvgGroup, {
 		transformOrigin: { x: 0.5, y: 0.5 }, // centers the map
 		bounds: true,
-		boundsPadding: 0.05, // the bigger the value (max 1), the less of the map is visible
+		boundsPadding: isMobile() ? 0.05 : 0.9, // the bigger the value (max 1), the less of the map is visible
 
 		maxZoom: 0.5,
 		minZoom: 0.1,
-		initialZoom: 0.1,
-		initialX: 500,
-		initialY: 4000,
+		initialZoom: isMobile() ? 0.2 : 0.3,
+		initialX: isMobile() ? -300 : -300,
+		initialY: isMobile() ? 0 : 100,
 	});
 
 	// This event will be called along with events above.
