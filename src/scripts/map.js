@@ -304,6 +304,10 @@ function setCard(id, title, body) {
 		cardHead.appendChild(cardTitle);
 		cardHead.appendChild(closeButton);
 
+		// the page-map.php converts newlines to <br> tags which we need to
+		// convert back to newlines
+		body = body.replace(/<br>/g, "\n");
+
 		const cardContent = document.createElement("p");
 		cardContent.textContent = body;
 

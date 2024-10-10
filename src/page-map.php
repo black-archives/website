@@ -329,6 +329,21 @@ function get_map_object_radius()
   }
 }
 
+// sanitize text for map card
+function sanitize_text($text)
+{
+  // escape new lines
+  $text = str_replace(array("\r\n", "\r", "\n"), "<br>", $text);
+
+  // escape quotes
+  $text = str_replace('"', "'", $text);
+
+  // escape html
+  $text = htmlspecialchars($text);
+
+  return $text;
+}
+
 ?>
 
 <main id="map-page" role="main">
@@ -372,8 +387,8 @@ function get_map_object_radius()
           ?>
             <g
               class="map-pointer tw-cursor-pointer"
-              ontouchend="setCard(<?= $pointer->id; ?>, '<?= $title; ?>', '<?= $body; ?>')"
-              onmouseup="setCard(<?= $pointer->id; ?>, '<?= $title; ?>', '<?= $body; ?>')">
+              ontouchend="setCard(<?= sanitize_text($pointer->id); ?>, '<?= sanitize_text($title); ?>', '<?= sanitize_text($body); ?>')"
+              onmouseup="setCard(<?= sanitize_text($pointer->id); ?>, '<?= sanitize_text($title); ?>', '<?= sanitize_text($body); ?>')">
               <circle
                 id="<?= $pointer->id; ?>"
                 cx="<?= $pointer->x; ?>"
