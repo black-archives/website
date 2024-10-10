@@ -20,7 +20,7 @@ if (wp_is_mobile()) {
 
 // set option btn style
 $option_btn_style = "tw-px-5 tw-py-2 tw-text-5xl tw-rounded-full tw-border tw-border-black tw-bg-white";
-$menu_option_btn_style = "tw-px-2 tw-py-3 tw-rounded-full tw-border tw-border-black tw-bg-slate-900 tw-text-white hover:tw-bg-white hover:tw-text-black md:tw-px-5 md:tw-py-2";
+$menu_option_btn_style = "tw-px-2 tw-py-4 tw-rounded-full tw-border tw-border-black tw-bg-black tw-text-white hover:tw-bg-white hover:tw-text-black md:tw-px-5 md:tw-py-2";
 
 // get map image
 $map_image_url = get_field('map_image');
@@ -425,13 +425,13 @@ function sanitize_text($text)
 
       <!-- menu options -->
       <div class="tw-flex tw-w-full md:tw-w-auto md:tw-justify-end tw-space-x-2">
-        <button id="btn-lang-en" class="<?= $menu_option_btn_style; ?>">
+        <button id="btn-lang-en" class="tw-basis-1/4 <?= $menu_option_btn_style; ?>">
           En
         </button>
-        <button id="btn-lang-sv" class="<?= $menu_option_btn_style; ?>">
+        <button id="btn-lang-sv" class="tw-basis-1/4 <?= $menu_option_btn_style; ?>">
           Sv
         </button>
-        <button id="map-open-modal" class="tw-w-1/3 tw-ml-auto md:tw-w-auto <?= $menu_option_btn_style; ?>">
+        <button id="map-open-modal" class="tw-basis-2/4 <?= $menu_option_btn_style; ?>">
           Info
         </button>
       </div>
