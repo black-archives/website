@@ -260,66 +260,67 @@ function isMobile() {
  */
 function setCard(id, title, body) {
 	// remove the card if it already exists
-	if (selectedCardElement && Number(selectedCardElement.id) === id) {
+	if (selectedCardElement) {
 		selectedCardElement.remove();
 		selectedCardElement = null;
-		return;
-	} else {
-		const card = document.createElement("div");
-		card.classList.add(
-			"map-card",
-			"tw-absolute",
-			"tw-top-1/3",
-			"tw-w-11/12",
-			"tw-min-h-60",
-			"tw-max-h-96",
-			"tw-mx-2",
-			"tw-p-4",
-			"tw-bg-slate-100",
-			"tw-rounded-xl",
-			"tw-border",
-			"tw-border-slate-800",
-			"tw-overflow-x-hidden",
-			"tw-overflow-y-scroll",
-			"tw-flex-col",
-			"md:tw-left-1/3",
-			"md:tw-w-5/12",
-			"md:tw-min-h-60"
-		);
-		card.id = id;
-
-		const closeButton = document.createElement("button");
-		closeButton.textContent = "X";
-		closeButton.classList.add("tw-mx-2", "tw-px-2", "tw-text-2xl");
-		closeButton.addEventListener("click", function () {
-			card.remove();
-			selectedCardElement = null;
-		});
-
-		const cardTitle = document.createElement("h3");
-		cardTitle.textContent = `${id}. ${title}`;
-
-		const cardHead = document.createElement("div");
-		cardHead.classList.add("tw-flex", "tw-justify-between", "tw-items-start");
-		cardHead.appendChild(cardTitle);
-		cardHead.appendChild(closeButton);
-
-		// the page-map.php converts newlines to <br> tags which we need to
-		// convert back to newlines
-		body = body.replace(/<br>/g, "\n");
-
-		const cardContent = document.createElement("p");
-		cardContent.textContent = body;
-
-		const cardBody = document.createElement("div");
-		cardBody.appendChild(cardContent);
-
-		card.appendChild(cardHead);
-		card.appendChild(cardBody);
-
-		map.appendChild(card);
-		selectedCardElement = card;
 	}
+
+	const card = document.createElement("div");
+	card.classList.add(
+		"map-card",
+		"tw-absolute",
+		"tw-top-1/3",
+		"tw-w-11/12",
+		"tw-min-h-60",
+		"tw-max-h-96",
+		"tw-mx-2",
+		"tw-p-4",
+		"tw-bg-slate-100",
+		"tw-rounded-xl",
+		"tw-border",
+		"tw-border-slate-800",
+		"tw-overflow-x-hidden",
+		"tw-overflow-y-scroll",
+		"tw-flex-col",
+		"md:tw-left-1/3",
+		"md:tw-w-5/12",
+		"md:tw-min-h-60"
+	);
+	card.id = id;
+
+	const closeButton = document.createElement("button");
+	closeButton.textContent = "X";
+	closeButton.classList.add("tw-mx-2", "tw-px-2", "tw-text-2xl");
+	closeButton.addEventListener("click", function () {
+		card.remove();
+		selectedCardElement = null;
+	});
+
+	const cardTitle = document.createElement("h3");
+	cardTitle.textContent = `${id}. ${title}`;
+
+	const cardHead = document.createElement("div");
+	cardHead.classList.add("tw-flex", "tw-justify-between", "tw-items-start");
+	cardHead.appendChild(cardTitle);
+	cardHead.appendChild(closeButton);
+
+	// the page-map.php converts special characters which we need to
+	// convert back here
+	body = body.replace(/<br>/g, "\n"); // newlines
+	body = body.replace(/\"/g, '"'); // double quotes
+	body = body.replace(/\'/g, "'"); // single quotes
+
+	const cardContent = document.createElement("p");
+	cardContent.textContent = body;
+
+	const cardBody = document.createElement("div");
+	cardBody.appendChild(cardContent);
+
+	card.appendChild(cardHead);
+	card.appendChild(cardBody);
+
+	map.appendChild(card);
+	selectedCardElement = card;
 }
 
 /**

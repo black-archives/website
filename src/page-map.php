@@ -335,8 +335,11 @@ function sanitize_text($text)
   // escape new lines
   $text = str_replace(array("\r\n", "\r", "\n"), "<br>", $text);
 
-  // escape quotes
-  $text = str_replace('"', "'", $text);
+  // escape double quotes
+  $text = str_replace('"', "\"", $text);
+
+  // escape single quotes
+  $text = str_replace("'", "\'", $text);
 
   // escape html
   $text = htmlspecialchars($text);
