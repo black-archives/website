@@ -19,8 +19,8 @@ if (wp_is_mobile()) {
 }
 
 // set option btn style
-$option_btn_style = "tw-py-3 tw-px-5 tw-text-5xl tw-rounded-full tw-border tw-border-black tw-bg-white";
-$menu_option_btn_style = "tw-px-3 tw-py-4 tw-rounded-full tw-border tw-border-black tw-bg-slate-900 tw-text-white hover:tw-bg-white hover:tw-text-black md:tw-px-5 md:tw-py-2";
+$option_btn_style = "tw-px-5 tw-py-2 tw-text-5xl tw-rounded-full tw-border tw-border-black tw-bg-white";
+$menu_option_btn_style = "tw-px-2 tw-py-3 tw-rounded-full tw-border tw-border-black tw-bg-slate-900 tw-text-white hover:tw-bg-white hover:tw-text-black md:tw-px-5 md:tw-py-2";
 
 // get map image
 $map_image_url = get_field('map_image');
@@ -408,14 +408,14 @@ function get_map_object_radius()
       </div>
 
       <!-- menu options -->
-      <div class="tw-flex md:tw-justify-end tw-space-x-2">
-        <button class="tw-basis-3/12 <?= $menu_option_btn_style; ?>">
+      <div class="tw-flex tw-w-full md:tw-w-auto md:tw-justify-end tw-space-x-2">
+        <button class="<?= $menu_option_btn_style; ?>">
           En
         </button>
-        <button class="tw-basis-3/12 <?= $menu_option_btn_style; ?>">
+        <button class="<?= $menu_option_btn_style; ?>">
           Sv
         </button>
-        <button id="map-open-modal" class="tw-basis-6/12 <?= $menu_option_btn_style; ?>">
+        <button id="map-open-modal" class="tw-w-1/3 tw-ml-auto md:tw-w-auto <?= $menu_option_btn_style; ?>">
           Info
         </button>
       </div>
