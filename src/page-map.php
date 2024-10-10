@@ -410,10 +410,10 @@ function get_map_object_radius()
 
       <!-- menu options -->
       <div class="tw-flex tw-w-full md:tw-w-auto md:tw-justify-end tw-space-x-2">
-        <button class="<?= $menu_option_btn_style; ?>">
+        <button id="btn-lang-en" class="<?= $menu_option_btn_style; ?>">
           En
         </button>
-        <button class="<?= $menu_option_btn_style; ?>">
+        <button id="btn-lang-sv" class="<?= $menu_option_btn_style; ?>">
           Sv
         </button>
         <button id="map-open-modal" class="tw-w-1/3 tw-ml-auto md:tw-w-auto <?= $menu_option_btn_style; ?>">

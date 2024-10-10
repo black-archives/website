@@ -12,6 +12,8 @@ const mapSvg = document.getElementById("map-svg");
 const mapSvgGroup = document.getElementById("map-svg-group");
 const zoomInBtn = document.getElementById("btn-zoom-in");
 const zoomOutBtn = document.getElementById("btn-zoom-out");
+const englishLanguageBtn = document.getElementById("btn-lang-en");
+const swedishLanguageBtn = document.getElementById("btn-lang-sv");
 
 const points = [
 	{
@@ -374,4 +376,55 @@ function setupPanzoom() {
 	}
 }
 
+/**
+ * Change the language of the map card content based on the provided
+ * language code.
+ *
+ * Note: This function is probably not the best way to handle language
+ * switching but this is honest work.
+ *
+ * @param {string} lang - the language code (en or sv)
+ *
+ * @returns {void}
+ */
+function setLanguage(lang) {
+	const origin = window.location.origin;
+	const path = window.location.pathname;
+
+	const langCode = lang === "sv" ? "sv" : "en";
+	const currentLanguage = path.includes("/sv/") ? "sv" : "en";
+
+	// skip if the language is already set
+	if (currentLanguage === langCode) {
+		return;
+	}
+
+	// redirect to the correct language path
+	let newPath = path;
+	if (langCode === "en") {
+		// remove /sv/ from the path
+		newPath = path.replace("/sv/", "/");
+	} else {
+		newPath = `/sv${path}`;
+	}
+
+	// redirect to the new path
+	window.location.href = `${origin}${newPath}`;
+}
+
+// setup the panzoom instance when the document is loaded
 document.addEventListener("DOMContentLoaded", setupPanzoom);
+
+// add event listener to the english language button
+if (englishLanguageBtn) {
+	englishLanguageBtn.addEventListener("click", function () {
+		setLanguage("en");
+	});
+}
+
+// add event listener to the swedish language button
+if (swedishLanguageBtn) {
+	swedishLanguageBtn.addEventListener("click", function () {
+		setLanguage("sv");
+	});
+}
