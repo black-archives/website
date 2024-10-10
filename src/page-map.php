@@ -307,9 +307,12 @@ $map_pointers = [
 function get_map_story_by_id($id)
 {
   global $map_stories;
-  foreach ($map_stories as $map_story) {
+  foreach ($map_stories as $key => $map_story) {
+    $index = $key + 1;
 
-    if ($map_story['id'] == $id) {
+    // the map stories are in a repeater custom field and their order of
+    // position is binded to the pointer id passed
+    if ($index == $id) {
       return $map_story;
     }
   }
