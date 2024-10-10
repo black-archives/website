@@ -23,19 +23,22 @@ get_header();
       $map_title = 'The Swinging Town';
       $map_cta = 'Launches on 12th October'
       ?>
-      <div class="col-f-1-3 active" style="background: #35A270; background-image: url('<?= $map_image; ?>');">
-        <div class="box-content">
-          <div class="post-text-box">
-            <div class="top">
-              <h2><?= $map_title; ?></h2>
+      <div class="col-f-1-3 active">
+        <div class="box-content hover-active">
+          <a href="#" style="height: 100%;">
+            <img src="<?= $map_image; ?>" alt="">
+            <div class="post-hover-box">
+              <div class="top">
+                <h2><?= $map_title; ?></h2>
+              </div>
+
+              <div class="bottom tw-mt-auto">
+                <button class="btn btn-primary">
+                  <?= $map_cta ?> <img src="/wp-content/uploads/2021/03/Pil.svg" />
+                </button>
+              </div>
             </div>
-            <div class="bottom tw-mt-auto">
-              <p></p>
-              <button class="btn btn-primary tw-cursor-default">
-                <?= $map_cta ?> <img src="/wp-content/uploads/2021/03/Pil.svg" />
-              </button>
-            </div>
-          </div>
+          </a>
         </div>
       </div>
 
