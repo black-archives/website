@@ -259,12 +259,10 @@ function isMobile() {
 function setCard(id, title, body) {
 	// remove the card if it already exists
 	if (selectedCardElement && Number(selectedCardElement.id) === id) {
-		console.log(`Removing ${id} card...`);
 		selectedCardElement.remove();
 		selectedCardElement = null;
 		return;
 	} else {
-		console.log(`Creating ${id} card...`);
 		const card = document.createElement("div");
 		card.classList.add(
 			"map-card",
@@ -359,22 +357,21 @@ function setupPanzoom() {
 		initialY: isMobileDevice ? 0 : 100,
 	});
 
-	// This event will be called along with events above.
-	//instance.on("transform", function (e) {
-	//	console.log("logging latest panzoom instance", instance.getTransform());
-	//});
-
 	// increase scale of map when zoom in button is clicked
-	zoomInBtn.addEventListener("click", function () {
-		const { x, y } = getCoords();
-		instance.smoothZoom(x, y, PANZOOM_ZOOM_IN);
-	});
+	if (zoomInBtn) {
+		zoomInBtn.addEventListener("click", function () {
+			const { x, y } = getCoords();
+			instance.smoothZoom(x, y, PANZOOM_ZOOM_IN);
+		});
+	}
 
 	// decrease scale of map when zoom out button is clicked
-	zoomOutBtn.addEventListener("click", function () {
-		const { x, y } = getCoords();
-		instance.smoothZoom(x, y, PANZOOM_ZOOM_OUT);
-	});
+	if (zoomOutBtn) {
+		zoomOutBtn.addEventListener("click", function () {
+			const { x, y } = getCoords();
+			instance.smoothZoom(x, y, PANZOOM_ZOOM_OUT);
+		});
+	}
 }
 
 document.addEventListener("DOMContentLoaded", setupPanzoom);
