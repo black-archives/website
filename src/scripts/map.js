@@ -12,6 +12,8 @@ const mapSvg = document.getElementById("map-svg");
 const mapSvgGroup = document.getElementById("map-svg-group");
 const zoomInBtn = document.getElementById("btn-zoom-in");
 const zoomOutBtn = document.getElementById("btn-zoom-out");
+const englishLanguageBtn = document.getElementById("btn-lang-en");
+const swedishLanguageBtn = document.getElementById("btn-lang-sv");
 
 const points = [
 	{
@@ -259,30 +261,29 @@ function isMobile() {
 function setCard(id, title, body) {
 	// remove the card if it already exists
 	if (selectedCardElement && Number(selectedCardElement.id) === id) {
-		console.log(`Removing ${id} card...`);
 		selectedCardElement.remove();
 		selectedCardElement = null;
 		return;
 	} else {
-		console.log(`Creating ${id} card...`);
 		const card = document.createElement("div");
 		card.classList.add(
 			"map-card",
 			"tw-absolute",
-			"tw-top-28",
-			"tw-left-0",
+			"tw-top-1/3",
 			"tw-w-11/12",
 			"tw-min-h-60",
+			"tw-max-h-96",
 			"tw-mx-2",
 			"tw-p-4",
 			"tw-bg-slate-100",
-			"tw-rounded-lg",
-			"tw-border-2",
+			"tw-rounded-xl",
+			"tw-border",
 			"tw-border-slate-800",
+			"tw-overflow-x-hidden",
+			"tw-overflow-y-scroll",
 			"tw-flex-col",
-			"md:tw-top-1/2",
-			"md:tw-left-1/2",
-			"md:tw-min-w-72",
+			"md:tw-left-1/3",
+			"md:tw-w-5/12",
 			"md:tw-min-h-60"
 		);
 		card.id = id;
@@ -303,8 +304,15 @@ function setCard(id, title, body) {
 		cardHead.appendChild(cardTitle);
 		cardHead.appendChild(closeButton);
 
-		const cardBody = document.createElement("p");
-		cardBody.textContent = body;
+		// the page-map.php converts newlines to <br> tags which we need to
+		// convert back to newlines
+		body = body.replace(/<br>/g, "\n");
+
+		const cardContent = document.createElement("p");
+		cardContent.textContent = body;
+
+		const cardBody = document.createElement("div");
+		cardBody.appendChild(cardContent);
 
 		card.appendChild(cardHead);
 		card.appendChild(cardBody);
@@ -355,22 +363,72 @@ function setupPanzoom() {
 		initialY: isMobileDevice ? 0 : 100,
 	});
 
-	// This event will be called along with events above.
-	//instance.on("transform", function (e) {
-	//	console.log("logging latest panzoom instance", instance.getTransform());
-	//});
-
 	// increase scale of map when zoom in button is clicked
-	zoomInBtn.addEventListener("click", function () {
-		const { x, y } = getCoords();
-		instance.smoothZoom(x, y, PANZOOM_ZOOM_IN);
-	});
+	if (zoomInBtn) {
+		zoomInBtn.addEventListener("click", function () {
+			const { x, y } = getCoords();
+			instance.smoothZoom(x, y, PANZOOM_ZOOM_IN);
+		});
+	}
 
 	// decrease scale of map when zoom out button is clicked
-	zoomOutBtn.addEventListener("click", function () {
-		const { x, y } = getCoords();
-		instance.smoothZoom(x, y, PANZOOM_ZOOM_OUT);
+	if (zoomOutBtn) {
+		zoomOutBtn.addEventListener("click", function () {
+			const { x, y } = getCoords();
+			instance.smoothZoom(x, y, PANZOOM_ZOOM_OUT);
+		});
+	}
+}
+
+/**
+ * Change the language of the map card content based on the provided
+ * language code.
+ *
+ * Note: This function is probably not the best way to handle language
+ * switching but this is honest work.
+ *
+ * @param {string} lang - the language code (en or sv)
+ *
+ * @returns {void}
+ */
+function setLanguage(lang) {
+	const origin = window.location.origin;
+	const path = window.location.pathname;
+
+	const langCode = lang === "sv" ? "sv" : "en";
+	const currentLanguage = path.includes("/sv/") ? "sv" : "en";
+
+	// skip if the language is already set
+	if (currentLanguage === langCode) {
+		return;
+	}
+
+	// redirect to the correct language path
+	let newPath = path;
+	if (langCode === "en") {
+		// remove /sv/ from the path
+		newPath = path.replace("/sv/", "/");
+	} else {
+		newPath = `/sv${path}`;
+	}
+
+	// redirect to the new path
+	window.location.href = `${origin}${newPath}`;
+}
+
+// setup the panzoom instance when the document is loaded
+document.addEventListener("DOMContentLoaded", setupPanzoom);
+
+// add event listener to the english language button
+if (englishLanguageBtn) {
+	englishLanguageBtn.addEventListener("click", function () {
+		setLanguage("en");
 	});
 }
 
-document.addEventListener("DOMContentLoaded", setupPanzoom);
+// add event listener to the swedish language button
+if (swedishLanguageBtn) {
+	swedishLanguageBtn.addEventListener("click", function () {
+		setLanguage("sv");
+	});
+}

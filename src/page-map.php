@@ -19,8 +19,8 @@ if (wp_is_mobile()) {
 }
 
 // set option btn style
-$option_btn_style = "tw-py-3 tw-px-5 tw-text-5xl tw-rounded-full tw-border tw-border-black tw-bg-white";
-$menu_option_btn_style = "tw-px-3 tw-py-4 tw-rounded-full tw-border tw-border-black tw-bg-slate-900 tw-text-white hover:tw-bg-white hover:tw-text-black md:tw-px-5 md:tw-py-2";
+$option_btn_style = "tw-px-5 tw-py-2 tw-text-5xl tw-rounded-full tw-border tw-border-black tw-bg-white";
+$menu_option_btn_style = "tw-px-2 tw-py-4 tw-rounded-full tw-border tw-border-black tw-bg-black tw-text-white hover:tw-bg-white hover:tw-text-black md:tw-px-5 md:tw-py-2";
 
 // get map image
 $map_image_url = get_field('map_image');
@@ -279,20 +279,20 @@ $map_pointers = [
   ],
   (object) [
     'id' => 42,
+    'x' => '4337.12939453125',
+    'y' => '4612.98828125',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 43,
     'x' => '7516.6220703125',
     'y' => '3231.24609375',
     'color' => $pointer_color,
   ],
   (object) [
-    'id' => 43,
+    'id' => 44,
     'x' => '7784.05615234375',
     'y' => '3832.97265625',
-    'color' => $pointer_color,
-  ],
-  (object) [
-    'id' => 44,
-    'x' => '4337.12939453125',
-    'y' => '4612.98828125',
     'color' => $pointer_color,
   ],
   (object) [
@@ -307,9 +307,12 @@ $map_pointers = [
 function get_map_story_by_id($id)
 {
   global $map_stories;
-  foreach ($map_stories as $map_story) {
+  foreach ($map_stories as $key => $map_story) {
+    $index = $key + 1;
 
-    if ($map_story['id'] == $id) {
+    // the map stories are in a repeater custom field and their order of
+    // position is binded to the pointer id passed
+    if ($index == $id) {
       return $map_story;
     }
   }
@@ -326,14 +329,29 @@ function get_map_object_radius()
   }
 }
 
+// sanitize text for map card
+function sanitize_text($text)
+{
+  // escape new lines
+  $text = str_replace(array("\r\n", "\r", "\n"), "<br>", $text);
+
+  // escape quotes
+  $text = str_replace('"', "'", $text);
+
+  // escape html
+  $text = htmlspecialchars($text);
+
+  return $text;
+}
+
 ?>
 
 <main id="map-page" role="main">
-  <div id="map-main" class="tw-min-h-svh md:tw-h-svh tw-flex-col">
+  <div id="map-main" class="tw-flex-col">
     <!-- map -->
     <div
       id="map-container"
-      class="tw-h-svh md:tw-grow tw-border-black tw-border-2 md:tw-border-0">
+      class="tw-h-screen-90vh tw-border-black tw-border-2 md:tw-grow md:tw-h-svh md:tw-border-0">
       <!-- 10004px × 7087px (scaled to 1146px × 811px) -->
       <svg
         id="map-svg"
@@ -358,10 +376,19 @@ function get_map_object_radius()
               $body = $map_story['body'];
             }
 
+            // single digit numbers are un-centered on top
+            // of the circle so the padding tries to fix that
+            if ($pointer->id < 10) {
+              $pointer_text_padding = -10;
+            } else {
+              $pointer_text_padding = 0;
+            }
+
           ?>
             <g
               class="map-pointer tw-cursor-pointer"
-              onclick="setCard(<?= $pointer->id; ?>, '<?= $title; ?>', '<?= $body; ?>')">
+              ontouchend="setCard(<?= sanitize_text($pointer->id); ?>, '<?= sanitize_text($title); ?>', '<?= sanitize_text($body); ?>')"
+              onmouseup="setCard(<?= sanitize_text($pointer->id); ?>, '<?= sanitize_text($title); ?>', '<?= sanitize_text($body); ?>')">
               <circle
                 id="<?= $pointer->id; ?>"
                 cx="<?= $pointer->x; ?>"
@@ -370,7 +397,7 @@ function get_map_object_radius()
 
               <!-- add text element with id -->
               <text
-                x="<?= $pointer->x - 25; ?>"
+                x="<?= $pointer->x - 25 - $pointer_text_padding; ?>"
                 y="<?= $pointer->y + 15; ?>"
                 style="font-size: 3em;"
                 fill="white">
@@ -397,14 +424,14 @@ function get_map_object_radius()
       </div>
 
       <!-- menu options -->
-      <div class="tw-flex md:tw-justify-end tw-space-x-2">
-        <button class="tw-basis-3/12 <?= $menu_option_btn_style; ?>">
+      <div class="tw-flex tw-w-full md:tw-w-auto md:tw-justify-end tw-space-x-2">
+        <button id="btn-lang-en" class="tw-basis-1/4 <?= $menu_option_btn_style; ?>">
           En
         </button>
-        <button class="tw-basis-3/12 <?= $menu_option_btn_style; ?>">
+        <button id="btn-lang-sv" class="tw-basis-1/4 <?= $menu_option_btn_style; ?>">
           Sv
         </button>
-        <button id="map-open-modal" class="tw-basis-6/12 <?= $menu_option_btn_style; ?>">
+        <button id="map-open-modal" class="tw-basis-2/4 <?= $menu_option_btn_style; ?>">
           Info
         </button>
       </div>

@@ -12,6 +12,12 @@ Text Domain: high-wire
 Tags: minimal, colorful
 */
 
+/* Interactive Map */
+
+.map-card {
+	font-family: "Space Mono", monospace;
+}
+
 /*------------ Reset ------------*/
 
 @font-face {
