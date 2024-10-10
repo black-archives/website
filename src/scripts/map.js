@@ -275,13 +275,12 @@ function setCard(id, title, body) {
 			"tw-max-h-96",
 			"tw-mx-2",
 			"tw-p-4",
+			"tw-bg-slate-100",
+			"tw-rounded-xl",
+			"tw-border",
+			"tw-border-slate-800",
 			"tw-overflow-x-hidden",
 			"tw-overflow-y-scroll",
-			"tw-text-wrap",
-			"tw-bg-slate-100",
-			"tw-rounded-lg",
-			"tw-border-2",
-			"tw-border-slate-800",
 			"tw-flex-col",
 			"md:tw-left-1/3",
 			"md:tw-w-5/12",
@@ -305,8 +304,11 @@ function setCard(id, title, body) {
 		cardHead.appendChild(cardTitle);
 		cardHead.appendChild(closeButton);
 
-		const cardBody = document.createElement("p");
-		cardBody.textContent = body;
+		const cardContent = document.createElement("p");
+		cardContent.textContent = body;
+
+		const cardBody = document.createElement("div");
+		cardBody.appendChild(cardContent);
 
 		card.appendChild(cardHead);
 		card.appendChild(cardBody);
