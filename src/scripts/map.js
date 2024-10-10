@@ -269,20 +269,22 @@ function setCard(id, title, body) {
 		card.classList.add(
 			"map-card",
 			"tw-absolute",
-			"tw-top-28",
-			"tw-left-0",
+			"tw-top-1/3",
 			"tw-w-11/12",
 			"tw-min-h-60",
+			"tw-max-h-96",
 			"tw-mx-2",
 			"tw-p-4",
+			"tw-overflow-x-hidden",
+			"tw-overflow-y-scroll",
+			"tw-text-wrap",
 			"tw-bg-slate-100",
 			"tw-rounded-lg",
 			"tw-border-2",
 			"tw-border-slate-800",
 			"tw-flex-col",
-			"md:tw-top-1/2",
-			"md:tw-left-1/2",
-			"md:tw-min-w-72",
+			"md:tw-left-1/3",
+			"md:tw-w-5/12",
 			"md:tw-min-h-60"
 		);
 		card.id = id;
