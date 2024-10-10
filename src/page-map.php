@@ -361,6 +361,14 @@ function get_map_object_radius()
               $body = $map_story['body'];
             }
 
+            // single digit numbers are un-centered on top
+            // of the circle so the padding tries to fix that
+            if ($pointer->id < 10) {
+              $pointer_text_padding = -10;
+            } else {
+              $pointer_text_padding = 0;
+            }
+
           ?>
             <g
               class="map-pointer tw-cursor-pointer"
@@ -373,7 +381,7 @@ function get_map_object_radius()
 
               <!-- add text element with id -->
               <text
-                x="<?= $pointer->x - 25; ?>"
+                x="<?= $pointer->x - 25 - $pointer_text_padding; ?>"
                 y="<?= $pointer->y + 15; ?>"
                 style="font-size: 3em;"
                 fill="white">
