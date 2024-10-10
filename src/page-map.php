@@ -332,11 +332,11 @@ function get_map_object_radius()
 ?>
 
 <main id="map-page" role="main">
-  <div id="map-main" class="tw-min-h-svh md:tw-h-svh tw-flex-col">
+  <div id="map-main" class="tw-flex-col">
     <!-- map -->
     <div
       id="map-container"
-      class="tw-h-svh md:tw-grow tw-border-black tw-border-2 md:tw-border-0">
+      class="tw-h-screen-90vh tw-border-black tw-border-2 md:tw-grow md:tw-h-svh md:tw-border-0">
       <!-- 10004px × 7087px (scaled to 1146px × 811px) -->
       <svg
         id="map-svg"
