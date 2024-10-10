@@ -279,20 +279,20 @@ $map_pointers = [
   ],
   (object) [
     'id' => 42,
+    'x' => '4337.12939453125',
+    'y' => '4612.98828125',
+    'color' => $pointer_color,
+  ],
+  (object) [
+    'id' => 43,
     'x' => '7516.6220703125',
     'y' => '3231.24609375',
     'color' => $pointer_color,
   ],
   (object) [
-    'id' => 43,
+    'id' => 44,
     'x' => '7784.05615234375',
     'y' => '3832.97265625',
-    'color' => $pointer_color,
-  ],
-  (object) [
-    'id' => 44,
-    'x' => '4337.12939453125',
-    'y' => '4612.98828125',
     'color' => $pointer_color,
   ],
   (object) [
