@@ -372,7 +372,8 @@ function get_map_object_radius()
           ?>
             <g
               class="map-pointer tw-cursor-pointer"
-              onclick="setCard(<?= $pointer->id; ?>, '<?= $title; ?>', '<?= $body; ?>')">
+              ontouchend="setCard(<?= $pointer->id; ?>, '<?= $title; ?>', '<?= $body; ?>')"
+              onmouseup="setCard(<?= $pointer->id; ?>, '<?= $title; ?>', '<?= $body; ?>')">
               <circle
                 id="<?= $pointer->id; ?>"
                 cx="<?= $pointer->x; ?>"
