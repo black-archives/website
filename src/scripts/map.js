@@ -191,24 +191,6 @@ function setOnboardingCard() {
 }
 
 /**
- * Returns the x and y coordinates of the center of the svg element
- *
- * @returns {Object} - object containing x and y coordinates
- */
-function getCoords() {
-	// exit if mapSvgGroup is not group instance of SVGElement
-	if (!(mapSvgGroup instanceof SVGElement)) {
-		return;
-	}
-
-	const rect = mapSvgGroup.getBBox();
-	const cx = rect.x + rect.width / 2;
-	const cy = rect.y + rect.height / 2;
-
-	return { x: cx, y: cy };
-}
-
-/**
  * Setup the panzoom instance and add event listeners to the zoom in and zoom
  * out buttons
  *
@@ -216,6 +198,19 @@ function getCoords() {
  */
 function setupPanzoom() {
 	const isMobileDevice = isMobile();
+
+	const getCoords = () => {
+		// exit if mapSvgGroup is not group instance of SVGElement
+		if (!(mapSvgGroup instanceof SVGElement)) {
+			return;
+		}
+
+		const rect = mapSvgGroup.getBBox();
+		const cx = rect.x + rect.width / 2;
+		const cy = rect.y + rect.height / 2;
+
+		return { x: cx, y: cy };
+	};
 
 	return panzoom(mapSvgGroup, {
 		bounds: true,
@@ -264,38 +259,40 @@ function setLanguage(lang) {
 
 // ======================================== Event Listeners ========================================
 
-// setup the panzoom instance when the document is loaded
+// add event listener for web page load
 document.addEventListener("DOMContentLoaded", setupPanzoom);
 document.addEventListener("DOMContentLoaded", setOnboardingCard);
 
-// add event listener to map info button to scroll to the map info section
-if (mapInfoBtn) {
-	mapInfoBtn.addEventListener("click", function () {
-		if (mapInfo) {
-			mapInfo.scrollIntoView({ behavior: "smooth" });
-		}
-	});
-}
-
-// add event listener to map info close button to scroll to the top of the page
-if (mapInfoCloseBtn) {
-	mapInfoCloseBtn.addEventListener("click", function () {
-		window.scrollTo({ top: 0, behavior: "smooth" });
-	});
-}
-
-// add event listener to language buttons
+// add event listeners for clicking and touching
 const events = ["click", "touchend"];
 events.forEach((event) => {
+	// language btn for english
 	if (englishLanguageBtn) {
 		englishLanguageBtn.addEventListener(event, function () {
 			setLanguage("en");
 		});
 	}
 
+	// language btn for swedish
 	if (swedishLanguageBtn) {
 		swedishLanguageBtn.addEventListener(event, function () {
 			setLanguage("sv");
+		});
+	}
+
+	// map info btn
+	if (mapInfoBtn) {
+		mapInfoBtn.addEventListener(event, function () {
+			if (mapInfo) {
+				mapInfo.scrollIntoView({ behavior: "smooth" });
+			}
+		});
+	}
+
+	// close map info btn
+	if (mapInfoCloseBtn) {
+		mapInfoCloseBtn.addEventListener(event, function () {
+			window.scrollTo({ top: 0, behavior: "smooth" });
 		});
 	}
 });
