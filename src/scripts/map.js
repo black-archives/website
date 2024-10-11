@@ -18,8 +18,6 @@ const mapSvgGroup = document.getElementById("map-svg-group");
 const mapInfo = document.getElementById("map-info");
 const mapInfoBtn = document.getElementById("btn-map-info");
 const mapInfoCloseBtn = document.getElementById("btn-map-info-close");
-const zoomInBtn = document.getElementById("btn-zoom-in");
-const zoomOutBtn = document.getElementById("btn-zoom-out");
 const englishLanguageBtn = document.getElementById("btn-lang-en");
 const swedishLanguageBtn = document.getElementById("btn-lang-sv");
 
@@ -132,37 +130,18 @@ function getCoords() {
  * Setup the panzoom instance and add event listeners to the zoom in and zoom
  * out buttons
  *
- * @returns {void}
+ * @returns {object} - the panzoom instance
  */
 function setupPanzoom() {
-	const PANZOOM_ZOOM_IN = 2;
-	const PANZOOM_ZOOM_OUT = 0;
-
 	const isMobileDevice = isMobile();
 
-	const instance = panzoom(mapSvgGroup, {
+	return panzoom(mapSvgGroup, {
 		bounds: true,
 		boundsPadding: isMobile() ? 0.05 : 0.9, // the bigger the value (max 1), the less of the map is visible
 		initialZoom: isMobileDevice ? 0.15 : 0.2,
 		initialX: isMobileDevice ? -1100 : 0,
 		initialY: isMobileDevice ? 0 : 0,
 	});
-
-	// increase scale of map when zoom in button is clicked
-	if (zoomInBtn) {
-		zoomInBtn.addEventListener("click", function () {
-			const { x, y } = getCoords();
-			instance.smoothZoom(x, y, PANZOOM_ZOOM_IN);
-		});
-	}
-
-	// decrease scale of map when zoom out button is clicked
-	if (zoomOutBtn) {
-		zoomOutBtn.addEventListener("click", function () {
-			const { x, y } = getCoords();
-			instance.smoothZoom(x, y, PANZOOM_ZOOM_OUT);
-		});
-	}
 }
 
 /**

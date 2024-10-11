@@ -414,18 +414,7 @@ function sanitize_text($text)
     <!-- options -->
     <div
       id="map-options"
-      class="tw-absolute tw-bottom-5 tw-inset-x-0 tw-mx-2 tw-flex tw-flex-col tw-space-y-2 tw-justify-between tw-text-xl md:tw-pl-10 md:tw-mx-10 md:tw-flex-row md:tw-space-y-0 lg:tw-pl-20">
-      <!-- interaction options -->
-      <div class="tw-flex md:tw-justify-start tw-space-x-2">
-        <button id="btn-zoom-in" class="<?= $option_btn_style; ?>">
-          +
-        </button>
-        <button id="btn-zoom-out" class="<?= $option_btn_style; ?>">
-          -
-        </button>
-      </div>
-
-      <!-- menu options -->
+      class="tw-absolute tw-bottom-5 tw-inset-x-0 tw-mx-2 tw-flex tw-flex-col tw-text-xl md:tw-pl-10 md:tw-mx-10 md:tw-flex-row md:tw-justify-end lg:tw-pl-20">
       <div class="tw-flex tw-w-full md:tw-w-auto md:tw-justify-end tw-space-x-2">
         <button id="btn-lang-en" class="tw-basis-1/4 <?= $menu_option_btn_style; ?>">
           En
