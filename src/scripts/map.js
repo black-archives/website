@@ -1,21 +1,31 @@
 /**
  * This script is responsible for setting up the interactive map in
- * page-map.php.
+ * page-map.php file.
  *
- * It uses the panzoom library to enable zooming and panning of the map image
- * within the map svg. It also creates a card element that displays information
- * about a point on the map when the point is clicked.
+ * The script does the following:
+ *
+ * - It uses the panzoom library to pand and zoom the [map] image within the svg.
+ * - Creates card elements that displays information about map pointers when the user clicks on them.
+ * - Switches the language of the map card content when the user clicks on the language buttons.
+ * - Scrolls between the map and the map info section when the user clicks on the map info buttons.
  */
+
+// ======================================== Variables ========================================
 
 const map = document.getElementById("map-main"); // entire map container
 const mapSvg = document.getElementById("map-svg");
 const mapSvgGroup = document.getElementById("map-svg-group");
+const mapInfo = document.getElementById("map-info");
+const mapInfoBtn = document.getElementById("btn-map-info");
+const mapInfoCloseBtn = document.getElementById("btn-map-info-close");
 const zoomInBtn = document.getElementById("btn-zoom-in");
 const zoomOutBtn = document.getElementById("btn-zoom-out");
 const englishLanguageBtn = document.getElementById("btn-lang-en");
 const swedishLanguageBtn = document.getElementById("btn-lang-sv");
 
 let selectedCardElement = null;
+
+// ======================================== Functions ========================================
 
 /**
  * Returns true if browser is a mobile device
@@ -191,22 +201,41 @@ function setLanguage(lang) {
 	window.location.href = `${origin}${newPath}`;
 }
 
+// ======================================== Event Listeners ========================================
+
 // setup the panzoom instance when the document is loaded
 document.addEventListener("DOMContentLoaded", setupPanzoom);
 
-// add event listener to language buttons
-const events = ["click", "touchend"];
-const languageButtons = [
-	{ element: englishLanguageBtn, code: "en" },
-	{ element: swedishLanguageBtn, code: "sv" },
-];
-
-languageButtons.forEach((button) => {
-	events.forEach((event) => {
-		if (button.element) {
-			button.element.addEventListener(event, function () {
-				setLanguage(button.code);
-			});
+// add event listener to map info button to scroll to the map info section
+if (mapInfoBtn) {
+	mapInfoBtn.addEventListener("click", function () {
+		if (mapInfo) {
+			mapInfo.scrollIntoView({ behavior: "smooth" });
 		}
 	});
+}
+
+// add event listener to map info close button to scroll to the map
+if (mapInfoCloseBtn) {
+	mapInfoCloseBtn.addEventListener("click", function () {
+		if (mapSvg) {
+			mapSvg.scrollIntoView({ behavior: "smooth" });
+		}
+	});
+}
+
+// add event listener to language buttons
+const events = ["click", "touchend"];
+events.forEach((event) => {
+	if (englishLanguageBtn) {
+		englishLanguageBtn.addEventListener(event, function () {
+			setLanguage("en");
+		});
+	}
+
+	if (swedishLanguageBtn) {
+		swedishLanguageBtn.addEventListener(event, function () {
+			setLanguage("sv");
+		});
+	}
 });

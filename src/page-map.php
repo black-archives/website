@@ -433,28 +433,28 @@ function sanitize_text($text)
         <button id="btn-lang-sv" class="tw-basis-1/4 <?= $menu_option_btn_style; ?>">
           Sv
         </button>
-        <button id="map-open-modal" class="tw-basis-2/4 <?= $menu_option_btn_style; ?>">
+        <button id="btn-map-info" class="tw-basis-2/4 <?= $menu_option_btn_style; ?>">
           Info
         </button>
       </div>
     </div>
 
-    <div id="map-modal" class="modal">
-      <div class="modal-content tw-flex-col">
-        <span class="modal-close ">
-          <img class="tw-ml-auto tw-mr-3 tw-my-3 tw-cursor-pointer" src="/wp-content/uploads/2021/03/Meny-kryss.svg" alt="Button to close modal">
-        </span>
-        <section id="project-info" class="tw-flex-col tw-justify-center">
-          <div class="md:tw-w-2/6 md:tw-mx-auto tw-text-center">
-            <h1 style="<?= $title_font_size; ?>">
-              <?= get_the_title(); ?>
-            </h1>
-          </div>
+    <!-- info -->
+    <div id="map-info" class="tw-my-10 tw-px-5 tw-h-svh tw-flex tw-flex-col tw-justify-center md:tw-my-10">
+      <div class="md:tw-w-2/6 md:tw-mx-auto tw-text-center">
+        <h1 style="<?= $title_font_size; ?>">
+          <?= get_the_title(); ?>
+        </h1>
+      </div>
 
-          <div class="tw-mt-5 md:tw-w-1/2 md:tw-mx-auto">
-            <?= get_the_content(); ?>
-          </div>
-        </section>
+      <div class="tw-mt-5 md:tw-w-1/2 md:tw-mx-auto">
+        <?= get_the_content(); ?>
+      </div>
+
+      <div class="tw-mt-5 md:tw-w-1/2 md:tw-mx-auto">
+        <button id="btn-map-info-close" class="tw-px-5 tw-py-2 tw-text-xl tw-rounded-full tw-border tw-border-black tw-bg-white">
+          Map
+        </button>
       </div>
     </div>
 </main>
