@@ -133,12 +133,9 @@ function setupPanzoom() {
 	const instance = panzoom(mapSvgGroup, {
 		bounds: true,
 		boundsPadding: isMobile() ? 0.05 : 0.9, // the bigger the value (max 1), the less of the map is visible
-
-		maxZoom: 0.5,
-		minZoom: 0.1,
-		initialZoom: isMobileDevice ? 0.2 : 0.3,
-		initialX: isMobileDevice ? -300 : -300,
-		initialY: isMobileDevice ? 0 : 100,
+		initialZoom: isMobileDevice ? 0.15 : 0.2,
+		initialX: isMobileDevice ? -1100 : 0,
+		initialY: isMobileDevice ? 0 : 0,
 	});
 
 	// increase scale of map when zoom in button is clicked
