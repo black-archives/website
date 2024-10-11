@@ -215,12 +215,10 @@ if (mapInfoBtn) {
 	});
 }
 
-// add event listener to map info close button to scroll to the map
+// add event listener to map info close button to scroll to the top of the page
 if (mapInfoCloseBtn) {
 	mapInfoCloseBtn.addEventListener("click", function () {
-		if (mapSvg) {
-			mapSvg.scrollIntoView({ behavior: "smooth" });
-		}
+		window.scrollTo({ top: 0, behavior: "smooth" });
 	});
 }
 
