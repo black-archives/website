@@ -35,15 +35,25 @@ function isMobile() {
 }
 
 /**
- * Create a card element and append it to the top-left corner of the map
+ * Return the language code based on the current path
  *
- * @param {string} id - the id of the card
+ * @returns {string} - the language code (en or sv)
+ */
+function getLanguage() {
+	const path = window.location.pathname;
+	return path.includes("/sv/") ? "sv" : "en";
+}
+
+/**
+ * Create a card element place it in the map container
+ *
+ * @param {string|null} id - the id of the card
  * @param {string} title - the title of the card
- * @param {string} body - the body of the card
+ * @param {string|HTMLElement} content - the content of the card
  *
  * @returns {void}
  */
-function setCard(id, title, body) {
+function setCard(id, title, content) {
 	// remove the card if it already exists
 	if (selectedCardElement) {
 		selectedCardElement.remove();
@@ -71,7 +81,7 @@ function setCard(id, title, body) {
 		"md:tw-w-5/12",
 		"md:tw-min-h-60"
 	);
-	card.id = id;
+	card.id = id | 0;
 
 	const closeButton = document.createElement("button");
 	closeButton.textContent = "X";
@@ -82,21 +92,26 @@ function setCard(id, title, body) {
 	});
 
 	const cardTitle = document.createElement("h3");
-	cardTitle.textContent = `${id}. ${title}`;
+	cardTitle.textContent = id ? `${id}. ${title}` : title;
 
 	const cardHead = document.createElement("div");
 	cardHead.classList.add("tw-flex", "tw-justify-between", "tw-items-start");
 	cardHead.appendChild(cardTitle);
 	cardHead.appendChild(closeButton);
 
-	// the page-map.php converts special characters which we need to
-	// convert back here
-	body = body.replace(/<br>/g, "\n"); // newlines
-	body = body.replace(/\"/g, '"'); // double quotes
-	body = body.replace(/\'/g, "'"); // single quotes
+	let cardContent = null;
+	if (typeof content === "object") {
+		cardContent = content;
+	} else {
+		// the page-map.php converts special characters which we need to
+		// convert back here
+		content = content.replace(/<br>/g, "\n"); // newlines
+		content = content.replace(/\"/g, '"'); // double quotes
+		content = content.replace(/\'/g, "'"); // single quotes
 
-	const cardContent = document.createElement("p");
-	cardContent.textContent = body;
+		cardContent = document.createElement("p");
+		cardContent.textContent = content;
+	}
 
 	const cardBody = document.createElement("div");
 	cardBody.appendChild(cardContent);
@@ -106,6 +121,73 @@ function setCard(id, title, body) {
 
 	map.appendChild(card);
 	selectedCardElement = card;
+}
+
+/**
+ * Create a card element with onboarding instructions
+ */
+function setOnboardingCard() {
+	// This is a very messy way to handle the language switching but it is
+	// almost 10pm on a Friday and I am tired - so it is what it is.
+	const enTitle = "Welcome to the map!";
+	const svTitle = "Välkommen till kartan!";
+
+	const enOnboardingHeader = "How to interact with the map";
+	const svOnboardingHeader = "Hur man använder kartan";
+
+	const enMobileOnboardingSteps = [
+		"Drag your finger to move around the map.",
+		"Pinch with fingers to zoom in and out.",
+		"Click map pointers to view more information.",
+	];
+	const svMobileOnboardingSteps = [
+		"Dra fingret för att flytta runt på kartan.",
+		"Knip med fingrarna för att zooma in och ut.",
+		"Klicka på kartmarkörer för att visa mer information.",
+	];
+
+	const enDesktopOnboardingSteps = [
+		"Click and drag to move around the map.",
+		"Use the scroll wheel to zoom in and out.",
+		"Click map pointers to view more information.",
+	];
+
+	const svDesktopOnboardingSteps = [
+		"Klicka och dra för att flytta runt på kartan.",
+		"Använd scrollhjulet för att zooma in och ut.",
+		"Klicka på kartmarkörer för att visa mer information.",
+	];
+
+	const title = getLanguage() === "sv" ? svTitle : enTitle;
+
+	const onboardingHeader =
+		getLanguage() === "sv" ? svOnboardingHeader : enOnboardingHeader;
+
+	const onboardingSteps = isMobile()
+		? getLanguage() === "sv"
+			? svMobileOnboardingSteps
+			: enMobileOnboardingSteps
+		: getLanguage() === "sv"
+		? svDesktopOnboardingSteps
+		: enDesktopOnboardingSteps;
+
+	const header = document.createElement("p");
+	header.textContent = onboardingHeader;
+
+	const list = document.createElement("ul");
+	list.classList.add("tw-list-decimal", "tw-list-inside");
+	onboardingSteps.forEach((step) => {
+		const li = document.createElement("li");
+		li.classList.add("tw-ml-2");
+		li.textContent = step;
+		list.appendChild(li);
+	});
+
+	const content = document.createElement("div");
+	content.appendChild(header);
+	content.appendChild(list);
+
+	setCard(null, title, content);
 }
 
 /**
@@ -156,16 +238,16 @@ function setupPanzoom() {
  * @returns {void}
  */
 function setLanguage(lang) {
-	const origin = window.location.origin;
-	const path = window.location.pathname;
-
+	const currentLanguage = getLanguage();
 	const langCode = lang === "sv" ? "sv" : "en";
-	const currentLanguage = path.includes("/sv/") ? "sv" : "en";
 
 	// skip if the language is already set
 	if (currentLanguage === langCode) {
 		return;
 	}
+
+	const origin = window.location.origin;
+	const path = window.location.pathname;
 
 	// redirect to the correct language path
 	let newPath = path;
@@ -184,6 +266,7 @@ function setLanguage(lang) {
 
 // setup the panzoom instance when the document is loaded
 document.addEventListener("DOMContentLoaded", setupPanzoom);
+document.addEventListener("DOMContentLoaded", setOnboardingCard);
 
 // add event listener to map info button to scroll to the map info section
 if (mapInfoBtn) {
