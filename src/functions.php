@@ -15,13 +15,6 @@ require get_template_directory() . '/inc/custom-fields.php';
 require get_template_directory() . '/inc/taxonomy.php';
 require get_template_directory() . '/inc/helper.php';
 
-// javascript files
-function enqueue_custom_js_scripts()
-{
-  wp_enqueue_script('custom-scripts', get_template_directory_uri() . '/scripts/modal.js', array('jquery'), null, true);
-}
-add_action('wp_enqueue_scripts', 'enqueue_custom_js_scripts');
-
 /*------------------------------------*\
 	Theme Support
 \*------------------------------------*/
