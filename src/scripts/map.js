@@ -194,16 +194,19 @@ function setLanguage(lang) {
 // setup the panzoom instance when the document is loaded
 document.addEventListener("DOMContentLoaded", setupPanzoom);
 
-// add event listener to the english language button
-if (englishLanguageBtn) {
-	englishLanguageBtn.addEventListener("click", function () {
-		setLanguage("en");
-	});
-}
+// add event listener to language buttons
+const events = ["click", "touchend"];
+const languageButtons = [
+	{ element: englishLanguageBtn, code: "en" },
+	{ element: swedishLanguageBtn, code: "sv" },
+];
 
-// add event listener to the swedish language button
-if (swedishLanguageBtn) {
-	swedishLanguageBtn.addEventListener("click", function () {
-		setLanguage("sv");
+languageButtons.forEach((button) => {
+	events.forEach((event) => {
+		if (button.element) {
+			button.element.addEventListener(event, function () {
+				setLanguage(button.code);
+			});
+		}
 	});
-}
+});
