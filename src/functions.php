@@ -540,6 +540,12 @@ add_filter('upload_mimes', 'cc_mime_types');
 	ShortCode Functions
 \*------------------------------------*/
 
+function get_language_shortcode()
+{
+  return apply_filters('wpml_current_language', null);
+}
+add_shortcode('language', 'get_language_shortcode');
+
 // Shortcode Demo with Nested Capability
 function html5_shortcode_demo($atts, $content = null)
 {

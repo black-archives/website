@@ -18,10 +18,19 @@ get_header();
       <?php
       $website_origin = get_site_url();
       $website_origin = $website_origin ? $website_origin : null;
-      $map_url = $website_origin . '/the-swinging-town/';
       $map_image = $website_origin . '/wp-content/uploads/2024/10/karta-thumbnail.png';
       $map_title = 'The Swinging Town';
-      $map_cta = 'Launches on 12th October'
+
+      // get website path
+      $current_language = apply_filters('wpml_current_language', NULL);
+
+      if ($current_language == 'sv') {
+        $map_cta = 'Öppna kartan';
+        $map_url = $website_origin . '/sv/the-swinging-town/';
+      } else {
+        $map_cta = 'Enter the map';
+        $map_url = $website_origin . '/the-swinging-town/';
+      }
       ?>
       <div class="col-f-1-3 active">
         <div class="box-content hover-active">
@@ -32,9 +41,10 @@ get_header();
                 <h2><?= $map_title; ?></h2>
               </div>
 
-              <div class="bottom tw-mt-auto">
-                <button class="btn btn-primary">
-                  <?= $map_cta ?> <img src="/wp-content/uploads/2021/03/Pil.svg" />
+              <div class="bottom tw-mt-auto tw-w-full">
+                <button class="btn btn-primary tw-w-full tw-flex">
+                  <?= $map_cta ?>
+                  <img src="/wp-content/uploads/2021/03/Pil.svg" />
                 </button>
               </div>
             </div>
