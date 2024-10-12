@@ -69,7 +69,7 @@ get_header();
       <?php
       $website_origin = get_site_url();
       $website_origin = $website_origin ? $website_origin : null;
-      $map_image = $website_origin . '/wp-content/uploads/2024/10/karta-thumbnail.png';
+      $map_image = $website_origin . '/wp-content/uploads/2024/10/karta-thumbnail-cropped.png';
       $map_title = 'The Swinging Town';
 
       // get website path
