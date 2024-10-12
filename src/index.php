@@ -70,13 +70,13 @@ get_header();
       $website_origin = get_site_url();
       $website_origin = $website_origin ? $website_origin : null;
       $map_url = $website_origin . '/the-swinging-town/';
-      $map_image = $website_origin . '/wp-content/uploads/2024/10/karta-webb.png';
+      $map_image = $website_origin . '/wp-content/uploads/2024/10/karta-thumbnail.png';
       $map_title = 'The Swinging Town';
       $map_cta = 'Launches on 12th October'
       ?>
       <div class="col-f-1-3 active">
         <div class="box-content hover-active">
-          <a href="#" style="height: 100%;">
+          <a href="<?= $map_url; ?>" style="height: 100%;">
             <img src="<?= $map_image; ?>" alt="">
             <div class="post-hover-box">
               <div class="top">
