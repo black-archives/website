@@ -1,10 +1,8 @@
 # Security Policy
 
+> [!NOTE]
+> We are a non-profit organization maintained by volunteers that have other full-time obligrations and may not have the time to address reports immediately. That is not to say that we do not value your help in keeping this repository secure.
+
 ## Reporting a Vulnerability
 
-To report a vulnerability, reach out to <a href="mailto:dev@oliverrr.net?subject='(IMPORTANT) Vulnerability Report - Black Archives Sweden'">dev@oliverrr.net</a>. If the vulneraility is accepted, please expect some potential questions.
-
-> [!NOTE]
-> We are a non-profit organization maintained by volunteers that may not have the time to address the vulnerability.
-
-Rest assured that we will make time for this once we get the time - security is important to us.
+To report a vulnerability, reach out to [dev@oliverrr.net](mailto:bob@mail.com?subject=(IMPORTANT)%20Vulnerability%20Report%20-%20Black%20Archives%20Sweden) or [open an issue](https://github.com/black-archives/website/issues/new) and make sure to assign a developer. If the vulneraility is accepted, please expect some potential questions.
