@@ -190,7 +190,7 @@ start_application() {
   create_docker_compose_file
 
   # Check if the docker-compose.yaml file exists
-  if [ ! -f "docker-compose.yaml" ]; then
+  if [ ! -f $DEV_DOCKER_COMPOSE_FILE ]; then
     util_log "ERROR: Missing docker-compose.yaml file - please run 'entrypoint.sh compose' to create one."
     exit 1
   fi
