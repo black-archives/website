@@ -19,23 +19,33 @@ TARGET_THEME_PATH="/www/wp-content/themes/highwire/"
 
 ## MAIN ##################################################
 
+# prompt for server hostname and username if not provided
 if [ -z "${_SERVER_HOSTNAME}" ] || [ -z "${_SERVER_USERNAME}" ]; then
   read -p "Enter Server Hostname: " _SERVER_HOSTNAME
   read -p "Enter Server Username: " _SERVER_USERNAME
 fi
 
+# prompt for server key path if not provided
 if [ -z "${_SERVER_KEY_PATH}" ]; then
   read -p "Enter Server Key Path (optional): " _SERVER_KEY_PATH
 fi
 
 echo "Deploying theme to ${_SERVER_HOSTNAME}..."
 
+# if the server key path is not provided, use the default ssh command
 if [ -z "$_SERVER_KEY_PATH" ]; then
+  ssh ${_SERVER_USERNAME}@${_SERVER_HOSTNAME} "rm -rf ${TARGET_THEME_PATH}/*"
   scp -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
 else
+
+  # if the CI mode is enabled, then don't check for strict host key checking
   if [[ "$_CI_MODE" = "true" || "$_CI_MODE" = "TRUE" || "$_CI_MODE" = "1" ]]; then
+    ssh -o StrictHostKeyChecking=no -i ${_SERVER_KEY_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME} "rm -rf ${TARGET_THEME_PATH}/*"
     scp -o StrictHostKeyChecking=no -i ${_SERVER_KEY_PATH} -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
+
+  # otherwise, use the custom key path
   else
+    ssh -i ${_SERVER_KEY_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME} "rm -rf ${TARGET_THEME_PATH}/*"
     scp -i ${_SERVER_KEY_PATH} -r ${SOURCE_THEME_PATH} ${_SERVER_USERNAME}@${_SERVER_HOSTNAME}:${TARGET_THEME_PATH}
   fi
 fi
