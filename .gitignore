@@ -7,6 +7,9 @@
 .env*
 !.env.example
 
+wp-config.php
+.htaccess
+
 docker-compose.*yml
 docker-compose.*yaml
 

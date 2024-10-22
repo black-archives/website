@@ -1,11 +1,10 @@
 # Contributing
 
-This repository implements a Wordpress Application. Locally, it comes with a bash script, `scripts/entrypoint.sh`, that sets up containers for Wordpress, MySQL and PHPadmin using a generated `docker-compose.yaml` file.
+This repository implements a Wordpress Application. Locally, it comes with a bash script, `scripts/entrypoint.sh`, that sets spins up a MYSQL, PHPAdmin and Wordpress container using Docker Compose.
 
 Shortcuts:
 
 - [Getting Started](#getting-started) - setting up the app locally
-- [Architecture](#architecture) - technical decisions and information
 - [Security](#security) - securing the app
 - [FAQ](#faq) - frequently asked questions
 
@@ -15,13 +14,10 @@ This section will guide you through setting up the app locally (on your machine)
 
 Pre-requisites:
 
-- Install Docker
-
-### Starting the app
+- Install [Docker](https://docs.docker.com/get-started/get-docker/)
 
 > [!NOTE]
->
-> Before starting the app, you will need to copy the `wp-content` directory from the remote server to the `.development/wordpress` directory. This directory contains the themes, plugins, and uploads for the Wordpress app that are needed to 'recreate' the website locally. In order to copy the `wp-content` directory from the remote server, see the [migrating remote data to local app](#migrating-remote-data-to-local-app) section.
+> To simulate the real website locally, you'll need to import some data (i.e. database, plugins and media files) from the remote WP application. For more information on how to do this, see the *"[How do I export and import data from the Wordpress app](#how-do-i-export-and-import-data-from-the-wordpress-app)"* section.
 
 To start the app locally, run the following command and open the browser to `http://localhost:8081/`:
 
@@ -31,34 +27,21 @@ bash scripts/entrypoint.sh start --dev
 
 # start the app with custom configurations
 bash scripts/entrypoint.sh start
-
-# connect to the MySQL database (databaseName: mysql, username: wp-user)
-bash scripts/entrypoint.sh connect mysql wp-user
 ```
 
 The `start` command will perform the following steps:
 
-1. creates a `/database` and `/wordpress` directory
-2. creates a `docker-compose.yaml` file with provided configurations
+1. creates a `.dev/database` and `.dev/wordpress` directory
+2. creates a `.dev/docker-compose.yaml` file with provided configurations
 3. import environment variables from the `.env` file (if the file doesn't exist, it will use default configurations)
 4. runs `docker compose up` to start the MySQL database, phpMyAdmin, and Wordpress app
 
-### Stopping the app
-
-To stop the app, run the following command:
-
-```bash
-# stop the app
-bash scripts/entrypoint.sh stop
-
-# stop the app and remove the volumes
-bash scripts/entrypoint.sh stop --clean
-```
+To stop the app, run `ctrl + c` in the terminal.
 
 ### Default Configurations
 
 > [!WARNING]
-> The default values below are for testing/development purposes only and should not be used in production. Please see the [security section](#security) for more information on how to secure the app.
+> The default values below are credentials for testing/development purposes only and should not be used in production. Please see the [security section](#security) for more information on how to secure the app.
 
 The MySQL database and Wordpress app are set up with the following configurations (if the `--dev` flag is set):
 
@@ -70,107 +53,60 @@ The MySQL database and Wordpress app are set up with the following configuration
 | MySQL regular username | `wp-user` | The regular username for the MySQL database and Wordpress app |
 | MySQL regular password | `wp-pass` | The regular password for the MySQL database and Wordpress app |
 
-### Migrating remote data to local app
-
-> [!NOTE]
->
-> For routine development, it is recommended to copy the `wp-content` directory from the remote server to the `.development/wordpress` directory since it contains the themes, plugins, and uploads for the Wordpress app that are needed to 'recreate' the website locally. To speed this specific process up, you can use the [import.sh](./scripts/import.sh) script to copy the `wp-content` directory from the remote server to the `.development/wordpress` directory.
-
-This essentially involves exporting the remote wordpress application using the [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/) plugin and importing it into the local app.
-
-1. Export the remote Wordpress app using the All-in-One WP Migration plugin
-2. Download the exported file
-3. Import the file into the local Wordpress app using the All-in-One WP Migration plugin (see [how to increase the upload size](#how-do-i-upload-more-than-2mb-of-data-to-the-wordpress-app) if the import fails due to the file size)
-
-## Architecture
-
-Technical decisions and information made in the development of this Wordpress application for future reference.
-
-### Themes
-
-The Wordpress app uses a custom theme called Highwire by Sam Skogh, the original developer of the website. The theme is located in the [`/src`](./src/) directory.
-
-### Plugins
-
-> [!NOTE]
-> The plugins with the `(BUG)` tag are not working as expected can cause issues with the website. I suspect that the plugins causing issues are all related to the `WPML Multilingual CMS` plugin which is a paid plugin that requires a license key to work properly and since local development does not have a license key, the plugin does not work as expected.
-
-The Wordpress app comes with the following plugins, of which some are active and some are not (because they are not needed at the moment):
-
-| Plugin Name                         | Active | Description                                                  |
-| ----------------------------------- | ------ | ------------------------------------------------------------ |
-| Advanced Custom Fields PRO          | ✅      | Custom fields for posts and pages                            |
-| Advanced Custom Fields Multilingual | ❌      | Multilingual custom fields for posts and pages (needs WPML)  |
-| All-in-One WP Migration             | ❌      | Migrate the website to another server                        |
-| Campaign Monitor for WordPress      | ✅      | Campaign monitor for the website                             |
-| Contact Form 7                      | ✅      | Contact form for the website                                 |
-| Drag and Drop Multiple File Upload  | ✅      | Drag and drop file upload for the website                    |
-| Duplicate Page                      | ✅      | Duplicate posts and pages                                    |
-| Font Awesome                        | ✅      | Font Awesome icons for the website                           |
-| Insert Headers and Footers          | ✅      | Insert headers and footers for the website                   |
-| Under Construction                  | ❌      | Under construction page for the website                      |
-| WPForms Lite                        | ✅      | Contact form for the website                                 |
-| WPML Media                          | ❌      | Multilingual media for the website (needs WPML)              |
-| WPML Multilingual CMS (**BUG**)     | ❌      | Multilingual CMS for the website                             |
-| WPML String Translation             | ❌      | Multilingual string translation for the website (needs WPML) |
-| Yoast SEO                           | ✅      | SEO for the website                                          |
-| Yoast SEO Multilingual              | ❌      | Multilingual SEO for the website (needs WPML)                |
-
 ## Security
 
-The default values listed in the [default configurations](#default-configurations) for the MySQL database and Wordpress app are very common and should not be used in a production environment where real information is stored and accessed publically because they are easily guessable which exposes your website to security vulnerabilities.
+Wordpress uses a MySQL database to store data (i.e. posts, pages, settings). You need to configure the wordpress app, in the `wp-config.php` file, to connect to the MySQL database using the database credentials (i.e. database name, username, password).
 
-Instead, it is recommended to create an `.env` file with secure values for the MySQL database and Wordpress app.
+The default configurations listed in the [default configurations](#default-configurations) for the MySQL database and Wordpress app are very common and should not be used in a production environment where real information is stored and accessed publically because they are easily guessable which means that unauthorized hackers can easily access your website.
 
-### Create an Env File
+Instead, it is recommended to:
 
-- create an env file file (see [.env.example](.env.example) for an example)
-- update the `MYSQL_ROOT_PASSWORD`, `MYSQL_USER`, and `MYSQL_PASSWORD` values in the `.env` file with secure values
-- restart the app
+1. never check your `wp-config.php` file into version control (i.e. git)
+2. use environment variables (i.e. `.env` file) to store and inject credentials into the Wordpress app
+3. create secure passwords for the MySQL database and Wordpress app
 
-Create an `.env` file with the following content:
+### Using Environment Variables
 
-```bash
-# .env
-MYSQL_DATABASE=wp
-MYSQL_ROOT_PASSWORD=secure-root-password
-MYSQL_USER=wp-user
-MYSQL_PASSWORD=secure-user-password
-```
+Setting up environment variables:
+
+1. create an env file at the root of the project (see [.env.example](.env.example) for an example)
+2. update the `MYSQL_ROOT_PASSWORD`, `MYSQL_USER`, and `MYSQL_PASSWORD` values in the `.env` file with secure values
+3. restart the app
 
 ### Strong Passwords
 
 A strong password should be easy to remember but hard to guess. Below are some recommendations:
 
-- use at least 8 characters
-- use phrases that are easy to remember but hard to guess (i.e. `ilovetoeathotdogs` instead of `h0td0gs@ndk3tchup`)
-- use a mix of uppercase and lowercase letters, numbers, and special characters, if you can
-- avoid using common words, phrases, or patterns in your passwords that can be inferred from your personal information (e.g. your name, birthdate, birth year etc.)
+- use phrases that are easy to remember but hard to guess (i.e. `ilovetoeathotdogs!!!` instead of `h0td0gs@ndk3tchup`)
+- use atleast two types of characters (i.e. uppercase and lowercase letters, numbers, special characters)
+- avoid themes or patterns that can be inferred from your personal information (i.e. your name, birthdate, birth year etc.)
 
 ## FAQ
 
 ### How do I export and import data from the Wordpress app?
 
-> [!TIP]
-> If you have issues importing data, checkout [this guide](#how-do-i-upload-more-than-2mb-of-data-to-the-wordpress-app) on how to increase the upload size. If that doesn't work, try exporting and importing the data in smaller chunks.
+If you run the app locally, you will get a fresh Wordpress app with no data - it may have the theme but it will not have any posts, pages, media files, etc. To simulate the real website locally, you will need to export some data from the remote server and import it into the local app.
 
-You can export and import data from the Wordpress app using the [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/) plugin.
+Exporting data (media files, plugins and databases) from the remote website:
 
-To export the data, follow these steps:
+1. Go to the remote Wordpress app
+2. Install and activate the [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/) plugin
+3. Go to `All-in-One WP Migration` > `Export` in the Wordpress admin dashboard
+4. Click on `Advanced Options` and check all checkboxes except `Do not export media library`
+5. Click on `Export To` and select the desired location (e.g. `File`)
+6. Click on `Export` to start the export process
+7. Repeat steps 4-6 for `Do not export must-use plugins`, `Do not export plugins` and `Do not export database`
 
-1. Install and activate the All-in-One WP Migration plugin
-2. Go to `All-in-One WP Migration` > `Export` in the Wordpress admin dashboard
-3. Click on `Export To` and select the desired location (e.g. `File`)
-4. Click on advanced options to exclude/include certain data (e.g. media, themes, plugins) - *I try to export as much as possible*
+> [!NOTE]
+> If you cannot upload a file larger than 2MB, see [how to increase the upload size](#how-do-i-upload-more-than-2mb-of-data-to-the-wordpress-app).
 
-To import the data, follow these steps:
+Importing data into the local app:
 
-1. Install and activate the All-in-One WP Migration plugin
+1. Install and activate the [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/) plugin
 2. Go to `All-in-One WP Migration` > `Import` in the Wordpress admin dashboard
-3. Click on `Import From` and select the desired location (e.g. for `File`, upload the file that was exported with the `.wpress` extension)
+3. Click on `Import From` and select the downloaded file for the `Do not export media library` export
 4. Click on `Proceed` to start the import process
-5. Once the import is complete, click on `Permalinks` to update the permalinks
-6. Click on `Save Changes` to save the permalinks
+5. Repeat for the `Do not export must-use plugins`, `Do not export plugins` and `Do not export database` exports
 
 ### How do I upload more than 2MB of data to the Wordpress app?
 
