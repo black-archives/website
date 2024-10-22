@@ -19,8 +19,11 @@ DOCKER_PHPMYADMIN_PORT="8082"
 ENV_FILE_PATH="${ROOT_DIR}/.env"
 
 THEME_PATH="${ROOT_DIR}/src/"
-MYSQL_PATH="${ROOT_DIR}/.dev/database"
-WORDPRESS_PATH="${ROOT_DIR}/.dev/wordpress/"
+
+DEV_DIR="${ROOT_DIR}/.dev"
+DEV_MYSQL_DIR="${DEV_DIR}/database"
+DEV_WORDPRESS_DIR="${DEV_DIR}/wordpress/"
+DEV_DOCKER_COMPOSE_FILE="${DEV_DIR}/docker-compose.yaml"
 
 ## FUNCTIONS ############################################
 usage() {
@@ -77,7 +80,7 @@ create_docker_compose_file() {
         networks:
           - default
         volumes:
-          - $MYSQL_PATH:/var/lib/mysql
+          - $DEV_MYSQL_DIR:/var/lib/mysql
 
       phpmyadmin:
         depends_on:
@@ -110,11 +113,11 @@ create_docker_compose_file() {
         volumes:
           - $THEME_PATH:/usr/src/wordpress/wp-content/themes/highwire
           - $THEME_PATH:/var/www/html/wp-content/themes/highwire
-          - $WORDPRESS_PATH:/var/www/html
+          - $DEV_WORDPRESS_DIR:/var/www/html
 
     networks:
       default:
-  " > docker-compose.yaml
+  " > $DEV_DOCKER_COMPOSE_FILE
 }
 
 connect_to_mysql() {
@@ -138,16 +141,16 @@ connect_to_mysql() {
 }
 
 setup_directories() {
-  if [ ! -d $MYSQL_PATH ]; then
+  if [ ! -d $DEV_MYSQL_DIR ]; then
     util_log "Creating database directory..." extra
-    mkdir -p $MYSQL_PATH
+    mkdir -p $DEV_MYSQL_DIR
   else
     util_log "Database directory already exists..." extra
   fi
 
-  if [ ! -d $WORDPRESS_PATH ]; then
+  if [ ! -d $DEV_WORDPRESS_DIR ]; then
     util_log "Creating wordpress directory..." extra
-    mkdir -p $WORDPRESS_PATH
+    mkdir -p $DEV_WORDPRESS_DIR
   else
     util_log "Wordpress directory already exists..." extra
   fi
@@ -156,16 +159,16 @@ setup_directories() {
     util_log "Theme directory does not exist..." extra
     exit 1
   else
-    cp -r $THEME_PATH $WORDPRESS_PATH/wp-content/themes/highwire
+    cp -r $THEME_PATH $DEV_WORDPRESS_DIR/wp-content/themes/highwire
   fi
 }
 
 teardown_directories() {
   util_log "Removing database directory..." extra
-  rm -rf $MYSQL_PATH
+  rm -rf $DEV_MYSQL_DIR
 
   util_log "Removing wordpress directory..." extra
-  rm -rf $WORDPRESS_PATH
+  rm -rf $DEV_WORDPRESS_DIR
 }
 
 start_application() {
@@ -199,7 +202,8 @@ start_application() {
   fi
 
   setup_directories
-  docker compose up --remove-orphans
+  #docker compose --file $DEV_DOCKER_COMPOSE_FILE up --remove-orphans
+  docker compose --project-directory $DEV_DIR up --remove-orphans
 }
 
 stop_application() {
