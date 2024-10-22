@@ -45,6 +45,11 @@ get_header();
 
                 <div class="bottom">
                   <p><?php echo get_text_excerpt(esc_html($subtitle)); ?></p>
+
+                  <button class="btn btn-primary tw-w-full tw-flex md:tw-w-auto">
+                    <?= $map_cta ?>
+                    <img src="/wp-content/uploads/2021/03/Pil.svg" />
+                  </button>
                 </div>
               </div>
             </a>
@@ -63,6 +68,7 @@ get_header();
         $card_summary = get_sub_field('summary');
         $card_call_to_action = get_sub_field('call_to_action');
         $card_link = get_sub_field('link');
+        $card_show_button = get_sub_field('show_button');
       ?>
         <?php if (!empty($card_link)): ?>
           <a href="<?= $card_link ?>">
@@ -75,6 +81,13 @@ get_header();
 
               <div class="bottom">
                 <p><?php echo get_text_excerpt($card_summary); ?></p>
+
+                <?php if ($card_show_button): ?>
+                  <button class="btn btn-primary tw-w-full tw-flex md:tw-w-auto">
+                    <?= $card_call_to_action ?>
+                    <img src="/wp-content/uploads/2021/03/Pil.svg" />
+                  </button>
+                <?php endif; ?>
               </div>
             </div>
           </div>
