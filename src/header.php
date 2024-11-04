@@ -35,6 +35,7 @@
   <script>
     tailwind.config = {
       prefix: 'tw-',
+      important: true,
       theme: {
         extend: {
           height: {
