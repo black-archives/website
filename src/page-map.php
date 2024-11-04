@@ -9,6 +9,7 @@
 get_header();
 
 // load javascript for map page
+wp_enqueue_script('help-js', get_template_directory_uri() . '/scripts/helper.js', array(), '1.0.0', true);
 wp_enqueue_script('map-js', get_template_directory_uri() . '/scripts/map.js', array('jquery'), '1.0.0', true);
 
 // if screen is less than 768px
