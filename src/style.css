@@ -1004,14 +1004,13 @@ main {
 
 /*----------- temp page ---------*/
 
-body.home,
 .about-page {
 	background-color: #35a270;
 	color: #000;
 }
 
 body,
-.archive-page .sub-page-menu {
+.archive-page {
 	background-color: #f0f0f0;
 }
 
@@ -1174,16 +1173,6 @@ figcaption {
 }
 
 /*----------- Pages ---------*/
-
-.sub-page-menu {
-	padding: 0;
-	border-bottom: 1px solid #000;
-	background: #35a270;
-	position: fixed;
-	left: 0;
-	right: 0;
-	z-index: 99;
-}
 
 .about-page {
 	padding: 113px 0;
