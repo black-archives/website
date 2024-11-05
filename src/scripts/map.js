@@ -193,8 +193,8 @@ function setupPanzoom() {
 
 	return panzoom(mapSvgGroup, {
 		bounds: true,
-		boundsPadding: isMobile() ? 0.05 : 0.9, // the bigger the value (max 1), the less of the map is visible
-		initialZoom: isMobileDevice ? 0.15 : 0.2,
+		boundsPadding: isMobileDevice ? 0.05 : 0.9, // the bigger the value (max 1), the less of the map is visible
+		initialZoom: isMobileDevice ? 0.15 : 0.3,
 		initialX: isMobileDevice ? -1100 : 0,
 		initialY: isMobileDevice ? 0 : 0,
 	});
@@ -207,8 +207,7 @@ document.addEventListener("DOMContentLoaded", setupPanzoom);
 document.addEventListener("DOMContentLoaded", setOnboardingCard);
 
 // add event listeners for clicking and touching
-const events = ["click", "touchend"];
-events.forEach((event) => {
+["click", "touchend"].forEach((event) => {
 	// map info btn
 	if (mapInfoBtn) {
 		mapInfoBtn.addEventListener(event, function () {
