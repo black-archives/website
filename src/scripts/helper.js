@@ -1,5 +1,9 @@
-const englishLanguageBtn = document.getElementById("btn-lang-en");
-const swedishLanguageBtn = document.getElementById("btn-lang-sv");
+/**
+ * This script is used to setup helper functions that are used in multiple
+ * scripts in the project.
+ */
+
+// ======================================== Functions ========================================
 
 /**
  * Returns true if browser is a mobile device
@@ -56,39 +60,62 @@ function setLanguage(lang) {
 	window.location.href = `${origin}${newPath}`;
 }
 
-// add event listeners for clicking and touching
-const events = ["click", "touchend"];
-events.forEach((event) => {
+/**
+ * Returns the language buttons
+ *
+ * the language buttons
+ */
+function getLanguageButtons() {
+	const BTN_ENGLISH_ID = "btn-lang-en";
+	const BTN_SWEDISH_ID = "btn-lang-sv";
+
+	return {
+		english: document.getElementById(BTN_ENGLISH_ID),
+		swedish: document.getElementById(BTN_SWEDISH_ID),
+	};
+}
+
+/**
+ * Underlines language buttons based on the current language
+ * and the style anchor class.
+ */
+function setLanguageButtons() {
+	const { english, swedish } = getLanguageButtons();
+
 	const underlineClass = "tw-underline";
-	const styleAnchor = "language-link";
+	const styleAnchor = "tw-font-bold";
+
+	// set underline class if current language is english
+	if (getLanguage() === "en" && english?.classList.contains(styleAnchor)) {
+		english.classList.add(underlineClass);
+	}
+
+	// set underline class if current language is swedish
+	if (getLanguage() === "sv" && swedish?.classList.contains(styleAnchor)) {
+		swedish.classList.add(underlineClass);
+	}
+}
+
+// ======================================== Event Listeners ========================================
+
+// set underline class for language buttons
+setLanguageButtons();
+
+// add event listeners for clicking and touching
+["click", "touchend"].forEach((event) => {
+	const { english, swedish } = getLanguageButtons();
 
 	// language btn for english
-	if (englishLanguageBtn) {
-		englishLanguageBtn.addEventListener(event, function () {
+	if (english) {
+		english.addEventListener(event, function () {
 			setLanguage("en");
 		});
-
-		// set underline class if current language is english
-		if (
-			getLanguage() === "en" &&
-			englishLanguageBtn.classList.contains(styleAnchor)
-		) {
-			englishLanguageBtn.classList.add(underlineClass);
-		}
 	}
 
 	// language btn for swedish
-	if (swedishLanguageBtn) {
-		swedishLanguageBtn.addEventListener(event, function () {
+	if (swedish) {
+		swedish.addEventListener(event, function () {
 			setLanguage("sv");
 		});
-
-		// set underline class if current language is swedish
-		if (
-			getLanguage() === "sv" &&
-			swedishLanguageBtn.classList.contains(styleAnchor)
-		) {
-			swedishLanguageBtn.classList.add(underlineClass);
-		}
 	}
 });
