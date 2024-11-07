@@ -25,9 +25,7 @@ wp_enqueue_script('help-js', get_template_directory_uri() . '/scripts/helper.js'
         ?>
 
         <a href=" <?= $parent_page_link; ?>">
-          <div class="tw-px-2 tw-py-1 tw-border tw-border-black tw-text-center md:tw-p-3 md:tw-w-fit">
-            Back
-          </div>
+          <img src="<?= get_parent_theme_file_uri('assets/img/icons/arrow-left.svg'); ?>" alt="Back arrow" class="tw-w-14" />
         </a>
       </div>
 
