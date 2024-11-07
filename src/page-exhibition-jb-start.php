@@ -68,14 +68,14 @@ wp_enqueue_script('help-js', get_template_directory_uri() . '/scripts/helper.js'
       <?php endif; ?>
     </div>
 
-    <div id="exhibition-sponsors" class="tw-flex tw-flex-col tw-gap-10">
+    <div id="exhibition-sponsors" class="tw-mt-10 tw-mb-5 tw-flex tw-gap-5">
       <?php if (have_rows('sponsors')) :
         while (have_rows('sponsors')) : the_row();
           $image = get_sub_field('image');
           $image_source = $image['url'];
           $image_alt = $image['alt'];
       ?>
-          <img src="<?= $image_source; ?>" alt="<?= $image_alt; ?>">
+          <img src="<?= $image_source; ?>" alt="<?= $image_alt; ?>" class="tw-w-1/4 md:tw-w-1/12">
         <?php endwhile; ?>
       <?php endif; ?>
     </div>
