@@ -64,7 +64,7 @@ $current_page = get_post();
         <p>1 December 2024-19 January 2025</p>
       </div>
 
-      <h1 id="exhibition-title" class="tw-flex tw-flex-col tw-text-5xl tw-mt-2 md:tw-text-center md:tw-text-7xl">
+      <h1 id="exhibition-title" class="tw-mt-2 tw-flex tw-flex-col tw-text-5xl tw-text-center md:tw-text-7xl">
         <span>James Barnor:</span>
         <span class="tw-italic">Transmissions</span>
       </h1>
