@@ -21,12 +21,11 @@ get_header();
           'posts_per_page' => 1,
           's' => 'Exhibition'
         ));
-
         $exhibition_page_link = get_permalink($exhibition_page->posts[0]->ID);
         ?>
 
         <a href=" <?= $exhibition_page_link; ?>">
-          <div class="tw-px-2 tw-py-1 tw-border tw-border-white tw-text-center md:tw-p-3 md:tw-w-fit">
+          <div class="tw-font-mono tw-px-2 tw-py-1 tw-w-2/3 tw-border tw-border-white tw-text-center md:tw-py-3 md:tw-px-10 md:tw-w-full hover:tw-text-white">
             About the exhibition
           </div>
         </a>
@@ -66,9 +65,9 @@ get_header();
     </div>
 
       <div id="exhibition-title" class="tw-col-span-2 tw-flex tw-flex-col tw-justify-center md:tw-order-2 md:tw-items-start md:tw-w-6/12 md:tw-mx-auto">
-        <div id="exhibition-date" class="tw-w-full tw-mt-10 tw-text-center">
-          <p>1 December 2024-19 January 2025</p>
-        </div>
+      <div id="exhibition-date" class="tw-font-mono tw-w-full tw-text-center">
+        <p>1 December 2024-19 January 2025</p>
+      </div>
 
         <h1 class="tw-flex tw-flex-col tw-text-5xl md:tw-text-8xl">
           <span>James Barnor:</span>

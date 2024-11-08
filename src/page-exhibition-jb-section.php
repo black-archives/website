@@ -60,9 +60,9 @@ $current_page = get_post();
     </div>
 
       <div id="exhibition-title" class="tw-col-span-2 tw-flex tw-flex-col tw-justify-center md:tw-w-6/12 md:tw-mx-auto">
-        <div id="exhibition-date" class="tw-w-full tw-mt-10 tw-text-center">
-          <p>1 December 2024-19 January 2025</p>
-        </div>
+      <div id="exhibition-date" class="tw-font-mono tw-w-full tw-text-center">
+        <p>1 December 2024-19 January 2025</p>
+      </div>
 
         <h1 class="tw-flex tw-flex-col tw-text-5xl md:tw-text-center md:tw-text-7xl">
           <span>James Barnor:</span>
@@ -71,8 +71,7 @@ $current_page = get_post();
       </div>
     </div>
 
-    <!-- child page radios -->
-    <div id="exhibition-nav" class="tw-flex tw-flex-col md:tw-flex-row md:tw-justify-evenly md:tw-gap-4 md:tw-w-6/12 md:tw-mx-auto">
+    <div id="exhibition-nav" class="tw-font-mono tw-flex tw-flex-col tw-gap-2 md:tw-flex-row md:tw-justify-evenly md:tw-gap-4 md:tw-w-6/12 md:tw-mx-auto">
       <?php
       $siblings = new WP_Query(array(
         'post_type' => 'page',
@@ -90,7 +89,7 @@ $current_page = get_post();
           $post_active = $post_id === $current_page->ID;
       ?>
 
-          <div class="tw-flex tw-gap-4">
+          <div class="tw-font-mono tw-flex tw-gap-4">
             <a href="<?= $post_link; ?>">
               <span class="md:tw-text-xl">
                 <?php if ($post_active) : ?>
