@@ -90,12 +90,16 @@ $current_page = get_post();
 
           <div class="tw-font-mono tw-flex tw-gap-4">
             <a href="<?= $post_link; ?>">
-              <span class="md:tw-text-xl">
-                <?php if ($post_active) : ?>
-                  <span class="tw-font-extrabold">&#9679; <?= $post_title; ?></span>
-                <?php else : ?>
-                  &#9675; <?= $post_title; ?>
-                <?php endif; ?>
+              <span class="tw-text-xl">
+                <span class="tw-text-4xl">
+                  <?php if ($post_active) : ?>
+                    &#9679;
+                  <?php else : ?>
+                    &#9675;
+                  <?php endif; ?>
+                </span>
+
+                <span><?= $post_title; ?></span>
               </span>
             </a>
           </div>
