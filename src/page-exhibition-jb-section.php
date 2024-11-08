@@ -12,8 +12,8 @@ $current_page = get_post();
 ?>
 
 <main role="main" class="tw-w-full tw-h-full tw-min-h-svh">
-  <div class="tw-flex tw-flex-col tw-gap-5 tw-w-10/12 tw-mx-auto tw-mt-10 tw-pb-32">
-    <div id="exhibition-header" class="tw-grid tw-grid-cols-2 tw-mt-10 tw-text-lg">
+  <div class="tw-flex tw-flex-col tw-gap-5 tw-w-10/12 tw-mt-10 tw-mx-auto tw-pb-32 md:tw-justify-center">
+    <div id="exhibition-bar" class="tw-flex tw-justify-between tw-mt-5 tw-text-lg">
       <div id="exhibition-action" class="md:tw-items-start">
         <?php
         // get the current page's parent page
@@ -59,16 +59,15 @@ $current_page = get_post();
       </div>
     </div>
 
-      <div id="exhibition-title" class="tw-col-span-2 tw-flex tw-flex-col tw-justify-center md:tw-w-6/12 md:tw-mx-auto">
+    <div id="exhibition-header" class="tw-flex tw-flex-col tw-justify-center md:tw-w-6/12 md:tw-mx-auto">
       <div id="exhibition-date" class="tw-font-mono tw-w-full tw-text-center">
         <p>1 December 2024-19 January 2025</p>
       </div>
 
-        <h1 class="tw-flex tw-flex-col tw-text-5xl md:tw-text-center md:tw-text-7xl">
-          <span>James Barnor:</span>
-          <span class="tw-italic">Transmissions</span>
-        </h1>
-      </div>
+      <h1 id="exhibition-title" class="tw-flex tw-flex-col tw-text-5xl tw-mt-2 md:tw-text-center md:tw-text-7xl">
+        <span>James Barnor:</span>
+        <span class="tw-italic">Transmissions</span>
+      </h1>
     </div>
 
     <div id="exhibition-nav" class="tw-font-mono tw-flex tw-flex-col tw-gap-2 md:tw-flex-row md:tw-justify-evenly md:tw-gap-4 md:tw-w-6/12 md:tw-mx-auto">
@@ -108,7 +107,7 @@ $current_page = get_post();
       ?>
     </div>
 
-    <div id="exhibition-body" class="md:tw-w-6/12 md:tw-mx-auto">
+    <div id="exhibition-body" class="tw-mt-2 md:tw-w-6/12 md:tw-mx-auto">
       <?= get_the_content(); ?>
     </div>
   </div>

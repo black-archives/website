@@ -10,9 +10,9 @@ get_header();
 ?>
 
 <main role="main" class="tw-bg-black tw-text-white tw-w-full tw-h-full tw-min-h-svh">
-  <div class="tw-flex tw-flex-col tw-gap-5 tw-w-10/12 tw-mx-auto tw-mt-10 tw-pb-32">
-    <div id="exhibition-header" class="tw-grid tw-grid-cols-2 tw-mt-10 tw-text-lg md:tw-flex">
-      <div id="exhibition-action" class="md:tw-order-1 md:tw-items-start">
+  <div class="tw-flex tw-flex-col tw-gap-5 tw-w-10/12 tw-mt-10 tw-mx-auto md:tw-mt-0 md:tw-justify-center">
+    <div id="exhibition-bar" class="tw-flex tw-justify-between tw-mt-5 tw-text-lg">
+      <div id="exhibition-action" class="md:tw-items-start">
         <?php
         // get link to child page with the title 'Exhibition'
         $exhibition_page = new WP_Query(array(
@@ -64,16 +64,15 @@ get_header();
       </div>
     </div>
 
-      <div id="exhibition-title" class="tw-col-span-2 tw-flex tw-flex-col tw-justify-center md:tw-order-2 md:tw-items-start md:tw-w-6/12 md:tw-mx-auto">
+    <div id="exhibition-header" class="tw-flex tw-flex-col tw-justify-center md:tw-w-6/12 md:tw-mx-auto">
       <div id="exhibition-date" class="tw-font-mono tw-w-full tw-text-center">
         <p>1 December 2024-19 January 2025</p>
       </div>
 
-        <h1 class="tw-flex tw-flex-col tw-text-5xl md:tw-text-8xl">
-          <span>James Barnor:</span>
-          <span class="tw-italic">Transmissions</span>
-        </h1>
-      </div>
+      <h1 id="exhibition-title" class="tw-flex tw-flex-col tw-text-5xl tw-mt-2 md:tw-text-center md:tw-text-7xl">
+        <span>James Barnor:</span>
+        <span class="tw-italic">Transmissions</span>
+      </h1>
     </div>
 
     <div id="exhibition-body" class="tw-text-center md:tw-w-6/12 md:tw-mx-auto">
