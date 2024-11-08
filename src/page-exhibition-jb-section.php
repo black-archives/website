@@ -90,16 +90,15 @@ $current_page = get_post();
           $post_active = $post_id === $current_page->ID;
       ?>
 
-          <div class="tw-my-1 tw-flex tw-gap-4">
+          <div class="tw-flex tw-gap-4">
             <a href="<?= $post_link; ?>">
               <span class="md:tw-text-xl">
                 <?php if ($post_active) : ?>
-                  <span class="tw-font-extrabold">-> <?= $post_title; ?></span>
+                  <span class="tw-font-extrabold">&#9679; <?= $post_title; ?></span>
                 <?php else : ?>
-                  -> <?= $post_title; ?>
+                  &#9675; <?= $post_title; ?>
                 <?php endif; ?>
               </span>
-
             </a>
           </div>
       <?php
