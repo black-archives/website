@@ -11,7 +11,7 @@ get_header();
 $current_page = get_post();
 
 // load javascript for map page
-wp_enqueue_script('help-js', get_template_directory_uri() . '/scripts/helper.js', array(), '1.0.0', true);
+wp_enqueue_script('help-js', get_template_directory_uri() . '/assets/js/helper.js', array(), '1.0.0', true);
 ?>
 
 <main role="main" class="tw-w-full tw-h-full tw-min-h-svh">

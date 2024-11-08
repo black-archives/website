@@ -70,8 +70,8 @@ function getLanguageButtons() {
 	const BTN_SWEDISH_ID = "btn-lang-sv";
 
 	return {
-		english: document.getElementById(BTN_ENGLISH_ID),
-		swedish: document.getElementById(BTN_SWEDISH_ID),
+		englishBtn: document.getElementById(BTN_ENGLISH_ID),
+		swedishBtn: document.getElementById(BTN_SWEDISH_ID),
 	};
 }
 
@@ -80,42 +80,45 @@ function getLanguageButtons() {
  * and the style anchor class.
  */
 function setLanguageButtons() {
-	const { english, swedish } = getLanguageButtons();
+	const { englishBtn, swedishBtn } = getLanguageButtons();
 
 	const underlineClass = "tw-underline";
 	const styleAnchor = "tw-font-bold";
 
-	// set underline class if current language is english
-	if (getLanguage() === "en" && english?.classList.contains(styleAnchor)) {
-		english.classList.add(underlineClass);
+	if (englishBtn) {
+		// set event listeners
+		englishBtn.addEventListener("click", function () {
+			setLanguage("en");
+		});
+
+		englishBtn.addEventListener("touchend", function () {
+			setLanguage("en");
+		});
+
+		// set underline class if current language is english
+		if (getLanguage() === "en" && englishBtn?.classList.contains(styleAnchor)) {
+			englishBtn.classList.add(underlineClass);
+		}
 	}
 
-	// set underline class if current language is swedish
-	if (getLanguage() === "sv" && swedish?.classList.contains(styleAnchor)) {
-		swedish.classList.add(underlineClass);
+	if (swedishBtn) {
+		// set event listeners
+		swedishBtn.addEventListener("click", function () {
+			setLanguage("sv");
+		});
+
+		swedishBtn.addEventListener("touchend", function () {
+			setLanguage("sv");
+		});
+
+		// set underline class if current language is swedish
+		if (getLanguage() === "sv" && swedishBtn?.classList.contains(styleAnchor)) {
+			swedishBtn.classList.add(underlineClass);
+		}
 	}
 }
 
-// ======================================== Event Listeners ========================================
+// ======================================== Main ========================================
 
 // set underline class for language buttons
 setLanguageButtons();
-
-// add event listeners for clicking and touching
-["click", "touchend"].forEach((event) => {
-	const { english, swedish } = getLanguageButtons();
-
-	// language btn for english
-	if (english) {
-		english.addEventListener(event, function () {
-			setLanguage("en");
-		});
-	}
-
-	// language btn for swedish
-	if (swedish) {
-		swedish.addEventListener(event, function () {
-			setLanguage("sv");
-		});
-	}
-});

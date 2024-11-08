@@ -9,7 +9,7 @@
 get_header();
 
 // load javascript for map page
-wp_enqueue_script('help-js', get_template_directory_uri() . '/scripts/helper.js', array(), '1.0.0', true);
+wp_enqueue_script('helper', get_template_directory_uri() . '/assets/js/helper.js', array(), '1.0.0', true);
 ?>
 
 <main role="main" class="tw-bg-black tw-text-white tw-w-full tw-h-full tw-min-h-svh">
