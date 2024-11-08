@@ -9,9 +9,6 @@
 
 get_header();
 $current_page = get_post();
-
-// load javascript for map page
-wp_enqueue_script('help-js', get_template_directory_uri() . '/assets/js/helper.js', array(), '1.0.0', true);
 ?>
 
 <main role="main" class="tw-w-full tw-h-full tw-min-h-svh">
@@ -29,10 +26,38 @@ wp_enqueue_script('help-js', get_template_directory_uri() . '/assets/js/helper.j
         </a>
       </div>
 
-      <div id="exhbition-language" class="tw-flex tw-gap-4 tw-justify-end md:tw-items-start">
-        <button id="btn-lang-en" class="language-link">EN</button>
-        <button id="btn-lang-sv" class="language-link">SV</button>
+      <div id="exhbition-language" class="tw-flex tw-gap-4 tw-justify-end md:tw-items-start hover:tw-text-black">
+        <?php
+        // if current full path has '/sv/' then set the language to 'sv' otherwise set it to 'en'
+        $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
+
+        // get origin
+        $current_origin = $_SERVER['HTTP_ORIGIN'];
+        $current_path = $_SERVER['REQUEST_URI'];
+
+        // remove '/sv' from path if it exists
+        $current_path = str_replace('/sv', '', $current_path);
+
+        // set base languages
+        $lang_en = $current_origin . $current_path;
+        $lang_sv = $current_origin . '/sv' . $current_path;
+        ?>
+
+        <a
+          id="btn-lang-en"
+          href="<?= $lang_en; ?>"
+          class="<?= ($language === 'en') ? 'tw-underline' : ''; ?>">
+          ENG
+        </a>
+
+        <a
+          id="btn-lang-sv"
+          href="<?= $lang_sv; ?>"
+          class="<?= ($language === 'sv') ? 'tw-underline' : ''; ?>">
+          SV
+        </a>
       </div>
+    </div>
 
       <div id="exhibition-title" class="tw-col-span-2 tw-flex tw-flex-col tw-justify-center md:tw-w-6/12 md:tw-mx-auto">
         <div id="exhibition-date" class="tw-w-full tw-mt-10 tw-text-center">
