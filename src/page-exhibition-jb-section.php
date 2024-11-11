@@ -70,7 +70,7 @@ $current_page = get_post();
       </h1>
     </div>
 
-    <div id="exhibition-nav" class="tw-font-mono tw-flex tw-flex-col tw-gap-2 md:tw-flex-row md:tw-justify-evenly md:tw-gap-4 md:tw-w-6/12 md:tw-mx-auto">
+    <div id="exhibition-nav" class="tw-font-mono tw-flex tw-flex-col tw-gap-2 md:tw-flex-row md:tw-justify-evenly md:tw-w-6/12 md:tw-mx-auto">
       <?php
       $siblings = new WP_Query(array(
         'post_type' => 'page',
@@ -88,21 +88,19 @@ $current_page = get_post();
           $post_active = $post_id === $current_page->ID;
       ?>
 
-          <div class="tw-font-mono tw-flex tw-gap-4">
-            <a href="<?= $post_link; ?>">
-              <span class="tw-text-xl">
-                <span class="tw-text-4xl">
-                  <?php if ($post_active) : ?>
-                    &#9679;
-                  <?php else : ?>
-                    &#9675;
-                  <?php endif; ?>
-                </span>
+          <a href="<?= $post_link; ?>" class="tw-text-xl tw-flex tw-gap-4 tw-place-items-center md:tw-gap-2">
+            <span class="tw-pb-2 tw-text-5xl tw-flex tw-center md:tw-pb-1 md:tw-text-3xl">
+              <?php if ($post_active) : ?>
+                &#9679;
+              <?php else : ?>
+                &#9675;
+              <?php endif; ?>
+            </span>
 
-                <span><?= $post_title; ?></span>
-              </span>
-            </a>
-          </div>
+            <span>
+              <?= $post_title; ?>
+            </span>
+          </a>
       <?php
         endwhile;
       endif;
