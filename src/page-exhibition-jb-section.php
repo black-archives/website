@@ -12,7 +12,7 @@ $current_page = get_post();
 ?>
 
 <main role="main" class="tw-w-full tw-h-full tw-min-h-svh">
-  <div class="tw-flex tw-flex-col tw-gap-5 tw-w-10/12 tw-mt-10 tw-mx-auto tw-pb-32 md:tw-justify-center">
+  <div class="tw-flex tw-flex-col tw-gap-2 tw-w-10/12 tw-mt-10 tw-mx-auto tw-pb-32 md:tw-justify-center">
     <div id="exhibition-bar" class="tw-flex tw-justify-between tw-mt-5 tw-text-lg">
       <div id="exhibition-action" class="md:tw-items-start">
         <?php
@@ -109,7 +109,7 @@ $current_page = get_post();
       ?>
     </div>
 
-    <div id="exhibition-body" class="tw-mt-2 md:tw-w-6/12 md:tw-mx-auto">
+    <div id="exhibition-body" class="tw-mt-10 md:tw-w-6/12 md:tw-mx-auto">
       <?= get_the_content(); ?>
     </div>
   </div>
