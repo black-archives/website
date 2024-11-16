@@ -26,7 +26,14 @@ get_header();
 
         <a href=" <?= $exhibition_page_link; ?>">
           <div class="tw-font-mono tw-px-2 tw-py-1 tw-w-2/3 tw-border tw-border-white tw-text-center md:tw-py-3 md:tw-px-10 md:tw-w-full hover:tw-text-white">
-            About the exhibition
+            <?php
+            // set language to 'sv' if the url path contains '/sv/'
+            $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
+
+            // if language is 'sv' then set text to 'Om utställningen'
+            // otherwise set text to 'About the exhibition'
+            echo ($language === 'sv') ? 'Om utställningen' : 'About the exhibition';
+            ?>
           </div>
         </a>
       </div>
