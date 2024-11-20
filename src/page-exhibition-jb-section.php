@@ -12,7 +12,7 @@ $current_page = get_post();
 ?>
 
 <main role="main" class="tw-w-full tw-h-full tw-min-h-svh">
-  <div class="tw-flex tw-flex-col tw-gap-5 tw-w-10/12 tw-mt-10 tw-mx-auto tw-pb-32 md:tw-justify-center">
+  <div class="tw-flex tw-flex-col tw-gap-2 tw-w-10/12 tw-mt-10 tw-mx-auto tw-pb-32 md:tw-justify-center">
     <div id="exhibition-bar" class="tw-flex tw-justify-between tw-mt-5 tw-text-lg">
       <div id="exhibition-action" class="md:tw-items-start">
         <?php
@@ -70,7 +70,7 @@ $current_page = get_post();
       </h1>
     </div>
 
-    <div id="exhibition-nav" class="tw-font-mono tw-flex tw-flex-col tw-gap-2 md:tw-flex-row md:tw-justify-evenly md:tw-gap-4 md:tw-w-6/12 md:tw-mx-auto">
+    <div id="exhibition-nav" class="tw-font-mono tw-flex tw-flex-col tw-gap-2 md:tw-flex-row md:tw-justify-evenly md:tw-w-6/12 md:tw-mx-auto">
       <?php
       $siblings = new WP_Query(array(
         'post_type' => 'page',
@@ -88,21 +88,19 @@ $current_page = get_post();
           $post_active = $post_id === $current_page->ID;
       ?>
 
-          <div class="tw-font-mono tw-flex tw-gap-4">
-            <a href="<?= $post_link; ?>">
-              <span class="tw-text-xl">
-                <span class="tw-text-4xl">
-                  <?php if ($post_active) : ?>
-                    &#9679;
-                  <?php else : ?>
-                    &#9675;
-                  <?php endif; ?>
-                </span>
+          <a href="<?= $post_link; ?>" class="tw-text-xl tw-flex tw-gap-4 tw-place-items-center md:tw-gap-2">
+            <span class="tw-pb-2 tw-text-5xl tw-flex tw-center md:tw-pb-1 md:tw-text-3xl">
+              <?php if ($post_active) : ?>
+                &#9679;
+              <?php else : ?>
+                &#9675;
+              <?php endif; ?>
+            </span>
 
-                <span><?= $post_title; ?></span>
-              </span>
-            </a>
-          </div>
+            <span>
+              <?= $post_title; ?>
+            </span>
+          </a>
       <?php
         endwhile;
       endif;
@@ -111,7 +109,7 @@ $current_page = get_post();
       ?>
     </div>
 
-    <div id="exhibition-body" class="tw-mt-2 md:tw-w-6/12 md:tw-mx-auto">
+    <div id="exhibition-body" class="tw-mt-10 md:tw-w-6/12 md:tw-mx-auto">
       <?= get_the_content(); ?>
     </div>
   </div>
