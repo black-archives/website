@@ -71,8 +71,8 @@ get_header();
         </a>
       </div>
 
-      <div id="exhibition-title" class="tw-col-span-2 tw-mt-5 tw-flex tw-flex-col tw-gap-2 tw-justify-center md:tw-order-2 md:tw-grow">
-        <div class="tw-font-mono tw-w-full tw-text-center">
+      <div id="exhibition-title" class="tw-col-span-2 tw-full tw-mt-5 tw-flex tw-flex-col tw-gap-2 tw-justify-center md:tw-order-2 md:tw-grow">
+        <div class="tw-font-mono tw-text-center">
           <p>1 December 2024-19 January 2025</p>
         </div>
 
@@ -99,7 +99,34 @@ get_header();
       <?php endif; ?>
     </div>
 
-    <div id="exhibition-sponsors" class="tw-mt-10 tw-mb-5 tw-w-10/12 tw-mx-auto tw-flex tw-flex-col tw-gap-4 md:tw-px-10 md:tw-w-full md:tw-flex-row md:tw-justify-between">
+    <div id="exhibition-sponsors" class="tw-mt-10 tw-mb-5 tw-w-11/12 tw-mx-auto tw-flex tw-flex-col tw-gap-5 md:tw-px-10 md:tw-w-full md:tw-flex-row md:tw-justify-between">
+      <?php if (have_rows('sponsors_secondary')): ?>
+        <div class="tw-grid tw-grid-cols-2 tw-gap-4 tw-place-items-center md:tw-flex md:tw-gap-7">
+          <?php while (have_rows('sponsors_secondary')) : the_row();
+            $image = get_sub_field('image');
+            $image_source = $image['url'];
+            $image_alt = $image['alt'];
+          ?>
+            <div>
+              <img src="<?= $image_source; ?>" alt="<?= $image_alt; ?>" class="tw-max-w-40 tw-max-h-16 md:tw-max-w-32 md:tw-max-h-16">
+            </div>
+          <?php endwhile; ?>
+        </div>
+      <?php endif; ?>
+
+      <?php if (have_rows('sponsors_primary')): ?>
+        <div class="tw-flex tw-gap-2 tw-place-items-end">
+          <div class="tw-w-fit tw-text-xs md:tw-text-md">Med stöd av</div>
+          <?php while (have_rows('sponsors_primary')) : the_row();
+            $image = get_sub_field('image');
+            $image_source = $image['url'];
+            $image_alt = $image['alt'];
+          ?>
+            <div>
+              <img src="<?= $image_source; ?>" alt="<?= $image_alt; ?>" class="tw-max-w-40 tw-max-h-16 md:tw-max-w-32 md:tw-max-h-16">
+            </div>
+          <?php endwhile; ?>
+        </div>
       <?php endif; ?>
     </div>
   </div>
