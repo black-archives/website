@@ -9,9 +9,9 @@
 get_header();
 ?>
 
-<main role="main" class="tw-bg-black tw-text-white tw-w-full tw-h-full tw-min-h-svh">
-  <div class="tw-flex tw-flex-col tw-gap-5 tw-w-10/12 tw-mt-10 tw-mx-auto md:tw-mt-0 md:tw-justify-center">
-    <div id="exhibition-bar" class="tw-flex tw-justify-between tw-mt-5 tw-text-lg">
+<main role="main" class="tw-bg-black tw-text-white tw-min-h-svh">
+  <div class="tw-flex tw-flex-col tw-gap-5 tw-mt-10 md:tw-w-full md:tw-mt-0 md:tw-justify-center">
+    <div id="exhibition-bar" class="tw-flex tw-justify-between tw-mt-5 tw-px-5 tw-text-lg md:tw-px-5">
       <div id="exhibition-action" class="md:tw-items-start">
         <?php
         // get link to child page with the title 'Exhibition'
@@ -71,7 +71,7 @@ get_header();
       </div>
     </div>
 
-    <div id="exhibition-header" class="tw-flex tw-flex-col tw-justify-center md:tw-w-6/12 md:tw-mx-auto">
+    <div id="exhibition-header" class="tw-flex tw-flex-col tw-justify-center">
       <div id="exhibition-date" class="tw-font-mono tw-w-full tw-text-center">
         <p>1 December 2024-19 January 2025</p>
       </div>
@@ -82,11 +82,11 @@ get_header();
       </h1>
     </div>
 
-    <div id="exhibition-body" class="tw-text-center md:tw-w-6/12 md:tw-mx-auto">
+    <div id="exhibition-body" class="tw-text-center tw-w-10/12 tw-mx-auto md:tw-w-6/12">
       <?= get_the_content(); ?>
     </div>
 
-    <div id="exhibition-thumbnails" class="tw-flex tw-flex-col tw-gap-10 md:tw-flex-row md:justify-center md:tw-w-9/12 md:tw-mx-auto">
+    <div id="exhibition-thumbnails" class="tw-w-10/12 tw-mx-auto tw-flex tw-flex-col tw-gap-10 md:tw-w-6/12 md:tw-mx-auto md:tw-flex-row md:justify-center">
       <?php if (have_rows('images')) :
         while (have_rows('images')) : the_row();
           $image = get_sub_field('image');
@@ -98,15 +98,7 @@ get_header();
       <?php endif; ?>
     </div>
 
-    <div id="exhibition-sponsors" class="tw-mt-10 tw-mb-5 tw-flex tw-gap-5">
-      <?php if (have_rows('sponsors')) :
-        while (have_rows('sponsors')) : the_row();
-          $image = get_sub_field('image');
-          $image_source = $image['url'];
-          $image_alt = $image['alt'];
-      ?>
-          <img src="<?= $image_source; ?>" alt="<?= $image_alt; ?>" class="tw-w-1/4 md:tw-w-1/12">
-        <?php endwhile; ?>
+    <div id="exhibition-sponsors" class="tw-mt-10 tw-mb-5 tw-w-10/12 tw-mx-auto tw-flex tw-flex-col tw-gap-4 md:tw-px-10 md:tw-w-full md:tw-flex-row md:tw-justify-between">
       <?php endif; ?>
     </div>
   </div>
