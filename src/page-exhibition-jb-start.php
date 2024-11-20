@@ -9,10 +9,11 @@
 get_header();
 ?>
 
-<main role="main" class="tw-bg-black tw-text-white tw-min-h-svh">
-  <div class="tw-flex tw-flex-col tw-gap-5 tw-mt-10 md:tw-w-full md:tw-mt-0 md:tw-justify-center">
-    <div id="exhibition-bar" class="tw-flex tw-justify-between tw-mt-5 tw-px-5 tw-text-lg md:tw-px-5">
-      <div id="exhibition-action" class="md:tw-items-start">
+<main role="main" class="tw-bg-black tw-text-white">
+  <div class="tw-min-h-svh tw-mt-10 tw-flex tw-flex-col tw-gap-5 md:tw-mt-0 md:tw-justify-center">
+
+    <div id="exhibition-header" class="tw-mt-5 tw-grid tw-grid-cols-2 md:tw-flex md:tw-justify-center">
+      <div id="exhibition-action" class="tw-w-full tw-p-2 tw-flex md:tw-order-1 md:tw-basis-3/12 md:tw-justify-center">
         <?php
         // get link to child page with the title 'Exhibition'
         $exhibition_page = new WP_Query(array(
@@ -25,7 +26,7 @@ get_header();
         ?>
 
         <a href=" <?= $exhibition_page_link; ?>">
-          <div class="tw-font-mono tw-px-2 tw-py-1 tw-w-2/3 tw-border tw-border-white tw-text-center md:tw-py-3 md:tw-px-10 md:tw-w-full hover:tw-text-white">
+          <div class="tw-font-mono tw-px-2 tw-py-1 tw-w-2/3 tw-border tw-border-white tw-text-center md:tw-py-3 md:tw-px-10 md:tw-w-fit hover:tw-text-white">
             <?php
             // set language to 'sv' if the url path contains '/sv/'
             $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
@@ -38,7 +39,7 @@ get_header();
         </a>
       </div>
 
-      <div id="exhbition-language" class="tw-flex tw-gap-4 tw-justify-end md:tw-items-start hover:tw-text-white">
+      <div id="exhbition-language" class="tw-w-full tw-p-2 tw-flex tw-gap-4 tw-justify-center tw-items-center hover:tw-text-white md:tw-text-lg md:tw-order-3 md:tw-basis-3/12 md:tw-justify-center md:tw-items-start">
         <?php
         // if current full path has '/sv/' then set the language to 'sv' otherwise set it to 'en'
         $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
@@ -69,31 +70,31 @@ get_header();
           SV
         </a>
       </div>
-    </div>
 
-    <div id="exhibition-header" class="tw-flex tw-flex-col tw-justify-center">
-      <div id="exhibition-date" class="tw-font-mono tw-w-full tw-text-center">
-        <p>1 December 2024-19 January 2025</p>
+      <div id="exhibition-title" class="tw-col-span-2 tw-mt-5 tw-flex tw-flex-col tw-gap-2 tw-justify-center md:tw-order-2 md:tw-grow">
+        <div class="tw-font-mono tw-w-full tw-text-center">
+          <p>1 December 2024-19 January 2025</p>
+        </div>
+
+        <h1 class="tw-mt-2 tw-flex tw-flex-col tw-text-5xl tw-text-center md:tw-text-7xl">
+          <span>James Barnor:</span>
+          <span class="tw-italic">Transmissions</span>
+        </h1>
       </div>
-
-      <h1 id="exhibition-title" class="tw-mt-2 tw-flex tw-flex-col tw-text-5xl tw-text-center md:tw-text-7xl">
-        <span>James Barnor:</span>
-        <span class="tw-italic">Transmissions</span>
-      </h1>
     </div>
 
     <div id="exhibition-body" class="tw-text-center tw-w-10/12 tw-mx-auto md:tw-w-6/12">
       <?= get_the_content(); ?>
     </div>
 
-    <div id="exhibition-thumbnails" class="tw-w-10/12 tw-mx-auto tw-flex tw-flex-col tw-gap-10 md:tw-w-6/12 md:tw-mx-auto md:tw-flex-row md:justify-center">
+    <div id="exhibition-thumbnails" class="tw-w-10/12 tw-mx-auto tw-flex tw-flex-col tw-gap-10 md:tw-grow md:tw-w-6/12 md:tw-mx-auto md:tw-flex-row md:tw-justify-center">
       <?php if (have_rows('images')) :
         while (have_rows('images')) : the_row();
           $image = get_sub_field('image');
           $image_source = $image['url'];
           $image_alt = $image['alt'];
       ?>
-          <img src="<?= $image_source; ?>" alt="<?= $image_alt; ?>" class="md:tw-w-5/12">
+          <img src="<?= $image_source; ?>" alt="<?= $image_alt; ?>" class="md:tw-w-6/12">
         <?php endwhile; ?>
       <?php endif; ?>
     </div>
