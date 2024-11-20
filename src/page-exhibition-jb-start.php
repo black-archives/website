@@ -15,13 +15,19 @@ get_header();
     <div id="exhibition-header" class="tw-mt-5 tw-grid tw-grid-cols-2 md:tw-flex md:tw-justify-center">
       <div id="exhibition-action" class="tw-w-full tw-p-2 tw-flex md:tw-order-1 md:tw-basis-3/12 md:tw-justify-center">
         <?php
-        // get link to child page with the title 'Exhibition'
-        $exhibition_page = new WP_Query(array(
+
+        /**
+         * Query wordpress for a page that is a child of the current page
+         * which also has the lowest 'order' value.
+         */
+        $exhibition_page = new WP_Query([
           'post_type' => 'page',
           'post_parent' => get_the_ID(),
           'posts_per_page' => 1,
-          's' => 'Exhibition'
-        ));
+          'orderby' => 'menu_order',
+          'order' => 'ASC'
+        ]);
+
         $exhibition_page_link = get_permalink($exhibition_page->posts[0]->ID);
         ?>
 
