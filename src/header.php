@@ -76,7 +76,7 @@
     <div class="main-header">
       <!-- sidebar -->
       <div class="left-menu">
-        <div class="menu-hamburger tw-flex tw-place-items-center">
+        <div class="menu-hamburger tw-flex tw-justify-center">
           <img src="/wp-content/uploads/2021/03/Meny.svg" alt="Menu icon">
         </div>
         <img class="header-logo" src="/wp-content/uploads/2021/03/logo-side.svg" alt="Black Archive Sweden Logo">
