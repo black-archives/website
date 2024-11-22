@@ -93,7 +93,7 @@ $current_page = get_post();
           $post_active = $post_id === $current_page->ID;
       ?>
 
-          <a href="<?= $post_link; ?>" class="tw-text-xl tw-flex tw-gap-4 tw-place-items-center md:tw-gap-2">
+          <a href="<?= $post_link; ?>" class="tw-flex tw-gap-4 tw-place-items-center md:tw-gap-2">
             <span class="tw-pb-2 tw-text-5xl tw-flex tw-center md:tw-pb-1 md:tw-text-3xl">
               <?php if ($post_active) : ?>
                 &#9679;
