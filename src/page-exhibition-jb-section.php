@@ -26,7 +26,7 @@ $current_page = get_post();
         </a>
       </div>
 
-      <div id="exhbition-language" class="tw-flex tw-gap-4 tw-justify-end md:tw-items-start hover:tw-text-black">
+      <div id="exhbition-language" class="tw-w-full tw-px-5 tw-py-2 tw-flex tw-gap-4 tw-justify-end tw-items-center hover:tw-text-black md:tw-order-3 md:tw-text-lg md:tw-p-2 md:tw-basis-3/12 md:tw-justify-center md:tw-items-start">
         <?php
         // if current full path has '/sv/' then set the language to 'sv' otherwise set it to 'en'
         $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
