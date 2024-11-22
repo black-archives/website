@@ -79,7 +79,12 @@ get_header();
 
       <div id="exhibition-title" class="tw-col-span-2 tw-full tw-mt-5 tw-flex tw-flex-col tw-gap-2 tw-justify-center md:tw-order-2 md:tw-grow">
         <div class="tw-font-mono tw-text-center">
-          <p>1 December 2024-19 January 2025</p>
+          <p>
+            <?php
+            $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
+            echo ($language === 'sv') ? '1 December 2024-19 Januari 2025' : '1 December 2024-19 January 2025';
+            ?>
+          </p>
         </div>
 
         <h1 class="tw-mt-2 tw-flex tw-flex-col tw-text-5xl tw-text-center md:tw-text-7xl">
