@@ -52,6 +52,9 @@
             'screen-80vw': '80vw',
             'screen-90vw': '90vw'
           },
+          fontFamily: {
+            mono: ['Space Mono', 'monospace']
+          }
         }
       }
     }
