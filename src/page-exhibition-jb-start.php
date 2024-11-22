@@ -32,7 +32,7 @@ get_header();
         ?>
 
         <a href=" <?= $exhibition_page_link; ?>">
-          <div class="tw-font-mono tw-px-2 tw-py-1 tw-w-2/3 tw-border tw-border-white tw-text-center md:tw-py-3 md:tw-px-10 md:tw-w-fit hover:tw-text-white">
+          <div class="tw-font-mono tw-px-2 tw-py-1 tw-w-5/6 tw-border tw-border-white tw-text-center md:tw-py-3 md:tw-px-10 md:tw-w-fit hover:tw-text-white">
             <?php
             // set language to 'sv' if the url path contains '/sv/'
             $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
