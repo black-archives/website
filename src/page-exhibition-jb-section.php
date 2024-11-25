@@ -26,7 +26,7 @@ $current_page = get_post();
         </a>
       </div>
 
-      <div id="exhbition-language" class="tw-flex tw-gap-4 tw-justify-end md:tw-items-start hover:tw-text-black">
+      <div id="exhbition-language" class="tw-w-full tw-px-5 tw-py-2 tw-flex tw-gap-4 tw-justify-end tw-items-center hover:tw-text-black md:tw-order-3 md:tw-text-lg md:tw-p-2 md:tw-basis-3/12 md:tw-justify-center md:tw-items-start">
         <?php
         // if current full path has '/sv/' then set the language to 'sv' otherwise set it to 'en'
         $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
@@ -61,7 +61,12 @@ $current_page = get_post();
 
     <div id="exhibition-header" class="tw-flex tw-flex-col tw-justify-center md:tw-w-6/12 md:tw-mx-auto">
       <div id="exhibition-date" class="tw-font-mono tw-w-full tw-text-center">
-        <p>1 December 2024-19 January 2025</p>
+        <p>
+          <?php
+          $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
+          echo ($language === 'sv') ? '1 December 2024-19 Januari 2025' : '1 December 2024-19 January 2025';
+          ?>
+        </p>
       </div>
 
       <h1 id="exhibition-title" class="tw-mt-2 tw-flex tw-flex-col tw-text-5xl tw-text-center md:tw-text-7xl">
@@ -88,7 +93,7 @@ $current_page = get_post();
           $post_active = $post_id === $current_page->ID;
       ?>
 
-          <a href="<?= $post_link; ?>" class="tw-text-xl tw-flex tw-gap-4 tw-place-items-center md:tw-gap-2">
+          <a href="<?= $post_link; ?>" class="tw-flex tw-gap-4 tw-place-items-center md:tw-gap-2">
             <span class="tw-pb-2 tw-text-5xl tw-flex tw-center md:tw-pb-1 md:tw-text-3xl">
               <?php if ($post_active) : ?>
                 &#9679;

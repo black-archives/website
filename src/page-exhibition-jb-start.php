@@ -32,7 +32,7 @@ get_header();
         ?>
 
         <a href=" <?= $exhibition_page_link; ?>">
-          <div class="tw-font-mono tw-px-2 tw-py-1 tw-w-2/3 tw-border tw-border-white tw-text-center md:tw-py-3 md:tw-px-10 md:tw-w-fit hover:tw-text-white">
+          <div class="tw-font-mono tw-px-2 tw-py-1 tw-w-5/6 tw-border tw-border-white tw-text-center md:tw-py-3 md:tw-px-10 md:tw-w-fit hover:tw-text-white">
             <?php
             // set language to 'sv' if the url path contains '/sv/'
             $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
@@ -45,7 +45,7 @@ get_header();
         </a>
       </div>
 
-      <div id="exhbition-language" class="tw-w-full tw-p-2 tw-flex tw-gap-4 tw-justify-center tw-items-center hover:tw-text-white md:tw-text-lg md:tw-order-3 md:tw-basis-3/12 md:tw-justify-center md:tw-items-start">
+      <div id="exhbition-language" class="tw-w-full tw-px-5 tw-py-2 tw-flex tw-gap-4 tw-justify-end tw-items-center hover:tw-text-white md:tw-order-3 md:tw-text-lg md:tw-p-2 md:tw-basis-3/12 md:tw-justify-center md:tw-items-start">
         <?php
         // if current full path has '/sv/' then set the language to 'sv' otherwise set it to 'en'
         $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
@@ -79,7 +79,12 @@ get_header();
 
       <div id="exhibition-title" class="tw-col-span-2 tw-full tw-mt-5 tw-flex tw-flex-col tw-gap-2 tw-justify-center md:tw-order-2 md:tw-grow">
         <div class="tw-font-mono tw-text-center">
-          <p>1 December 2024-19 January 2025</p>
+          <p>
+            <?php
+            $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
+            echo ($language === 'sv') ? '1 December 2024-19 Januari 2025' : '1 December 2024-19 January 2025';
+            ?>
+          </p>
         </div>
 
         <h1 class="tw-mt-2 tw-flex tw-flex-col tw-text-5xl tw-text-center md:tw-text-7xl">
