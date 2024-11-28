@@ -76,12 +76,13 @@ get_header();
         $item_title = get_sub_field('title');
         $item_body = get_sub_field('body');
         $item_image = get_sub_field('image');
-        $item_cta = get_sub_field('cta'); // array with 'url' and 'title'
+        $item_cta_link = get_sub_field('cta_link');
+        $item_cta_text = get_sub_field('cta_text');
 
       ?>
         <div class="col-f-1-3 active">
           <div class="box-content hover-active">
-            <a href="<?= $item_cta['url']; ?>" style="height: 100%;">
+            <a href="<?= $item_cta_link; ?>" style="height: 100%;">
               <img src="<?= $item_image; ?>" alt="">
               <div class="post-hover-box">
                 <div class="top">
@@ -94,7 +95,7 @@ get_header();
                   <?php endif; ?>
 
                   <button class="btn btn-primary tw-w-full tw-flex">
-                    <?= $item_cta['title']; ?>
+                    <?= $item_cta_text; ?>
                     <img src="/wp-content/uploads/2021/03/Pil.svg" />
                   </button>
                 </div>
