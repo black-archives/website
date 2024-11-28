@@ -13,7 +13,7 @@ get_header();
   <div class="tw-min-h-svh tw-mt-10 tw-flex tw-flex-col tw-gap-5 md:tw-mt-0 md:tw-justify-center">
 
     <div id="exhibition-header" class="tw-mt-5 tw-grid tw-grid-cols-2 md:tw-flex md:tw-justify-center">
-      <div id="exhibition-action" class="tw-w-full tw-p-2 tw-flex md:tw-order-1 md:tw-basis-3/12 md:tw-justify-center">
+      <div id="exhibition-action" class="tw-w-full tw-p-2 tw-flex md:tw-order-1 md:tw-mx-2 md:tw-basis-3/12 md:tw-justify-start">
         <?php
 
         /**
@@ -31,21 +31,20 @@ get_header();
         $exhibition_page_link = get_permalink($exhibition_page->posts[0]->ID);
         ?>
 
-        <a href=" <?= $exhibition_page_link; ?>">
-          <div class="tw-font-mono tw-px-2 tw-py-1 tw-w-5/6 tw-border tw-border-white tw-text-center md:tw-py-3 md:tw-px-10 md:tw-w-fit hover:tw-text-white">
-            <?php
-            // set language to 'sv' if the url path contains '/sv/'
-            $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
+        <a href="<?= $exhibition_page_link; ?>" class="tw-font-mono tw-px-2 tw-py-1 tw-w-5/6 tw-border tw-border-white tw-text-center hover:tw-text-white md:tw-py-3 md:tw-px-10 md:tw-h-fit md:tw-w-fit">
 
-            // if language is 'sv' then set text to 'Om utställningen'
-            // otherwise set text to 'About the exhibition'
-            echo ($language === 'sv') ? 'Om utställningen' : 'About the exhibition';
-            ?>
-          </div>
+          <?php
+          // set language to 'sv' if the url path contains '/sv/'
+          $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
+
+          // if language is 'sv' then set text to 'Om utställningen'
+          // otherwise set text to 'About the exhibition'
+          echo ($language === 'sv') ? 'Om utställningen' : 'About the exhibition';
+          ?>
         </a>
       </div>
 
-      <div id="exhbition-language" class="tw-w-full tw-px-5 tw-py-2 tw-flex tw-gap-4 tw-justify-end tw-items-center hover:tw-text-white md:tw-order-3 md:tw-text-lg md:tw-p-2 md:tw-basis-3/12 md:tw-justify-center md:tw-items-start">
+      <div id="exhbition-language" class="tw-w-full tw-px-5 tw-py-2 tw-flex tw-gap-4 tw-justify-end tw-items-center md:tw-order-3 md:tw-mx-2 md:tw-p-2 md:tw-text-lg md:tw-basis-3/12 md:tw-justify-end md:tw-items-start">
         <?php
         // if current full path has '/sv/' then set the language to 'sv' otherwise set it to 'en'
         $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
@@ -65,14 +64,14 @@ get_header();
         <a
           id="btn-lang-en"
           href="<?= $lang_en; ?>"
-          class="<?= ($language === 'en') ? 'tw-underline' : ''; ?>">
+          class="<?= ($language === 'en') ? 'tw-underline' : ''; ?> hover:tw-text-white">
           ENG
         </a>
 
         <a
           id="btn-lang-sv"
           href="<?= $lang_sv; ?>"
-          class="<?= ($language === 'sv') ? 'tw-underline' : ''; ?>">
+          class="<?= ($language === 'sv') ? 'tw-underline' : ''; ?> hover:tw-text-white">
           SV
         </a>
       </div>
