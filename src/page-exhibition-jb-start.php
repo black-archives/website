@@ -13,7 +13,7 @@ get_header();
   <div class="tw-min-h-svh tw-mt-10 tw-flex tw-flex-col tw-gap-5 md:tw-mt-0 md:tw-justify-center">
 
     <div id="exhibition-header" class="tw-mt-5 tw-grid tw-grid-cols-2 md:tw-flex md:tw-justify-center">
-      <div id="exhibition-action" class="tw-w-full tw-p-2 tw-flex md:tw-order-1 md:tw-basis-3/12 md:tw-justify-center">
+      <div id="exhibition-action" class="tw-w-full tw-p-2 tw-flex md:tw-order-1 md:tw-mx-2 md:tw-basis-3/12 md:tw-justify-start">
         <?php
 
         /**
@@ -45,7 +45,7 @@ get_header();
         </a>
       </div>
 
-      <div id="exhbition-language" class="tw-w-full tw-px-5 tw-py-2 tw-flex tw-gap-4 tw-justify-end tw-items-center hover:tw-text-white md:tw-order-3 md:tw-text-lg md:tw-p-2 md:tw-basis-3/12 md:tw-justify-center md:tw-items-start">
+      <div id="exhbition-language" class="tw-w-full tw-px-5 tw-py-2 tw-flex tw-gap-4 tw-justify-end tw-items-center md:tw-order-3 md:tw-mx-2 md:tw-p-2 md:tw-text-lg md:tw-basis-3/12 md:tw-justify-end md:tw-items-start">
         <?php
         // if current full path has '/sv/' then set the language to 'sv' otherwise set it to 'en'
         $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';

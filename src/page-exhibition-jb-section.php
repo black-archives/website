@@ -14,7 +14,7 @@ $current_page = get_post();
 <main role="main" class="tw-w-full tw-h-full tw-min-h-svh">
   <div class="tw-flex tw-flex-col tw-gap-2 tw-w-10/12 tw-mt-10 tw-mx-auto tw-pb-32 md:tw-justify-center">
     <div id="exhibition-bar" class="tw-flex tw-justify-between tw-mt-5 tw-text-lg">
-      <div id="exhibition-action" class="md:tw-items-start">
+      <div id="exhibition-action" class="md:tw-justify-start md:tw-items-start">
         <?php
         // get the current page's parent page
         $parent_page = get_post($post->post_parent);
@@ -26,7 +26,7 @@ $current_page = get_post();
         </a>
       </div>
 
-      <div id="exhbition-language" class="tw-w-full tw-px-5 tw-py-2 tw-flex tw-gap-4 tw-justify-end tw-items-center hover:tw-text-black md:tw-order-3 md:tw-text-lg md:tw-p-2 md:tw-basis-3/12 md:tw-justify-center md:tw-items-start">
+      <div id="exhbition-language" class="tw-w-full tw-px-5 tw-py-2 tw-flex tw-gap-4 tw-justify-end tw-items-center hover:tw-text-black md:tw-order-3 md:tw-px-0 md:tw-text-lg md:tw-basis-3/12 md:tw-justify-end md:tw-items-start">
         <?php
         // if current full path has '/sv/' then set the language to 'sv' otherwise set it to 'en'
         $language = (strpos($_SERVER['REQUEST_URI'], '/sv/') !== false) ? 'sv' : 'en';
