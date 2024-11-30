@@ -38,9 +38,11 @@ get_header();
                   <h2><?= $item_title; ?></h2>
                 </div>
 
-                <div class="bottom tw-mt-auto tw-w-full">
+                <div class="bottom tw-w-full">
                   <?php if ($item_body) : ?>
-                    <p><?= $item_body; ?></p>
+                    <p class="tw-h-fit">
+                      <?php echo get_text_excerpt($item_body) ?>
+                    </p>
                   <?php endif; ?>
 
                   <button class="btn btn-primary tw-w-full tw-flex">
