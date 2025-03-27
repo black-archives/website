@@ -18,12 +18,11 @@ if (have_rows('puffar')) {
 
 if ($key !== null):
 ?>
-  <div class="grid grid-cols-2">
+  <div class="tw-grid tw-grid-cols-2">
     <?php
 
     // loop through the rows of data
     while (have_rows($key)) : the_row();
-
       // set variables
       if ($key === 'puffar') {
         $card_image_url = get_sub_field('bild')['url'];
@@ -41,14 +40,21 @@ if ($key !== null):
         $card_link = get_sub_field('link');
       }
     ?>
-      <div class="col puff-col">
-        <img src="<?= $card_image_url ?>" alt="<?= $card_image_alt ?>">
-        <div class="col-content">
-          <h2><?= $card_title ?></h2>
+      <div class="tw-mx-2 tw-flex tw-flex-col tw-border-2 tw-border-black">
+        <img src="<?= $card_image_url ?>" alt="<?= $card_image_alt ?>" class="tw-w-full tw-h-full tw-object-cover" />
+
+        <div class="tw-px-2 tw-flex tw-flex-col">
+          <p class="tw-mt-2 tw-text-5xl tw-font-bold tw-text-clip" style="font-family: HappyTimes, helvetica !important;">
+            <?= $card_title ?>
+          </p>
+
           <p>
             <?= $card_summary ?>
           </p>
-          <a href="<?= $card_link ?>" class="btn btn-primary"><?= $card_call_to_action ?> <img src="/wp-content/uploads/2021/03/Pil.svg" /></a>
+
+          <a href="<?= $card_link ?>" class="btn btn-primary tw-m-2 tw-w-fit">
+            <?= $card_call_to_action ?> <img src="/wp-content/uploads/2021/03/Pil.svg" />
+          </a>
         </div>
       </div>
     <?php endwhile; ?>
