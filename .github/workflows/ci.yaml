@@ -6,9 +6,6 @@ on:
       - main
     paths:
       - 'src/**'
-  pull_request:
-    branches:
-      - main
 
 jobs:
   # This job will fetch the latest version of the code and copy it to the server
