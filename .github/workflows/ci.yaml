@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - 'src/**'
+  pull_request:
+    branches:
+      - main
 
 jobs:
   # This job will fetch the latest version of the code and copy it to the server
@@ -26,4 +29,8 @@ jobs:
 
       - name: Copy Files
         run: |
+          # add key to known hosts
+          ssh-keyscan -t ed25519 -H ${{ secrets.ONE_COM_HOST }} >> ~/.ssh/known_hosts
+
+          # copy files to server
           bash scripts/deploy.sh "${{ secrets.ONE_COM_HOST }}" "${{ secrets.ONE_COM_USERNAME }}" "${{ env.ONE_COM_KEY_PATH }}" "TRUE"
