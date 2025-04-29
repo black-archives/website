@@ -40,11 +40,11 @@ if ($key !== null):
         $card_link = get_sub_field('link');
       }
     ?>
-      <div class="tw-mx-2 tw-flex tw-flex-col tw-border-2 tw-border-black">
+      <div class="tw-mx-2 tw-flex tw-flex-col">
         <img src="<?= $card_image_url ?>" alt="<?= $card_image_alt ?>" class="tw-w-full tw-h-full tw-object-cover" />
 
         <div class="tw-px-2 tw-flex tw-flex-col">
-          <p class="tw-mt-2 tw-text-5xl tw-font-bold tw-text-clip" style="font-family: HappyTimes, helvetica !important;">
+          <p class="tw-mt-2 tw-text-5xl tw-text-clip" style="font-family: HappyTimes, helvetica !important;">
             <?= $card_title ?>
           </p>
 
@@ -52,7 +52,7 @@ if ($key !== null):
             <?= $card_summary ?>
           </p>
 
-          <a href="<?= $card_link ?>" class="btn btn-primary tw-m-2 tw-w-fit">
+          <a href="<?= $card_link ?>" class="btn btn-primary tw-m-2 tw-w-fit tw-flex tw-items-center tw-justify-center">
             <?= $card_call_to_action ?> <img src="/wp-content/uploads/2021/03/Pil.svg" />
           </a>
         </div>
