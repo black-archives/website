@@ -18,7 +18,7 @@ if (have_rows('puffar')) {
 
 if ($key !== null):
 ?>
-  <div class="tw-grid tw-grid-cols-2">
+  <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2">
     <?php
 
     // loop through the rows of data
