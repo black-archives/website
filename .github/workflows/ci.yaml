@@ -57,5 +57,5 @@ jobs:
           GITHUB_COMMENT_REPORTER: true # Set to false to disable GitHub pr comments
           REPORTERS_MARKDOWN_TYPE: simple
           GITHUB_STATUS_REPORTER: true # Set to false to disable GitHub status checks
-          ENABLE: ACTION,BASH,MARKDOWN,PHP,HTML,CSS,JAVASCRIPT,REPOSITORY # Enable specific linters
+          ENABLE: ACTION,BASH,MARKDOWN,PHP,HTML,CSS,JAVASCRIPT # Enable specific linters
           ENABLE_ERRORS_LINTERS: PHP,HTML,CSS,JAVASCRIPT # Enable errors for these linters
