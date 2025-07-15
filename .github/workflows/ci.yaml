@@ -52,10 +52,10 @@ jobs:
         env:
           # All available variables are described in documentation
           # https://megalinter.io/configuration/
-          VALIDATE_ALL_CODEBASE: false # Validates all source when `true`, else just the git diff with main. Override with true if you always want to lint all sources
+          VALIDATE_ALL_CODEBASE: true # Validates all source when `true`, else just the git diff with main. Override with true if you always want to lint all sources
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_COMMENT_REPORTER: true # Set to false to disable GitHub pr comments
           REPORTERS_MARKDOWN_TYPE: simple
           GITHUB_STATUS_REPORTER: true # Set to false to disable GitHub status checks
-          ENABLE: GITHUB_ACTIONS,BASH,MARKDOWN,PHP,HTML,CSS,JAVASCRIPT # Enable specific linters
+          ENABLE: ACTION,BASH,MARKDOWN,PHP,HTML,CSS,JAVASCRIPT,REPOSITORY # Enable specific linters
           ENABLE_ERRORS_LINTERS: PHP,HTML,CSS,JAVASCRIPT # Enable errors for these linters
