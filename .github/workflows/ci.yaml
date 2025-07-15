@@ -1,38 +1,63 @@
 name: Continous Integration
 
 on:
-  push:
+  pull_request:
     branches:
       - main
-    paths:
-      - 'src/**'
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
 
 jobs:
-  # This job will fetch the latest version of the code and copy it to the server
-  # hosting the WordPress site. The job will run automatically when a push is made
-  # to the main branch and the changes are in the /src directory.
-  deploy:
+  lint-commits:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0 # Ensure we have the full history for commitlint
 
-      - name: Setup SSH Key
-        id: key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.ONE_COM_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          echo "ONE_COM_KEY_PATH=~/.ssh/id_ed25519" >> $GITHUB_OUTPUT
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 'lts'
 
-      - name: Copy Files
+      - name: Install dependencies
+        run: npx install commitlint@latest @commitlint/config-conventional@latest
+
+      - name: Lint commit messages
+        run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
+
+      - name: Lint Pull Request
+        run: echo "${{ github.event.pull_request.title }}" | npx commitlint --verbose
+
+  lint-code:
+    runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push, comment issues & post new PR
+      # Remove the ones you do not need
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0 # Ensure we have the full history for commitlint
+
+      # MegaLinter
+      - name: MegaLinter
+        id: ml
+        # You can override MegaLinter flavor used to have faster performances
+        # More info at https://megalinter.io/flavors/
+        uses: oxsecurity/megalinter@v8
         env:
-          TARGET_HOST: ${{ secrets.ONE_COM_HOST }}
-          TARGET_USERNAME: ${{ secrets.ONE_COM_USERNAME }}
-          KEY_PATH: ${{ steps.key.outputs.ONE_COM_KEY_PATH }}
-        run: |
-          # add key to known hosts
-          ssh-keyscan -t ed25519 -H "$TARGET_HOST" >> ~/.ssh/known_hosts
-
-          # copy files to server
-          bash scripts/deploy.sh "$TARGET_HOST" "$TARGET_USERNAME" "$KEY_PATH"
+          # All available variables are described in documentation
+          # https://megalinter.io/configuration/
+          VALIDATE_ALL_CODEBASE: false # Validates all source when `true`, else just the git diff with main. Override with true if you always want to lint all sources
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_COMMENT_REPORTER: true # Set to false to disable GitHub pr comments
+          REPORTERS_MARKDOWN_TYPE: simple
+          GITHUB_STATUS_REPORTER: true # Set to false to disable GitHub status checks
+          ENABLE: GITHUB_ACTIONS,BASH,MARKDOWN,PHP,HTML,CSS,JAVASCRIPT # Enable specific linters
+          ENABLE_ERRORS_LINTERS: PHP,HTML,CSS,JAVASCRIPT # Enable errors for these linters

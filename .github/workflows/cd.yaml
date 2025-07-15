@@ -20,3 +20,33 @@ jobs:
         id: release
         with:
           release-type: simple
+
+  # This job will fetch the latest version of the code and copy it to the server
+  # hosting the WordPress site. The job will run automatically when a push is made
+  # to the main branch and the changes are in the /src directory.
+  deploy:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH Key
+        id: key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ONE_COM_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "ONE_COM_KEY_PATH=~/.ssh/id_ed25519" >> $GITHUB_OUTPUT
+
+      - name: Copy Files
+        env:
+          TARGET_HOST: ${{ secrets.ONE_COM_HOST }}
+          TARGET_USERNAME: ${{ secrets.ONE_COM_USERNAME }}
+          KEY_PATH: ${{ steps.key.outputs.ONE_COM_KEY_PATH }}
+        run: |
+          # add key to known hosts
+          ssh-keyscan -t ed25519 -H "$TARGET_HOST" >> ~/.ssh/known_hosts
+
+          # copy files to server
+          bash scripts/deploy.sh "$TARGET_HOST" "$TARGET_USERNAME" "$KEY_PATH"
