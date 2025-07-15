@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   release:
+    if: github.event_name == 'push'
     outputs:
       tag: ${{ steps.release.outputs.version }}
       released: ${{ steps.release.outputs.releases_created}}
@@ -26,7 +28,7 @@ jobs:
   # to the main branch and the changes are in the /src directory.
   deploy:
     needs: release
-    if: needs.release.outputs.released == 'true'
+    if: needs.release.outputs.released == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
