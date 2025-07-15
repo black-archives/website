@@ -58,4 +58,4 @@ jobs:
           REPORTERS_MARKDOWN_TYPE: simple
           GITHUB_STATUS_REPORTER: true # Set to false to disable GitHub status checks
           ENABLE: ACTION,BASH,MARKDOWN,PHP,HTML,CSS,JAVASCRIPTg # Enable specific linters
-          ENABLE_ERRORS_LINTERS: PHP,HTML,CSS,JAVASCRIPT # Enable errors for these linters
+          ENABLE_ERRORS_LINTERS: PHP,HTML,CSS,JAVASCRIPT,YAML # Enable errors for these linters
