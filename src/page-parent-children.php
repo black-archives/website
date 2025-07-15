@@ -47,7 +47,6 @@ get_header();
                   <p><?php echo get_text_excerpt(esc_html($subtitle)); ?></p>
 
                   <button class="btn btn-primary tw-w-full tw-flex md:tw-w-auto">
-                    <?= $map_cta ?>
                     <img src="/wp-content/uploads/2021/03/Pil.svg" />
                   </button>
                 </div>

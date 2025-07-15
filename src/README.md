@@ -16,4 +16,3 @@ By default, all themes come with the following pre-defined files:
 - [page-about.php](./page-about.php) - The about page template.
 - [page-contact.php](./page-contact.php) - The contact page template.
 - [archive-events.php](./archive-events.php) - This is a special template for events (it is not for pages or posts) but it is used for the `/events` page
-
