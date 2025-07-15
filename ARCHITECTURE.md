@@ -2,9 +2,19 @@
 
 This document contains the technical decisions and information made in the development of this Wordpress application for future reference.
 
-Wordpress is made up of pages, posts and plugins. The pages and posts are created by the website owner/administrator and the plugins are used to extend the functionality of the website. This repository contains the theme of the website which extends the visual appearance and behavior of the website using PHP, HTML, CSS, JavaScript and the Advanced Custom Fields plugin.
+At a high level, the Wordpress site is made up of the following components:
+
+```mermaid
+graph TD;
+  A[CMS - Wordpress] --> B[MySQL Database]
+  A --> C[Plugins]
+  A --> D[Theme]
+  E[Client - HTML] <--> A
+```
 
 ## Application
+
+The Wordpress application is made up of pages, posts, plugins and themes. The pages and posts are created by the website owner/administrator, the plugins extend the functionality of the base Wordpress application and are created by developers (open-source and paid). Lastly, the theme dictates the visual appearance and behavior of the website using the plugins, PHP, HTML, CSS and JavaScript.
 
 ### Plugins
 
@@ -49,8 +59,61 @@ The `/src` directory contains the following files and directories:
 - `languages/`: Contains the language files for the theme
 - `scripts/`: Contains the scripts for the theme
 
-## Deployment
+For more information on the theme files, read [/src/README.md](./src/README.md).
 
-This repository only contains the theme of the Wordpress website. Whenever changes are pushed to the `main` branch, we run a github workflow automation, [`.github/workflows/ci.yaml`](./.github/workflows/ci.yaml), which copies the theme files in the `src` directory to a remote file server using `scp`.
+## Infrastructure
 
-The remote file server is hosted on [One.com](https://www.one.com/), a web hosting service, which is used to store the entire Wordpress application (i.e. config files, plugins, themes, etc.) and the Mysql database.
+The Wordpress site uses the following computational resources:
+
+- **Remote Server** to host and server the Wordpress site
+- **MySQL database** to store the data (i.e. posts, settings, etc.) for the Wordpress site
+- **Github repository** to store the source code for the theme used by the Wordpress site
+
+### Remote Server
+
+> [!WARNING]
+> The remote file server stores config files (i.e. `wp-config.php`), plugins, media and themes. The remote file server **does not** store the data (posts, pages and dynamic settings) - theses are stored in the [MySQL Database](#mysql-database).
+
+The remote file server is used to host the Wordpress site and serve the files for the website. You can access the server in three ways:
+
+1. Using `ssh` to connect to the server and run commands
+2. Using `scp` to copy files to and from the server
+3. Using the file server UI
+
+#### Using SSH
+
+> [!NOTE]
+> Contact [it-support@blackarchivessweden.com](mailto:it-support@blackarchivessweden.com?subject=(IMPORTANT)%20Vulnerability%20Report%20-%20Black%20Archives%20Sweden) for access to the Black Archive dashboard hosted at [One.com](https://www.one.com/). To access the remote server via `ssh` or `scp`, you'll need to visit the control panel > dashboard > advanced settings (in footer) > [SSH & SFTP](https://www.one.com/admin/external-access-administration.do) > click the "Send" button to get the SSH credentials sent to the email address associated with the account.
+
+The remote file server is used to host the Wordpress site and serve the files for the website. To access the server, you can `ssh` using the following command:
+
+```bash
+ssh <username>@<server_ip>
+```
+
+#### Using SCP
+
+> [!NOTE]
+> To get the credentials needed to access the server, read the note in the [Using SSH](#using-ssh) section.
+
+You can also copy all the files that make up the Wordpress site to the remote file server using `scp`:
+
+```bash
+scp -r black-archives <username>@<server_ip>:/www/
+```
+
+#### Using the File Server UI
+
+> [!NOTE]
+> To get the credentials needed to access the server, read the note in the [Using SSH](#using-ssh) section.
+
+Lastly, you can also use the file server UI to manage the files on the remote file server. The file server UI is accessible by visiting [One.com](https://www.one.com/) > login to the account > visit the control panel > dashboard > advanced settings (in footer) > File Manager.
+
+In the File Manager, you can select all files and folders and click the "Download" button to download all files and folders to your local machine. You can also upload files and folders to the remote file server by clicking the "Upload" button.
+
+### MySQL Database
+
+> [!NOTE]
+> To get access to the database, read the note in the [Remote Server](#remote-server) section.
+
+The MySQL database that is used by the Wordpress app is also hosted on One.com. The database is used to store the data for the Wordpress site, such as posts, pages, settings, etc. To access the database, login to [One.com](https://www.one.com/) > visit the control panel > dashboard > advanced settings (in footer) > PHP and database settings > PHPMyAdmin > select the database for the Wordpress app.

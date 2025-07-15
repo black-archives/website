@@ -4,11 +4,21 @@ This repository implements a Wordpress Application. Locally, it comes with a bas
 
 Shortcuts:
 
-- [Getting Started](#getting-started) - setting up the app locally
+- [Coding Guidelines](#coding-guidelines) - coding guidelines for the project
+- [Development Environment](#development-environment) - setting up the development environment
 - [Security](#security) - securing the app
 - [FAQ](#faq) - frequently asked questions
 
-## Getting Started
+## Coding Guidelines
+
+The code in this repository is written in PHP, HTML, CSS and JavaScript. The code should meet the following coding standards:
+
+- Simple and easy to understand code - the code should prioritize simplicity and readability over complexity and performance.
+- Clear commits - this repository follows the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification for commit messages which means that commit messages should follow the format `type(scope): subject` where `type` is one of the following: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, and `scope` is an optional scope that describes the part of the code that is affected by the commit.
+- Pull requests - all changes should be made in a separate branch and submitted as a pull request. The pull request should have a clear title and description that explains the changes made in the pull request. The pull requests should also pass the CI checks before being merged into the `main` branch.
+- Lastly, the code should follow the [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/) which includes PHP, HTML, CSS and JavaScript coding standards. The code should be well-documented and easy to read.
+
+## Development Environment
 
 This section will guide you through setting up the app locally (on your machine) using Docker Compose.
 
@@ -53,6 +63,10 @@ The MySQL database and Wordpress app are set up with the following configuration
 | MySQL regular username | `wp-user` | The regular username for the MySQL database and Wordpress app |
 | MySQL regular password | `wp-pass` | The regular password for the MySQL database and Wordpress app |
 
+## Deployment
+
+This repository only contains the theme of the Wordpress website. Whenever changes are pushed to the `main` branch, we run a github workflow automation, [`.github/workflows/cd.yaml`](./.github/workflows/cd.yaml), which copies the theme files in the `src` directory to a remote file server (`/www/wp-content/themes/highwire/`) using `scp` (see the [`scripts/deploy.sh`](./scripts/deploy.sh) and the [remote server docs](./ARCHITECTURE.md#remote-server)).
+
 ## Security
 
 Wordpress uses a MySQL database to store data (i.e. posts, pages, settings). You need to configure the wordpress app, in the `wp-config.php` file, to connect to the MySQL database using the database credentials (i.e. database name, username, password).
@@ -80,6 +94,14 @@ A strong password should be easy to remember but hard to guess. Below are some r
 - use phrases that are easy to remember but hard to guess (i.e. `ilovetoeathotdogs!!!` instead of `h0td0gs@ndk3tchup`)
 - use atleast two types of characters (i.e. uppercase and lowercase letters, numbers, special characters)
 - avoid themes or patterns that can be inferred from your personal information (i.e. your name, birthdate, birth year etc.)
+
+### Backup and Recovery
+
+Backing up your Wordpress app is crucial to ensure that you can recover your data in case of a security breach or data loss. The Wordpress app runs on a MySQL database, so you can back up the database using the following command:
+
+```bash
+docker exec -i <mysql_container_name> mysqldump -u <username> -p<password> <database_name> > backup.sql
+```
 
 ## FAQ
 

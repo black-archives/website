@@ -5,4 +5,4 @@
 
 ## Reporting a Vulnerability
 
-To report a vulnerability, reach out to [dev@oliverrr.net](mailto:bob@mail.com?subject=(IMPORTANT)%20Vulnerability%20Report%20-%20Black%20Archives%20Sweden) or [open an issue](https://github.com/black-archives/website/issues/new) and make sure to assign a developer. If the vulneraility is accepted, please expect some potential questions.
+To report a vulnerability, reach out to [it-support@blackarchivessweden.com](mailto:it-support@blackarchivessweden.com?subject=(IMPORTANT)%20Vulnerability%20Report%20-%20Black%20Archives%20Sweden) or [open an issue](https://github.com/black-archives/website/issues/new) and make sure to assign a developer. If the vulneraility is accepted, please expect some potential questions.
