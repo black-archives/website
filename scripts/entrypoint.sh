@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 
 # The purpose of this script is to spin up a local development environment for
 # Wordpress website using Docker containers for the database, Wordpress, and
