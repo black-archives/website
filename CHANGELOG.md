@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/black-archives/website/compare/v1.3.0...v1.3.1) (2025-09-03)
+
+
+### Bug Fixes
+
+* **template:** parent-page template generating broken links ([#46](https://github.com/black-archives/website/issues/46)) ([2f6f79b](https://github.com/black-archives/website/commit/2f6f79b6f60c0f45ec652d0901920d6a52004edb))
+
 ## [1.3.0](https://github.com/black-archives/website/compare/v1.2.0...v1.3.0) (2025-07-15)
 
 
