@@ -37,7 +37,7 @@ get_header();
           $background_image_url = get_the_post_thumbnail_url(get_the_ID(), 'full') ?: '/wp-content/uploads/2021/03/Michael-Bild-2-700x687.jpg'; // Fallback image
       ?>
           <div class="col-f-1-3" style="background-image: url('<?php echo esc_url($background_image_url); ?>');">
-            <a href="<?php echo get_permalink($page->ID); ?>">
+            <a href="<?php echo get_permalink(get_the_ID()); ?>">
               <div class="post-hover-box">
                 <div class="top">
                   <h2><?php echo esc_html($title); ?></h2>
