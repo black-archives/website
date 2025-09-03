@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 
 # The purpose of this script is to deploy the theme in the highwire directory
 # (wp-content/themes/highwire) to a remote server in a specified location for

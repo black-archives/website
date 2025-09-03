@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 
 # The purpose of this script is to import the wp-content directory from a remote
 # server to the local development environment. This is useful for syncing the
