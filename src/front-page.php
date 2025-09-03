@@ -21,40 +21,42 @@ get_header();
       displays the items in the archive page.
       */
 
-      while (have_rows("pinned_items")) : the_row();
-        $item_title = get_sub_field('title');
-        $item_body = get_sub_field('body');
-        $item_image = get_sub_field('image');
-        $item_cta_link = get_sub_field('cta_link');
-        $item_cta_text = get_sub_field('cta_text');
-
+      if (have_rows("pinned_items")) : // Check if there are rows in the repeater field
+        while (have_rows("pinned_items")) : the_row();
+          $item_title = get_sub_field('title');
+          $item_body = get_sub_field('body');
+          $item_image = get_sub_field('image');
+          $item_cta_link = get_sub_field('cta_link');
+          $item_cta_text = get_sub_field('cta_text');
       ?>
-        <div class="col-f-1-3 active">
-          <div class="box-content hover-active">
-            <a href="<?= $item_cta_link; ?>" style="height: 100%;">
-              <img src="<?= $item_image; ?>" alt="">
-              <div class="post-hover-box">
-                <div class="top">
-                  <h2><?= $item_title; ?></h2>
-                </div>
+          <div class="col-f-1-3 active">
+            <div class="box-content hover-active">
+              <a href="<?= $item_cta_link; ?>" style="height: 100%;">
+                <img src="<?= $item_image; ?>" alt="">
+                <div class="post-hover-box">
+                  <div class="top">
+                    <h2><?= $item_title; ?></h2>
+                  </div>
 
-                <div class="bottom tw-w-full">
-                  <?php if ($item_body) : ?>
-                    <p class="tw-h-fit">
-                      <?php echo get_text_excerpt($item_body) ?>
-                    </p>
-                  <?php endif; ?>
+                  <div class="bottom tw-w-full">
+                    <?php if ($item_body) : ?>
+                      <p class="tw-h-fit">
+                        <?php echo get_text_excerpt($item_body) ?>
+                      </p>
+                    <?php endif; ?>
 
-                  <button class="btn btn-primary tw-w-full tw-flex">
-                    <?= $item_cta_text; ?>
-                    <img src="/wp-content/uploads/2021/03/Pil.svg" />
-                  </button>
+                    <button class="btn btn-primary tw-w-full tw-flex">
+                      <?= $item_cta_text; ?>
+                      <img src="/wp-content/uploads/2021/03/Pil.svg" />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </a>
+              </a>
+            </div>
           </div>
-        </div>
-      <?php endwhile; ?>
+      <?php endwhile;
+      endif; // End if statement for have_rows
+      ?>
 
       <div class="col-f-1-3 ">
         <div class="box-content hover-active'">
