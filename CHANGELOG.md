@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/black-archives/website/compare/v1.3.1...v1.3.2) (2025-09-03)
+
+
+### Bug Fixes
+
+* **theme:** while loops not wrapped in if statements ([#49](https://github.com/black-archives/website/issues/49)) ([4a6b329](https://github.com/black-archives/website/commit/4a6b32971a223cc20b89caff93c049f66b95bdef))
+
 ## [1.3.1](https://github.com/black-archives/website/compare/v1.3.0...v1.3.1) (2025-09-03)
 
 
