@@ -32,11 +32,24 @@ get_header();
 
       if ($the_query->have_posts()):
         while ($the_query->have_posts()) : $the_query->the_post();
-          $title = get_the_title();
-          $subtitle = get_field('page_summary') ?: get_the_excerpt();
-          $background_image_url = get_the_post_thumbnail_url(get_the_ID(), 'full') ?: '/wp-content/uploads/2021/03/Michael-Bild-2-700x687.jpg'; // Fallback image
+            $title = get_the_title();
+            $subtitle = get_field('page_summary') ?: get_the_excerpt();
+
+            $background_image_id = get_post_thumbnail_id();
+            $background_image_url = $background_image_id ? wp_get_attachment_image_url($background_image_id, 'large') : '/wp-content/uploads/2021/03/Michael-Bild-2-700x687.jpg';
+            $background_image_srcset = $background_image_id ? wp_get_attachment_image_srcset($background_image_id, 'large') : false;
       ?>
-          <div class="col-f-1-3" style="background-image: url('<?php echo esc_url($background_image_url); ?>');">
+          <div class="col-f-1-3 relative">
+            <img
+                class="tw-w-full tw-h-full tw-object-cover tw-absolute tw-inset-0"
+                src="<?= $background_image_url ?>"
+                <?php if ($background_image_srcset): ?>
+                srcset="<?= $background_image_srcset ?>"
+                sizes="(max-width: 1100px) 100vw, 33vw"
+                <?php endif; ?>
+                loading="lazy"
+                alt=""
+            />
             <a href="<?php echo get_permalink(get_the_ID()); ?>">
               <div class="post-hover-box">
                 <div class="top">
@@ -47,7 +60,7 @@ get_header();
                   <p><?php echo get_text_excerpt(esc_html($subtitle)); ?></p>
 
                   <button class="btn btn-primary tw-w-full tw-flex md:tw-w-auto">
-                    <img src="/wp-content/uploads/2021/03/Pil.svg" />
+                    <img src="/wp-content/uploads/2021/03/Pil.svg" loading="lazy" />
                   </button>
                 </div>
               </div>
@@ -55,7 +68,6 @@ get_header();
           </div>
       <?php endwhile;
       endif; ?>
-
       <?php
       // Reset Post Data
       wp_reset_postdata();
@@ -84,7 +96,7 @@ get_header();
                 <?php if ($card_show_button): ?>
                   <button class="btn btn-primary tw-w-full tw-flex md:tw-w-auto">
                     <?= $card_call_to_action ?>
-                    <img src="/wp-content/uploads/2021/03/Pil.svg" />
+                    <img src="/wp-content/uploads/2021/03/Pil.svg" loading="lazy" />
                   </button>
                 <?php endif; ?>
               </div>
