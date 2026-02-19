@@ -64,6 +64,12 @@ util_import_env() {
 
 create_docker_compose_file() {
   util_log "Creating docker-compose.yaml file..." extra
+
+  if [ ! -d "$DEV_DIR" ]; then
+    mkdir -p "$DEV_DIR"
+    touch "$DEV_DOCKER_COMPOSE_FILE"
+  fi
+
   echo "
     name: wp
 
