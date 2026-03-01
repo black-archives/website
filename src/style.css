@@ -724,6 +724,14 @@ div.wpcf7 .ajax-loader {
 	font-family: "Space Mono", monospace;
 }
 
+.wpcf7-response-output {
+	background: #35a270;
+	font-size: 1.5em;
+	border: 0;
+	padding: 1em;
+	margin: 1em 0;
+}
+
 .circle-number p {
 	margin-bottom: 0;
 	border: 1px solid black;
