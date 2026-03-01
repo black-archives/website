@@ -733,19 +733,19 @@ div.wpcf7 .ajax-loader {
 }
 
 .circle-number p {
+  position: relative;
 	margin-bottom: 0;
 	border: 1px solid black;
-	border-radius: 9999px;
+	border-radius: 50%;
 	height: 70px;
 	width: 70px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
 .number {
-	position: relative;
-	top: 4px;
+	position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /*--------------  search ---------------*/
