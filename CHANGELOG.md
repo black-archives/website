@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/black-archives/website/compare/v1.3.2...v1.4.0) (2026-03-01)
+
+
+### Features
+
+* form response design ([#56](https://github.com/black-archives/website/issues/56)) ([f8f1530](https://github.com/black-archives/website/commit/f8f1530907c24a4ba1a4e78f6d0867487a5ae069))
+
+
+### Bug Fixes
+
+* **theme:** center circle number ([#57](https://github.com/black-archives/website/issues/57)) ([f0ac7e6](https://github.com/black-archives/website/commit/f0ac7e6c975772a5440655b889b4a617e62449ff))
+* use img instead of background images ([#52](https://github.com/black-archives/website/issues/52)) ([97372c7](https://github.com/black-archives/website/commit/97372c7cb65cab732e4c532b955cd68c4639f052))
+
 ## [1.3.2](https://github.com/black-archives/website/compare/v1.3.1...v1.3.2) (2025-09-03)
 
 
