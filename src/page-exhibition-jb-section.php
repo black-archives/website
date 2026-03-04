@@ -82,7 +82,8 @@ $current_page = get_post();
             'post_parent' => $post->post_parent,
             'posts_per_page' => -1,
             'orderby' => 'menu_order',
-            'order' => 'ASC'
+            'order' => 'ASC',
+            'post_status' => 'publish',
           ));
 
           if ($siblings->have_posts()) :
