@@ -10,12 +10,13 @@
 \*------------------------------------*/
 
 // php files
-require get_template_directory() . '/inc/contact-form.php';
-require get_template_directory() . '/inc/custom-fields.php';
-require get_template_directory() . '/inc/taxonomy.php';
-require get_template_directory() . '/inc/helper.php';
-require get_template_directory() . '/inc/clean/wordpress-seo.php';
-require get_template_directory() . '/inc/clean/comments.php';
+foreach (glob(get_template_directory() . '/inc/*.php') as $file) {
+  require_once $file;
+}
+
+foreach (glob(get_template_directory() . '/inc/clean/*.php') as $file) {
+  require_once $file;
+}
 
 /*------------------------------------*\
 	Theme Support
@@ -509,7 +510,7 @@ add_action('init', 'create_my_taxonomies_events', 0);
 
 /**
  * Remove archive labels.
- * 
+ *
  * @param  string $title Current archive title to be displayed.
  * @return string        Modified archive title to be displayed.
  */
