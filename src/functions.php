@@ -15,6 +15,8 @@ require get_template_directory() . '/inc/custom-fields.php';
 require get_template_directory() . '/inc/taxonomy.php';
 require get_template_directory() . '/inc/helper.php';
 require get_template_directory() . '/inc/content.php';
+require get_template_directory() . '/inc/clean/wordpress-seo.php';
+require get_template_directory() . '/inc/clean/comments.php';
 
 /*------------------------------------*\
 	Theme Support
