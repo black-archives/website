@@ -26,6 +26,7 @@ get_header();
         'post_parent' => $post->ID,
         'posts_per_page' => -1,
         'post_type' => 'page',
+        'post_status' => 'publish',
       );
 
       $the_query = new WP_Query($args);
