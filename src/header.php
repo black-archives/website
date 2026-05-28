@@ -54,7 +54,7 @@
           },
           fontFamily: {
             mono: ['Space Mono', 'monospace']
-          }
+          },
         }
       }
     }
@@ -97,13 +97,12 @@
         </div>
 
         <div class="nav-footer tw-mt-5 tw-grow-0 tw-flex tw-space-x-3">
-          <div class="tw-basis-1/2 tw-flex tw-place-items-center">
+          <div class="tw-basis-2/3 tw-flex tw-place-items-center">
             <form class="search" method="get" action="<?php echo home_url(); ?>" role="search">
               <input class="search-input" type="search" name="s" placeholder="<?php _e('Search', 'html5blank'); ?>">
             </form>
           </div>
-
-          <div class="lang-list tw-basis-1/2 tw-pl-5">
+          <div class="lang-list tw-basis-1/3 tw-pl-5">
             <?php if (!function_exists('dynamic_sidebar') || !dynamic_sidebar('footer-area-2')) ?>
           </div>
         </div>
