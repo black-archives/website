@@ -49,6 +49,7 @@
 .menu-hamburger img {
     width: 50%;
     cursor: pointer;
+    margin-left: auto;
 }
 
 .header-logo {
@@ -65,7 +66,7 @@
 
 .nav {
     position: fixed;
-    width: 400px;
+    width: 480px;
     max-width: 100%;
     height: 100%;
     top: 0;
@@ -156,7 +157,7 @@
 }
 
 form.search {
-    width: 75%;
+    width: 100%;
 }
 
 .wpml-ls-link {
@@ -200,7 +201,7 @@ form.search {
 @media only screen and (max-width: 997px) {
 
     .nav {
-        top: -1000px;
+        top: -101vh;
         left: 0;
         z-index: 99;
         background: #35A270;
@@ -249,7 +250,7 @@ form.search {
     }
 
     .nav ul li a {
-        font-size: 35px;   
+        font-size: 35px;
     }
 
 

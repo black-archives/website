@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.5.0](https://github.com/black-archives/website/compare/v1.4.0...v1.5.0) (2026-05-28)
+
+
+### Features
+
+* Add functions to clean up the wordpress admin  ([#55](https://github.com/black-archives/website/issues/55)) ([570e034](https://github.com/black-archives/website/commit/570e03442b935b6a76074ec21eb0c7e7cf5ccf27))
+* hide private posts ([d56965c](https://github.com/black-archives/website/commit/d56965cde66f0ae62e71678b9e46147801c8adf2))
+
+
+### Bug Fixes
+
+* admin menu design ([#62](https://github.com/black-archives/website/issues/62)) ([7cf267e](https://github.com/black-archives/website/commit/7cf267e1f416a4d8155c71f3a42be915a2a7fe2d))
+* **theme:** hide private and protected posts ([#59](https://github.com/black-archives/website/issues/59)) ([d56965c](https://github.com/black-archives/website/commit/d56965cde66f0ae62e71678b9e46147801c8adf2))
+
 ## [1.4.0](https://github.com/black-archives/website/compare/v1.3.2...v1.4.0) (2026-03-01)
 
 

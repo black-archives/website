@@ -25,7 +25,8 @@ get_header();
           'post_parent' => get_the_ID(),
           'posts_per_page' => 1,
           'orderby' => 'menu_order',
-          'order' => 'ASC'
+          'order' => 'ASC',
+          'post_status' => 'publish',
         ]);
 
         $exhibition_page_link = get_permalink($exhibition_page->posts[0]->ID);
