@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.0](https://github.com/black-archives/website/compare/v1.5.0...v1.6.0) (2026-05-29)
+
+
+### Features
+
+* **admin:** hide admin menu and bar items ([#61](https://github.com/black-archives/website/issues/61)) ([9fff791](https://github.com/black-archives/website/commit/9fff7916ff59de4df2af8fcf4f1d77faaebc7221))
+
+
+### Bug Fixes
+
+* menu animation ([#63](https://github.com/black-archives/website/issues/63)) ([0018bb9](https://github.com/black-archives/website/commit/0018bb91696f25dc0cea0ef5a9a3ff8c831d6db9))
+
 ## [1.5.0](https://github.com/black-archives/website/compare/v1.4.0...v1.5.0) (2026-05-28)
 
 
