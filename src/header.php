@@ -88,7 +88,7 @@
           <img src="/wp-content/uploads/2021/03/Meny-kryss.svg" alt="Close menu cross">
         </div>
 
-        <a class="tw-my-5 tw-grow-0" href="<?php echo get_home_url(); ?>">
+        <a class="tw-grow-0" href="<?php echo get_home_url(); ?>">
           <img class="menu-logo" src="/wp-content/uploads/2021/03/BAS-Logga.svg" alt="Black Archive Sweden Logo">
         </a>
 
